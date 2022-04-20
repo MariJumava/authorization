@@ -51,23 +51,23 @@ export const Login = () => {
   );
   const [warning, setWarning] = useState('');
 
-  const userEmail = (event) => {
-    setEmail(event.target.value);
+  const userEmail = (e) => {
+    setEmail(e.target.value);
     const re = /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i;
-    if (!re.test(String(event.target.value).toLocaleLowerCase())) {
+    if (!re.test(String(e.target.value).toLocaleLowerCase())) {
       setEmailError('Incorrect email');
     } else {
       setEmailError('');
     }
   };
 
-  const userPassword = (event) => {
-    setPassword(event.target.value);
-    if (event.target.value < 3 || event.target.value > 10) {
+  const userPassword = (e) => {
+    setPassword(e.target.value);
+    if (e.target.value < 3 || e.target.value > 10) {
       setPasswordError(
         'Password must be longer than 3 and not more than 10 characters'
       );
-      if (!event.target.value) {
+      if (!e.target.value) {
         setPasswordError('Password cannot be empty');
       }
     } else {
@@ -92,7 +92,7 @@ export const Login = () => {
 
   const navigate = useNavigate();
 
-  const isAuthenticated = localStorage.getItem('isAuthenticated');
+  const isAuthenticated = localStorage.getItem('token');
 
   if (isAuthenticated) {
     return <Navigate to={'/user'} state={{ from: location }} />;
@@ -102,7 +102,7 @@ export const Login = () => {
     e.preventDefault();
     if (email === 'test@mail.ru' && password === 'password') {
       navigate('/');
-      localStorage.setItem('isAuthenticated', 'true');
+      localStorage.setItem('token', 'true');
     } else {
       setWarning('User is not found!');
       setEmail('');
@@ -114,23 +114,27 @@ export const Login = () => {
   return (
     <Form>
       <h2>Login Page</h2>
-      {emailDirty ||
-        (emailError && <div style={{ color: 'red' }}>{emailError}</div>)}
+      {emailDirty && emailError && (
+        <div style={{ color: 'red' }}>{emailError}</div>
+      )}
       <Input
-        type="next"
+        type="text"
         placeholder="Enter your email"
+        name="email"
         onBlur={(e) => blurHandler(e)}
-        onChange={userEmail}
+        onChange={(e) => userEmail(e)}
         value={email}
       />
-      {passwordDirty ||
-        (passwordError && <div style={{ color: 'red' }}>{passwordError}</div>)}
+      {passwordDirty && passwordError && (
+        <div style={{ color: 'red' }}>{passwordError}</div>
+      )}
 
       <Input
         type="password"
         placeholder="Enter your password"
+        name="password"
         onBlur={(e) => blurHandler(e)}
-        onChange={userPassword}
+        onChange={(e) => userPassword(e)}
         value={password}
       />
       <span>
