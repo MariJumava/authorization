@@ -1,6 +1,7 @@
-import { NavLink, useNavigate, Navigate } from 'react-router-dom';
 import { useState } from 'react';
+import { NavLink, useNavigate, Navigate } from 'react-router-dom';
 import { PATH } from '../utils/ROUTES';
+import { delay } from '../fakeBackend/delay';
 import styled from 'styled-components';
 
 const Form = styled.form`
@@ -98,6 +99,8 @@ export const Login = () => {
     return <Navigate to={'/user'} state={{ from: location }} />;
   }
 
+  const actionWithDelay = delay(1000).then(() => console.log('OKAY'));
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (email === 'test@mail.ru' && password === 'password') {
@@ -109,6 +112,7 @@ export const Login = () => {
       setPassword('');
       setChecked(false);
     }
+    actionWithDelay();
   };
 
   return (
