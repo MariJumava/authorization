@@ -123,8 +123,8 @@ export const SignUp = () => {
 
   return (
     <div>
-      <Form>
-        <div>Register</div>
+      <Form onSubmit={handleSubmit}>
+        <h2>Registration</h2>
         {usernameDirty && usernameError && (
           <div style={{ color: 'red' }}>{usernameError}</div>
         )}
@@ -132,8 +132,8 @@ export const SignUp = () => {
           type="text"
           placeholder="Enter your userName"
           name="username"
-          onBlur={(e) => blurHandler(e)}
-          onChange={(e) => createUserName(e)}
+          onBlur={blurHandler}
+          onChange={createUserName}
           value={username}
           required
         />
@@ -144,8 +144,8 @@ export const SignUp = () => {
           type="text"
           placeholder="Enter your email"
           name="email"
-          onBlur={(e) => blurHandler(e)}
-          onChange={(e) => createUserEmail(e)}
+          onBlur={blurHandler}
+          onChange={createUserEmail}
           value={email}
           required
         />
@@ -153,8 +153,8 @@ export const SignUp = () => {
           type="date"
           placeholder="Enter your Birthday"
           name="birthday"
-          onBlur={(e) => blurHandler(e)}
-          onChange={(e) => createUserBirthday(e)}
+          onBlur={blurHandler}
+          onChange={createUserBirthday}
           value={birthday}
         />
         {passwordDirty && passwordError && (
@@ -164,8 +164,8 @@ export const SignUp = () => {
           type="password"
           placeholder="Enter your password"
           name="password"
-          onBlur={(e) => blurHandler(e)}
-          onChange={(e) => createUserPassword(e)}
+          onBlur={blurHandler}
+          onChange={createUserPassword}
           value={password}
           required
         />
@@ -173,14 +173,12 @@ export const SignUp = () => {
           type="password"
           placeholder="Repeat password"
           name="confirmPassword"
-          onBlur={(e) => blurHandler(e)}
-          onChange={(e) => repeatUserPassword(e)}
+          onBlur={blurHandler}
+          onChange={repeatUserPassword}
           value={confirmPassword}
           required
         />
-        <Button disabled={!password} onClick={handleSubmit}>
-          SignUp
-        </Button>
+        <Button disabled={!password}>SignUp</Button>
       </Form>
     </div>
   );

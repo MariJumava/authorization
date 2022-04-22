@@ -12,7 +12,7 @@ const Wrap = styled.div`
 export const Loader = () => {
   return (
     <Wrap>
-      <CircularProgress color="secondary" />
+      <CircularProgress color="inherit" />
     </Wrap>
   );
 };

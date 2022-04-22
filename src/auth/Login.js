@@ -1,7 +1,11 @@
 import { useState } from 'react';
-import { NavLink, useNavigate, Navigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { NavLink, Navigate } from 'react-router-dom';
 import { PATH } from '../utils/ROUTES';
 import { delay } from '../fakeBackend/delay';
+import { Loader } from './Loader';
+import { loginStart, loginSuccess, loginFailure } from '../redux/action';
+import { users } from '../components/Users';
 import styled from 'styled-components';
 
 const Form = styled.form`
@@ -34,13 +38,10 @@ const Button = styled.button`
   border: none;
 `;
 
-const Warning = styled.p`
-  margin-top: 20px;
-  font-size: 20px;
-  color: #ff0000;
-`;
-
 export const Login = () => {
+  const isAuthorized = useSelector((state) => state.authorized);
+  const loading = useSelector((state) => state.loading);
+  const error = useSelector((state) => state.error);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [checked, setChecked] = useState(false);
@@ -50,7 +51,8 @@ export const Login = () => {
   const [passwordError, setPasswordError] = useState(
     'Password cannot be empty'
   );
-  const [warning, setWarning] = useState('');
+
+  const dispatch = useDispatch();
 
   const userEmail = (e) => {
     setEmail(e.target.value);
@@ -91,69 +93,83 @@ export const Login = () => {
     }
   };
 
-  const navigate = useNavigate();
-
-  const isAuthenticated = localStorage.getItem('token');
-
-  if (isAuthenticated) {
+  if (isAuthorized) {
     return <Navigate to={'/user'} state={{ from: location }} />;
   }
 
-  const actionWithDelay = delay(1000).then(() => console.log('OKAY'));
+  const data = { email, password, checked };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (email === 'test@mail.ru' && password === 'password') {
-      navigate('/');
-      localStorage.setItem('token', 'true');
-    } else {
-      setWarning('User is not found!');
-      setEmail('');
-      setPassword('');
-      setChecked(false);
+    dispatch(loginUser(data));
+    setEmail('');
+    setPassword('');
+    setChecked(false);
+  };
+
+  const loginUser = (user) => async (dispatch) => {
+    try {
+      dispatch(loginStart(true));
+      await delay(2000);
+      const response = users.find(
+        (us) => us.email === user.email && us.password === user.password
+      );
+      if (response) {
+        dispatch(loginSuccess(response));
+        dispatch(loginStart(false));
+      } else if (!response) {
+        dispatch(loginFailure('Wrong email or password'));
+        console.log(error);
+      }
+    } catch (error) {
+      console.log('error', error);
+      dispatch(loginFailure('Something is wrong!'));
     }
-    actionWithDelay();
   };
 
   return (
-    <Form>
-      <h2>Login Page</h2>
-      {emailDirty && emailError && (
-        <div style={{ color: 'red' }}>{emailError}</div>
-      )}
-      <Input
-        type="text"
-        placeholder="Enter your email"
-        name="email"
-        onBlur={(e) => blurHandler(e)}
-        onChange={(e) => userEmail(e)}
-        value={email}
-      />
-      {passwordDirty && passwordError && (
-        <div style={{ color: 'red' }}>{passwordError}</div>
-      )}
+    <>
+      {loading ? (
+        <Loader />
+      ) : (
+        <Form onSubmit={handleSubmit}>
+          <h2>Login Page</h2>
+          {emailDirty && emailError && (
+            <div style={{ color: 'red' }}>{emailError}</div>
+          )}
+          <Input
+            type="text"
+            placeholder="Enter your email"
+            name="email"
+            onBlur={blurHandler}
+            onChange={userEmail}
+            value={email}
+          />
+          {passwordDirty && passwordError && (
+            <div style={{ color: 'red' }}>{passwordError}</div>
+          )}
 
-      <Input
-        type="password"
-        placeholder="Enter your password"
-        name="password"
-        onBlur={(e) => blurHandler(e)}
-        onChange={(e) => userPassword(e)}
-        value={password}
-      />
-      <span>
-        <input type="checkbox" checked={checked} onChange={userRemember} />
-        &nbsp;<span>Remember me</span>
-      </span>
-      <Button type="submit" onClick={handleSubmit}>
-        Login
-      </Button>
-      <div>
-        <NavLink to={PATH.PASSWORDRECOVERY}>Forgot Password?</NavLink>
-        &nbsp;<span>or</span>&nbsp;
-        <NavLink to={PATH.REGISTRATION}>Sign Up!</NavLink>
-      </div>
-      <Warning>{warning}</Warning>
-    </Form>
+          <Input
+            type="password"
+            placeholder="Enter your password"
+            name="password"
+            onBlur={blurHandler}
+            onChange={userPassword}
+            value={password}
+          />
+          <span>
+            <input type="checkbox" checked={checked} onChange={userRemember} />
+            &nbsp;<span>Remember me</span>
+          </span>
+          <span style={{ color: 'red' }}>{error}</span>
+          <Button type="submit">Login</Button>
+          <div>
+            <NavLink to={PATH.PASSWORDRECOVERY}>Forgot Password?</NavLink>
+            &nbsp;<span>or</span>&nbsp;
+            <NavLink to={PATH.REGISTRATION}>Sign Up!</NavLink>
+          </div>
+        </Form>
+      )}
+    </>
   );
 };
