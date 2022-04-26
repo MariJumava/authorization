@@ -13,9 +13,10 @@ code {
 }
 
 a {
+  font-weight: 500;
   text-decoration: none;
   color: #181818;
 }
 a:hover {
-  color: #808080;
+  color: #c0b9b9;
 }

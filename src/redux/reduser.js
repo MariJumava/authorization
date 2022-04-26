@@ -1,10 +1,13 @@
+import { uniqueId } from 'lodash';
 import { ACTION_TYPES } from './consts';
 
 const initialState = {
   user: {
+    id: uniqueId(),
     email: '',
     password: '',
-    checked: false,
+    token: null,
+    birthday: null,
   },
   loading: false,
   authorized: false,
@@ -31,6 +34,12 @@ export const reducer = (state = initialState, action) => {
         loading: false,
         authorized: false,
         error: action.payload,
+      };
+    case ACTION_TYPES.REGISTERED:
+      return {
+        ...state,
+        authorized: true,
+        loading: false,
       };
     default:
       return state;

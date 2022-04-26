@@ -1,39 +1,14 @@
-import { Navigate } from 'react-router-dom';
 import { useState } from 'react';
-import styled from 'styled-components';
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 300px;
-  margin: 100px auto;
-  padding: 50px;
-  background: #dcdcdc;
-  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.08);
-  border-radius: 10px;
-`;
-
-const Input = styled.input`
-  width: 270px;
-  height: 40px;
-  margin-bottom: 20px;
-  border: 1px solid #808080;
-  box-sizing: border-box;
-  border-radius: 8px;
-`;
-
-const Button = styled.button`
-  height: 40px;
-  width: 200px;
-  margin: 20px 0;
-  background: #808080;
-  border-radius: 10px;
-  border: none;
-`;
+import { useSelector, useDispatch } from 'react-redux';
+import { Navigate } from 'react-router-dom';
+import { Loader } from './Loader';
+import { registeredUser } from '../redux/thunk';
+import { Form, Title, Input, Button } from './Login';
 
 export const SignUp = () => {
+  const isRegistrated = useSelector((state) => state.authorized);
+  const loading = useSelector((state) => state.loading);
+  const error = useSelector((state) => state.error);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
@@ -49,7 +24,8 @@ export const SignUp = () => {
   const [passwordError, setPasswordError] = useState(
     'Password cannot be empty'
   );
-  const [registrated, setRegistrated] = useState(false);
+
+  const dispatch = useDispatch();
 
   const createUserName = (e) => {
     setUsername(e.target.value);
@@ -107,24 +83,22 @@ export const SignUp = () => {
     }
   };
 
+  const newUser = { username, email, password, birthday };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password === confirmPassword) {
-      console.log('OK');
-    } else {
-      console.log('NO');
-    }
-    setRegistrated(true);
+    dispatch(registeredUser(newUser));
   };
 
-  if (registrated) {
-    return <Navigate to={'/login'} />;
+  if (isRegistrated) {
+    return <Navigate to={'/'} state={{ from: location }} />;
   }
 
   return (
     <div>
+      <div>{loading && <Loader />}</div>
       <Form onSubmit={handleSubmit}>
-        <h2>Registration</h2>
+        <Title>Registration</Title>
         {usernameDirty && usernameError && (
           <div style={{ color: 'red' }}>{usernameError}</div>
         )}
@@ -178,7 +152,10 @@ export const SignUp = () => {
           value={confirmPassword}
           required
         />
-        <Button disabled={!password}>SignUp</Button>
+        <span style={{ color: 'red' }}>{error}</span>
+        <Button disabled={!password || password != confirmPassword}>
+          SignUp
+        </Button>
       </Form>
     </div>
   );

@@ -4,17 +4,20 @@ import { NotFound } from '../auth/NotFound';
 import { SignUp } from '../auth/SignUp';
 import { HomePage } from '../components/HomePage';
 import { Navbar } from '../components/Navbar';
+import { PasswordRecovery } from '../components/PasswordRecovery';
 import { UserPage } from '../components/UserPage';
 
 export const Navigator = () => {
+  const isAuthorized = localStorage.getItem('authToken');
   return (
     <>
-      <Navbar />
+      {isAuthorized && <Navbar />}
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/user" element={<UserPage />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/passwordRecovery" element={<PasswordRecovery />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

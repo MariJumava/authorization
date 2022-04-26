@@ -11,16 +11,17 @@ const Nav = styled.nav`
 `;
 
 const Wrap = styled.div`
-  margin: 0 60px;
+  margin: 0 70px;
 `;
 
 const ButtonLogout = styled.button`
   font-size: 20px;
+  font-weight: 500;
   background-color: transparent;
   border: none;
   cursor: pointer;
   :hover {
-    color: #808080;
+    color: red;
   }
 `;
 
@@ -34,12 +35,14 @@ export const Navbar = () => {
     <>
       <Nav>
         <Wrap>
-          <NavLink to="/">Home</NavLink>&nbsp;&nbsp;
+          <NavLink to="/">Home</NavLink>&nbsp;&nbsp;&nbsp;
           <NavLink to="/user">Profile</NavLink>
         </Wrap>
         <Wrap>
-          <ButtonLogout onClick={handleLogOut}>LogOut</ButtonLogout>&nbsp;&nbsp;
-          <NavLink to="/signup">Registration</NavLink>
+          <NavLink to="/signup">SignUp</NavLink>
+          &nbsp;&nbsp;&nbsp;
+          <NavLink to="/login">Login</NavLink>&nbsp;&nbsp;
+          <ButtonLogout onClick={handleLogOut}>SignOut</ButtonLogout>
         </Wrap>
       </Nav>
     </>

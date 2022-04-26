@@ -2,26 +2,28 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, Navigate } from 'react-router-dom';
 import { PATH } from '../utils/ROUTES';
-import { delay } from '../fakeBackend/delay';
 import { Loader } from './Loader';
-import { loginStart, loginSuccess, loginFailure } from '../redux/action';
-import { users } from '../components/Users';
+import { loginUser } from '../redux/thunk';
 import styled from 'styled-components';
 
-const Form = styled.form`
+export const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
   width: 300px;
-  margin: 100px auto;
+  margin: 50px auto;
   padding: 50px;
   background: #dcdcdc;
   box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.08);
   border-radius: 10px;
 `;
-
-const Input = styled.input`
+export const Title = styled.h3`
+  font-size: 25px;
+  font-weight: 600;
+  cursor: default;
+`;
+export const Input = styled.input`
   width: 270px;
   height: 40px;
   margin-bottom: 20px;
@@ -29,10 +31,11 @@ const Input = styled.input`
   box-sizing: border-box;
   border-radius: 8px;
 `;
-const Button = styled.button`
+export const Button = styled.button`
   height: 40px;
   width: 200px;
   margin: 20px 0;
+  font-size: 15px;
   background: #808080;
   border-radius: 10px;
   border: none;
@@ -107,69 +110,46 @@ export const Login = () => {
     setChecked(false);
   };
 
-  const loginUser = (user) => async (dispatch) => {
-    try {
-      dispatch(loginStart(true));
-      await delay(2000);
-      const response = users.find(
-        (us) => us.email === user.email && us.password === user.password
-      );
-      if (response) {
-        dispatch(loginSuccess(response));
-        dispatch(loginStart(false));
-      } else if (!response) {
-        dispatch(loginFailure('Wrong email or password'));
-        console.log(error);
-      }
-    } catch (error) {
-      console.log('error', error);
-      dispatch(loginFailure('Something is wrong!'));
-    }
-  };
-
   return (
     <>
-      {loading ? (
-        <Loader />
-      ) : (
-        <Form onSubmit={handleSubmit}>
-          <h2>Login Page</h2>
-          {emailDirty && emailError && (
-            <div style={{ color: 'red' }}>{emailError}</div>
-          )}
-          <Input
-            type="text"
-            placeholder="Enter your email"
-            name="email"
-            onBlur={blurHandler}
-            onChange={userEmail}
-            value={email}
-          />
-          {passwordDirty && passwordError && (
-            <div style={{ color: 'red' }}>{passwordError}</div>
-          )}
+      <div>{loading && <Loader />}</div>
+      <Form onSubmit={handleSubmit}>
+        <Title>Login Page</Title>
+        {emailDirty && emailError && (
+          <div style={{ color: 'red' }}>{emailError}</div>
+        )}
+        <Input
+          type="text"
+          placeholder="Enter your email"
+          name="email"
+          onBlur={blurHandler}
+          onChange={userEmail}
+          value={email}
+        />
+        {passwordDirty && passwordError && (
+          <div style={{ color: 'red' }}>{passwordError}</div>
+        )}
 
-          <Input
-            type="password"
-            placeholder="Enter your password"
-            name="password"
-            onBlur={blurHandler}
-            onChange={userPassword}
-            value={password}
-          />
-          <span>
-            <input type="checkbox" checked={checked} onChange={userRemember} />
-            &nbsp;<span>Remember me</span>
-          </span>
-          <span style={{ color: 'red' }}>{error}</span>
-          <Button type="submit">Login</Button>
-          <div>
-            <NavLink to={PATH.PASSWORDRECOVERY}>Forgot Password?</NavLink>
-            &nbsp;<span>or</span>&nbsp;
-            <NavLink to={PATH.REGISTRATION}>Sign Up!</NavLink>
-          </div>
-        </Form>
-      )}
+        <Input
+          type="password"
+          placeholder="Enter your password"
+          name="password"
+          onBlur={blurHandler}
+          onChange={userPassword}
+          value={password}
+        />
+        <span>
+          <input type="checkbox" checked={checked} onChange={userRemember} />
+          &nbsp;<span>Remember me</span>
+        </span>
+        <span style={{ color: 'red' }}>{error}</span>
+        <Button type="submit">Login</Button>
+        <div>
+          <NavLink to={PATH.PASSWORDRECOVERY}>Forgot Password?</NavLink>
+          &nbsp;<span>or</span>&nbsp;
+          <NavLink to={PATH.REGISTRATION}>Sign Up!</NavLink>
+        </div>
+      </Form>
     </>
   );
 };

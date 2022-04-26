@@ -19,3 +19,10 @@ export const loginFailure = (error) => {
     payload: error,
   };
 };
+
+export const handleSignUp = (payload) => {
+  return {
+    type: ACTION_TYPES.REGISTERED,
+    payload,
+  };
+};
