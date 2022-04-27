@@ -1,7 +1,14 @@
 import { uniqueId } from 'lodash';
+import user_photo from '../pictures/user_photo.png';
 
 export const users = [
-  { id: uniqueId(), email: 'test@mail.ru', username: 'test', password: '123q' },
+  {
+    id: uniqueId(),
+    email: 'test@mail.ru',
+    username: 'test',
+    img: user_photo,
+    password: '123q',
+  },
   { id: uniqueId(), email: 'qw@er.ru', username: 'hgb' },
   { id: uniqueId(), email: 'er@ty.ru', username: 'hgb' },
   { id: uniqueId(), email: 'zx@cv.ru', username: 'hgb' },

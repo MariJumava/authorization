@@ -1,4 +1,6 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../redux/action';
 import styled from 'styled-components';
 
 const Nav = styled.nav`
@@ -26,11 +28,14 @@ const ButtonLogout = styled.button`
 `;
 
 export const Navbar = () => {
-  const navigate = useNavigate();
+  const isAuthorized = useSelector((state) => state.authorized);
+  const dispatch = useDispatch();
   const handleLogOut = () => {
+    dispatch(logout());
     localStorage.clear();
-    navigate('/login');
+    //window.location.href = '/login';
   };
+
   return (
     <>
       <Nav>
@@ -41,8 +46,12 @@ export const Navbar = () => {
         <Wrap>
           <NavLink to="/signup">SignUp</NavLink>
           &nbsp;&nbsp;&nbsp;
-          <NavLink to="/login">Login</NavLink>&nbsp;&nbsp;
-          <ButtonLogout onClick={handleLogOut}>SignOut</ButtonLogout>
+          {isAuthorized ? (
+            <ButtonLogout onClick={handleLogOut}>LogOut</ButtonLogout>
+          ) : (
+            <NavLink to="/login">Login</NavLink>
+          )}
+          &nbsp;&nbsp;
         </Wrap>
       </Nav>
     </>

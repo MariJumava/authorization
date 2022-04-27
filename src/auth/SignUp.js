@@ -91,7 +91,7 @@ export const SignUp = () => {
   };
 
   if (isRegistrated) {
-    return <Navigate to={'/'} state={{ from: location }} />;
+    return <Navigate to={'/'} />;
   }
 
   return (

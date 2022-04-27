@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { Login } from '../auth/Login';
 import { NotFound } from '../auth/NotFound';
 import { SignUp } from '../auth/SignUp';
@@ -9,9 +10,10 @@ import { UserPage } from '../components/page/UserPage';
 
 export const Navigator = () => {
   const isAuthorized = localStorage.getItem('authToken');
+  const isAuthorizedStore = useSelector((state) => state.authorized);
   return (
     <>
-      {isAuthorized && <Navbar />}
+      {isAuthorized && isAuthorizedStore && <Navbar />}
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<HomePage />} />

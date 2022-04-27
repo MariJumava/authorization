@@ -97,7 +97,7 @@ export const Login = () => {
   };
 
   if (isAuthorized) {
-    return <Navigate to={'/user'} state={{ from: location }} />;
+    return <Navigate to={'/user'} />;
   }
 
   const data = { email, password, checked };

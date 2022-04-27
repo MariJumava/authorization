@@ -27,6 +27,13 @@ export const handleSignUp = (payload) => {
   };
 };
 
+export const logout = (payload) => {
+  return {
+    type: ACTION_TYPES.LOGOUT,
+    payload,
+  };
+};
+
 export const EditUserName = (username) => {
   return {
     type: ACTION_TYPES.EDIT_NAME_USER,

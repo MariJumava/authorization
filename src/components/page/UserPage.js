@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 import {
   EditUserName,
   EditUserEmail,
@@ -64,6 +65,7 @@ const Img = styled.img`
 `;
 
 export const UserPage = () => {
+  const isAuthorized = useSelector((state) => state.authorized);
   const user = useSelector((state) => state.user);
   const [isEditView, setIsEditView] = useState(false);
   const [editableName, setEditableName] = useState(user.username);
@@ -82,7 +84,10 @@ export const UserPage = () => {
     dispatch(EditUserEmail(editableEmail));
     dispatch(EditUserPassword(editablePassword));
   };
-
+  if (!isAuthorized) {
+    return <Navigate to={'/login'} />;
+  }
+  console.log(user);
   return (
     <Wrap>
       <Title>Personal information</Title>

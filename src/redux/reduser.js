@@ -12,6 +12,7 @@ const initialState = {
     birthday: null,
     img: user_photo,
   },
+
   loading: false,
   authorized: false,
   error: '',
@@ -28,6 +29,7 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.payload,
+
         loading: false,
         authorized: true,
       };
@@ -42,6 +44,12 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         authorized: true,
+        loading: false,
+      };
+    case ACTION_TYPES.LOGOUT:
+      return {
+        ...state,
+        authorized: action.payload,
         loading: false,
       };
     case ACTION_TYPES.EDIT_NAME_USER:
