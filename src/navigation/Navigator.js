@@ -2,10 +2,10 @@ import { Routes, Route } from 'react-router-dom';
 import { Login } from '../auth/Login';
 import { NotFound } from '../auth/NotFound';
 import { SignUp } from '../auth/SignUp';
-import { HomePage } from '../components/HomePage';
+import { HomePage } from '../components/page/HomePage';
 import { Navbar } from '../components/Navbar';
-import { PasswordRecovery } from '../components/PasswordRecovery';
-import { UserPage } from '../components/UserPage';
+import { PasswordRecovery } from '../components/page/PasswordRecovery';
+import { UserPage } from '../components/page/UserPage';
 
 export const Navigator = () => {
   const isAuthorized = localStorage.getItem('authToken');

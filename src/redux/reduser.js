@@ -1,13 +1,16 @@
 import { uniqueId } from 'lodash';
 import { ACTION_TYPES } from './consts';
+import user_photo from '../pictures/user_photo.png';
 
 const initialState = {
   user: {
     id: uniqueId(),
-    email: '',
-    password: '',
+    username: 'test',
+    email: 'test@mail.ru',
+    password: '123q',
     token: null,
     birthday: null,
+    img: user_photo,
   },
   loading: false,
   authorized: false,
@@ -40,6 +43,21 @@ export const reducer = (state = initialState, action) => {
         ...state,
         authorized: true,
         loading: false,
+      };
+    case ACTION_TYPES.EDIT_NAME_USER:
+      return {
+        ...state,
+        user: { ...state.user, username: action.payload },
+      };
+    case ACTION_TYPES.EDIT_EMAIL_USER:
+      return {
+        ...state,
+        user: { ...state.user, email: action.payload },
+      };
+    case ACTION_TYPES.EDIT_PASSWORD_USER:
+      return {
+        ...state,
+        user: { ...state.user, password: action.payload },
       };
     default:
       return state;

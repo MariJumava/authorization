@@ -26,3 +26,24 @@ export const handleSignUp = (payload) => {
     payload,
   };
 };
+
+export const EditUserName = (username) => {
+  return {
+    type: ACTION_TYPES.EDIT_NAME_USER,
+    payload: username,
+  };
+};
+
+export const EditUserEmail = (email) => {
+  return {
+    type: ACTION_TYPES.EDIT_EMAIL_USER,
+    payload: email,
+  };
+};
+
+export const EditUserPassword = (password) => {
+  return {
+    type: ACTION_TYPES.EDIT_PASSWORD_USER,
+    payload: password,
+  };
+};

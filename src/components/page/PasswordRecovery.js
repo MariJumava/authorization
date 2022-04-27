@@ -1,5 +1,5 @@
 //import { useDispatch } from 'react-redux';
-import { Form, Title, Input, Button } from '../auth/Login';
+import { Form, Title, Input, Button } from '../../auth/Login';
 
 export const PasswordRecovery = () => {
   //const dispatch = useDispatch();
