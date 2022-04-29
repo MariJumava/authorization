@@ -8,15 +8,21 @@ import {
 } from '../../redux/action';
 import BeenhereIcon from '@mui/icons-material/Beenhere';
 import edit from '../../pictures/edit.png';
+import profile from '../../pictures/profile.png';
 import styled from 'styled-components';
 
 const Wrap = styled.div`
-  margin-left: 100px;
+  display: flex;
+  margin-left: 70px;
 `;
 const Wrapper = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
+`;
+const ImgBackground = styled.img`
+  width: fit-content;
+  max-width: 700px;
 `;
 const Title = styled.h2`
   font-size: 35px;
@@ -90,55 +96,58 @@ export const UserPage = () => {
 
   return (
     <Wrap>
-      <Title>Personal information</Title>
-      <Wrapper>
-        <Img src={user.img} />
-        <Info>
-          <Container>
-            <SubTitle>Your Name:</SubTitle>
+      <div>
+        <Title>Personal information</Title>
+        <Wrapper>
+          <Img src={user.img} />
+          <Info>
+            <Container>
+              <SubTitle>Your Name:</SubTitle>
+              {isEditView && (
+                <Input
+                  type="text"
+                  value={editableName}
+                  onChange={(event) => setEditableName(event.target.value)}
+                />
+              )}
+              {!isEditView && <Text>{user.username}</Text>}
+            </Container>
+            <Container>
+              <SubTitle>Your Email:</SubTitle>
+              {isEditView && (
+                <Input
+                  type="email"
+                  value={editableEmail}
+                  onChange={(event) => setEditableEmail(event.target.value)}
+                />
+              )}
+              {!isEditView && <Text>{user.email}</Text>}
+            </Container>
+            <Container>
+              <SubTitle>Your Password:</SubTitle>
+              {isEditView && (
+                <Input
+                  type="password"
+                  value={editablePassword}
+                  onChange={(event) => setEditablePassword(event.target.value)}
+                />
+              )}
+              {!isEditView && <Text>{user.password}</Text>}
+            </Container>
             {isEditView && (
-              <Input
-                type="text"
-                value={editableName}
-                onChange={(event) => setEditableName(event.target.value)}
-              />
+              <Button onClick={saveChanges}>
+                <BeenhereIcon />
+              </Button>
             )}
-            {!isEditView && <Text>{user.username}</Text>}
-          </Container>
-          <Container>
-            <SubTitle>Your Email:</SubTitle>
-            {isEditView && (
-              <Input
-                type="email"
-                value={editableEmail}
-                onChange={(event) => setEditableEmail(event.target.value)}
-              />
+            {!isEditView && (
+              <Button onClick={showEditView}>
+                <ImgEdit src={edit} />
+              </Button>
             )}
-            {!isEditView && <Text>{user.email}</Text>}
-          </Container>
-          <Container>
-            <SubTitle>Your Password:</SubTitle>
-            {isEditView && (
-              <Input
-                type="password"
-                value={editablePassword}
-                onChange={(event) => setEditablePassword(event.target.value)}
-              />
-            )}
-            {!isEditView && <Text>{user.password}</Text>}
-          </Container>
-          {isEditView && (
-            <Button onClick={saveChanges}>
-              <BeenhereIcon />
-            </Button>
-          )}
-          {!isEditView && (
-            <Button onClick={showEditView}>
-              <ImgEdit src={edit} />
-            </Button>
-          )}
-        </Info>
-      </Wrapper>
+          </Info>
+        </Wrapper>
+      </div>
+      <ImgBackground src={profile} />
     </Wrap>
   );
 };

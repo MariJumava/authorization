@@ -4,7 +4,8 @@ import { Navigate, NavLink } from 'react-router-dom';
 import { PATH } from '../utils/ROUTES';
 import { Loader } from './Loader';
 import { registeredUser, loginUser } from '../redux/thunk';
-import { Title, Input, Button, Wrap } from './Login';
+import { Container, Img, Title, Input, Wrap, Button } from './Login';
+import registrated from '../pictures/registrated.png';
 import styled from 'styled-components';
 
 export const Text = styled.p`
@@ -109,72 +110,75 @@ export const SignUp = () => {
   }
 
   return (
-    <Wrap>
-      <div>{loading && <Loader />}</div>
-      <form onSubmit={handleSubmit}>
-        <Title>Registration</Title>
-        {usernameDirty && usernameError && (
-          <div style={{ color: 'red' }}>{usernameError}</div>
-        )}
-        <Input
-          type="text"
-          placeholder="Enter your userName"
-          name="username"
-          onBlur={blurHandler}
-          onChange={createUserName}
-          value={username}
-          required
-        />
-        {emailDirty && emailError && (
-          <div style={{ color: 'red' }}>{emailError}</div>
-        )}
-        <Input
-          type="text"
-          placeholder="Enter your email"
-          name="email"
-          onBlur={blurHandler}
-          onChange={createUserEmail}
-          value={email}
-          required
-        />
-        <Input
-          type="date"
-          placeholder="Enter your Birthday"
-          name="birthday"
-          onBlur={blurHandler}
-          onChange={createUserBirthday}
-          value={birthday}
-        />
-        {passwordDirty && passwordError && (
-          <div style={{ color: 'red' }}>{passwordError}</div>
-        )}
-        <Input
-          type="password"
-          placeholder="Enter your password"
-          name="password"
-          onBlur={blurHandler}
-          onChange={createUserPassword}
-          value={password}
-          required
-        />
-        <Input
-          type="password"
-          placeholder="Repeat password"
-          name="confirmPassword"
-          onBlur={blurHandler}
-          onChange={repeatUserPassword}
-          value={confirmPassword}
-          required
-        />
-        <span style={{ color: 'red' }}>{error}</span>
-        <Button disabled={!password || password != confirmPassword}>
-          SignUp
-        </Button>
-        <Text>
-          Have a profile?
-          <NavLink to={PATH.LOGIN}> Login!</NavLink>
-        </Text>
-      </form>
-    </Wrap>
+    <Container>
+      <Img src={registrated} />
+      <Wrap primary>
+        <div>{loading && <Loader />}</div>
+        <form onSubmit={handleSubmit}>
+          <Title>Registration</Title>
+          {usernameDirty && usernameError && (
+            <div style={{ color: 'red' }}>{usernameError}</div>
+          )}
+          <Input
+            type="text"
+            placeholder="Enter your name"
+            name="username"
+            onBlur={blurHandler}
+            onChange={createUserName}
+            value={username}
+            required
+          />
+          {emailDirty && emailError && (
+            <div style={{ color: 'red' }}>{emailError}</div>
+          )}
+          <Input
+            type="text"
+            placeholder="Enter your email"
+            name="email"
+            onBlur={blurHandler}
+            onChange={createUserEmail}
+            value={email}
+            required
+          />
+          <Input
+            type="date"
+            placeholder="Enter your Birthday"
+            name="birthday"
+            onBlur={blurHandler}
+            onChange={createUserBirthday}
+            value={birthday}
+          />
+          {passwordDirty && passwordError && (
+            <div style={{ color: 'red' }}>{passwordError}</div>
+          )}
+          <Input
+            type="password"
+            placeholder="Enter your password"
+            name="password"
+            onBlur={blurHandler}
+            onChange={createUserPassword}
+            value={password}
+            required
+          />
+          <Input
+            type="password"
+            placeholder="Repeat password"
+            name="confirmPassword"
+            onBlur={blurHandler}
+            onChange={repeatUserPassword}
+            value={confirmPassword}
+            required
+          />
+          <span style={{ color: 'red' }}>{error}</span>
+          <Button primary disabled={!password || password != confirmPassword}>
+            SignUp
+          </Button>
+          <Text>
+            Have a profile?
+            <NavLink to={PATH.LOGIN}> Login!</NavLink>
+          </Text>
+        </form>
+      </Wrap>
+    </Container>
   );
 };

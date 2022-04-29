@@ -10,7 +10,7 @@ const Nav = styled.nav`
   align-items: center;
   height: 60px;
   font-size: 20px;
-  background: #dcdcdc;
+  background: #7b68ee;
 `;
 
 const Wrap = styled.div`
@@ -34,7 +34,6 @@ export const Navbar = () => {
   const handleLogOut = () => {
     dispatch(logout());
     localStorage.clear();
-    //window.location.href = '/login';
   };
 
   return (
