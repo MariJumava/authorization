@@ -12,7 +12,6 @@ const initialState = {
     birthday: null,
     img: user_photo,
   },
-
   loading: false,
   authorized: false,
   error: '',
@@ -29,7 +28,6 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.payload,
-
         loading: false,
         authorized: true,
       };
@@ -66,6 +64,11 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         user: { ...state.user, password: action.payload },
+      };
+    case ACTION_TYPES.VERIFICATION:
+      return {
+        ...state,
+        loading: false,
       };
     default:
       return state;

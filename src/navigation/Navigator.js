@@ -17,7 +17,7 @@ export const Navigator = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<HomePage />} />
-        <Route path="/user" element={<UserPage />} />
+        <Route path="/profile" element={<UserPage />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/passwordRecovery" element={<PasswordRecovery />} />
         <Route path="*" element={<NotFound />} />

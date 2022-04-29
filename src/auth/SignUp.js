@@ -1,9 +1,15 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Navigate } from 'react-router-dom';
+import { Navigate, NavLink } from 'react-router-dom';
+import { PATH } from '../utils/ROUTES';
 import { Loader } from './Loader';
-import { registeredUser } from '../redux/thunk';
-import { Form, Title, Input, Button } from './Login';
+import { registeredUser, loginUser } from '../redux/thunk';
+import { Title, Input, Button, Wrap } from './Login';
+import styled from 'styled-components';
+
+export const Text = styled.p`
+  cursor: default;
+`;
 
 export const SignUp = () => {
   const isRegistrated = useSelector((state) => state.authorized);
@@ -87,6 +93,14 @@ export const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    (async () => {
+      await dispatch(registeredUser(newUser));
+      const data = {
+        email: newUser.email,
+        password: newUser.password,
+      };
+      await dispatch(loginUser(data));
+    })();
     dispatch(registeredUser(newUser));
   };
 
@@ -95,9 +109,9 @@ export const SignUp = () => {
   }
 
   return (
-    <div>
+    <Wrap>
       <div>{loading && <Loader />}</div>
-      <Form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <Title>Registration</Title>
         {usernameDirty && usernameError && (
           <div style={{ color: 'red' }}>{usernameError}</div>
@@ -156,7 +170,11 @@ export const SignUp = () => {
         <Button disabled={!password || password != confirmPassword}>
           SignUp
         </Button>
-      </Form>
-    </div>
+        <Text>
+          Have a profile?
+          <NavLink to={PATH.LOGIN}> Login!</NavLink>
+        </Text>
+      </form>
+    </Wrap>
   );
 };

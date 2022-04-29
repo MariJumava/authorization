@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { PATH } from '../utils/ROUTES';
 import { logout } from '../redux/action';
 import styled from 'styled-components';
 
@@ -40,16 +41,18 @@ export const Navbar = () => {
     <>
       <Nav>
         <Wrap>
-          <NavLink to="/">Home</NavLink>&nbsp;&nbsp;&nbsp;
-          <NavLink to="/user">Profile</NavLink>
+          <NavLink to={PATH.MAIN}>Home</NavLink>&nbsp;&nbsp;&nbsp;
+          <NavLink to={PATH.PROFILE}>Profile</NavLink>
         </Wrap>
         <Wrap>
-          <NavLink to="/signup">SignUp</NavLink>
+          {!isAuthorized ? (
+            <NavLink to={PATH.REGISTRATION}>SignUp</NavLink>
+          ) : null}
           &nbsp;&nbsp;&nbsp;
           {isAuthorized ? (
             <ButtonLogout onClick={handleLogOut}>LogOut</ButtonLogout>
           ) : (
-            <NavLink to="/login">Login</NavLink>
+            <NavLink to={PATH.LOGIN}>Login</NavLink>
           )}
           &nbsp;&nbsp;
         </Wrap>

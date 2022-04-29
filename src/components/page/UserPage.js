@@ -87,7 +87,7 @@ export const UserPage = () => {
   if (!isAuthorized) {
     return <Navigate to={'/login'} />;
   }
-  console.log(user);
+
   return (
     <Wrap>
       <Title>Personal information</Title>

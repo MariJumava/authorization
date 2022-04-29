@@ -3,5 +3,5 @@ export const PATH = {
   PASSWORDRECOVERY: '/passwordRecovery',
   PROFILE: '/profile',
   REGISTRATION: '/signup',
-  NEWPASSWORD: '/newPassword',
+  MAIN: '/',
 };

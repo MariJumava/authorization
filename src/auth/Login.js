@@ -6,7 +6,7 @@ import { Loader } from './Loader';
 import { loginUser } from '../redux/thunk';
 import styled from 'styled-components';
 
-export const Form = styled.form`
+export const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -14,6 +14,7 @@ export const Form = styled.form`
   width: 300px;
   margin: 50px auto;
   padding: 50px;
+  text-align: center;
   background: #dcdcdc;
   box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.08);
   border-radius: 10px;
@@ -21,6 +22,9 @@ export const Form = styled.form`
 export const Title = styled.h3`
   font-size: 25px;
   font-weight: 600;
+  cursor: default;
+`;
+export const Text = styled.span`
   cursor: default;
 `;
 export const Input = styled.input`
@@ -97,7 +101,7 @@ export const Login = () => {
   };
 
   if (isAuthorized) {
-    return <Navigate to={'/user'} />;
+    return <Navigate to={'/profile'} />;
   }
 
   const data = { email, password, checked };
@@ -111,9 +115,9 @@ export const Login = () => {
   };
 
   return (
-    <>
+    <Wrap>
       <div>{loading && <Loader />}</div>
-      <Form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <Title>Login Page</Title>
         {emailDirty && emailError && (
           <div style={{ color: 'red' }}>{emailError}</div>
@@ -138,18 +142,18 @@ export const Login = () => {
           onChange={userPassword}
           value={password}
         />
-        <span>
+        <div>
           <input type="checkbox" checked={checked} onChange={userRemember} />
           &nbsp;<span>Remember me</span>
-        </span>
+        </div>
         <span style={{ color: 'red' }}>{error}</span>
         <Button type="submit">Login</Button>
         <div>
           <NavLink to={PATH.PASSWORDRECOVERY}>Forgot Password?</NavLink>
-          &nbsp;<span>or</span>&nbsp;
+          &nbsp;<Text>or</Text>&nbsp;
           <NavLink to={PATH.REGISTRATION}>Sign Up!</NavLink>
         </div>
-      </Form>
-    </>
+      </form>
+    </Wrap>
   );
 };

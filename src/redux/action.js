@@ -54,3 +54,10 @@ export const EditUserPassword = (password) => {
     payload: password,
   };
 };
+
+export const verificationEmail = (email) => {
+  return {
+    type: ACTION_TYPES.VERIFICATION,
+    payload: email,
+  };
+};
