@@ -43,11 +43,9 @@ export const registeredUser = () => async (dispatch) => {
 
 export const compareEmail = (email) => async (dispatch) => {
   try {
-    console.log(email);
     dispatch(loginStart(true));
     await delay(1000);
     const verification = users.find((us) => us.email === email);
-    console.log(verification);
     if (verification) {
       dispatch(verificationEmail(verification));
     } else if (!verification) {

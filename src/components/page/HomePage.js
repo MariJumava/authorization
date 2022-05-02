@@ -1,21 +1,23 @@
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { PATH } from '../../utils/ROUTES';
-import main_1 from '../../pictures/main_1.png';
-import main_2 from '../../pictures/main_2.png';
-import main_3 from '../../pictures/main_3.png';
-import main_4 from '../../pictures/main_4.png';
+// import main1 from '../../pictures/main1.png';
+// import main2 from '../../pictures/main2.jpeg';
+// import main3 from '../../pictures/main3.jpeg';
+// import main4 from '../../pictures/main4.jpeg';
 import styled from 'styled-components';
 
 const Wrap = styled.div`
-  margin: 70px;
   display: flex;
 `;
 const Nav = styled.nav`
   margin: 30px;
 `;
 const Container = styled.div`
-  padding: 23px;
+  padding: 40px;
+`;
+const Div = styled.div`
+  margin: 80px 0;
 `;
 const Title = styled.h2`
   margin: auto;
@@ -24,16 +26,14 @@ const Title = styled.h2`
 const SubTitle = styled.h4`
   font-size: 25px;
 `;
-const Text = styled.p`
-  margin-bottom: 80px;
-`;
-const Img = styled.img`
-  margin: 20px 10px 0;
-  border-radius: 20px;
-`;
+const Text = styled.p``;
+// const Img = styled.img`
+//   width: 300px;
+// `;
 
 export const HomePage = () => {
   const isAuthorized = useSelector((state) => state.authorized);
+
   return (
     <Nav>
       {!isAuthorized ? (
@@ -54,16 +54,16 @@ export const HomePage = () => {
             elit, mi. Pretium elementum commodo amet cursus massa dictum. Ac,
             pharetra nisi, morbi maecenas facilisi.
           </Text>
-          <div>
-            <Img src={main_1} />
-            <Img src={main_2} />
-          </div>
+          <Div>
+            {/* <Img src={main1} />
+            <Img src={main2} /> */}
+          </Div>
         </Container>
         <Container>
-          <div>
-            <Img src={main_3} />
-            <Img src={main_4} />
-          </div>
+          <Div>
+            {/* <Img src={main3} />
+            <Img src={main4} /> */}
+          </Div>
           <SubTitle>Our mission</SubTitle>
           <Text>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum

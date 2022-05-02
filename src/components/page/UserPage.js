@@ -8,7 +8,6 @@ import {
 } from '../../redux/action';
 import BeenhereIcon from '@mui/icons-material/Beenhere';
 import edit from '../../pictures/edit.png';
-import profile from '../../pictures/profile.png';
 import styled from 'styled-components';
 
 const Wrap = styled.div`
@@ -19,10 +18,6 @@ const Wrapper = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-`;
-const ImgBackground = styled.img`
-  width: fit-content;
-  max-width: 700px;
 `;
 const Title = styled.h2`
   font-size: 35px;
@@ -147,7 +142,6 @@ export const UserPage = () => {
           </Info>
         </Wrapper>
       </div>
-      <ImgBackground src={profile} />
     </Wrap>
   );
 };

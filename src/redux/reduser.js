@@ -9,7 +9,6 @@ const initialState = {
     email: 'test@mail.ru',
     password: '123q',
     token: null,
-    birthday: null,
     img: user_photo,
   },
   loading: false,
