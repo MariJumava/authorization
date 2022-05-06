@@ -1,5 +1,5 @@
 import { uniqueId } from 'lodash';
-import user_photo from '../pictures/user_photo.png';
+import user_photo from '../pictures/profile/user_photo.png';
 
 export const users = [
   {

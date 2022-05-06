@@ -13,7 +13,8 @@ code {
 }
 
 a {
-  font-weight: 600;
+  font-weight: 700;
+  outline: none;
   text-decoration: none;
   color: #181818;
 }

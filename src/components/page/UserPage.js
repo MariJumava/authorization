@@ -6,42 +6,39 @@ import {
   EditUserEmail,
   EditUserPassword,
 } from '../../redux/action';
-import BeenhereIcon from '@mui/icons-material/Beenhere';
-import edit from '../../pictures/edit.png';
+import profile from '../../pictures/profile/profile.jpg';
 import styled from 'styled-components';
 
-const Wrap = styled.div`
-  display: flex;
-  margin-left: 70px;
-`;
 const Wrapper = styled.div`
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
+  justify-content: space-evenly;
+  align-items: flex-end;
 `;
-const Title = styled.h2`
-  font-size: 35px;
-`;
-const SubTitle = styled.h4`
-  margin: 0;
-  padding: 10px;
-  font-size: 20px;
-  font-weight: 500;
-`;
-const Text = styled.p`
-  margin: 0;
-  padding: 10px;
-  font-weight: 300;
-  font-size: 20px;
+const Img = styled.img`
+  max-width: 1440px;
+  min-width: 375px;
+  object-fit: fill;
 `;
 const Container = styled.div`
   display: flex;
-  align-items: center;
-  width: 400px;
-`;
-const Info = styled.div`
-  display: flex;
   flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  width: 800px;
+  height: 350px;
+  left: 22%;
+  top: 170px;
+  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(40px);
+  border-radius: 12px;
+`;
+const SubTitle = styled.h4`
+  font-size: 20px;
+  color: #ffffff;
+`;
+const Text = styled.p`
+  font-size: 20px;
+  color: #ffffff;
 `;
 const Input = styled.input`
   height: 30px;
@@ -51,18 +48,21 @@ const Input = styled.input`
   color: #696969;
 `;
 const Button = styled.button`
-  width: 70px;
-  margin: 10px auto;
-  background: transparent;
+  width: 100px;
+  height: 40px;
+  font-size: 17px;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(90deg, rgba(127, 202, 33, 0.8) 0%, #105200 100%);
   border: none;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 40px;
   cursor: pointer;
 `;
-const ImgEdit = styled.img`
-  width: 20px;
-`;
-const Img = styled.img`
+const ImgUser = styled.img`
   width: 80px;
-  margin-right: 100px;
+  height: 80px;
+  margin: 0 auto;
 `;
 
 export const UserPage = () => {
@@ -90,58 +90,48 @@ export const UserPage = () => {
   }
 
   return (
-    <Wrap>
-      <div>
-        <Title>Personal information</Title>
+    <>
+      <Img src={profile} />
+      <Container>
+        <ImgUser src={user.img} />
         <Wrapper>
-          <Img src={user.img} />
-          <Info>
-            <Container>
-              <SubTitle>Your Name:</SubTitle>
-              {isEditView && (
-                <Input
-                  type="text"
-                  value={editableName}
-                  onChange={(event) => setEditableName(event.target.value)}
-                />
-              )}
-              {!isEditView && <Text>{user.username}</Text>}
-            </Container>
-            <Container>
-              <SubTitle>Your Email:</SubTitle>
-              {isEditView && (
-                <Input
-                  type="email"
-                  value={editableEmail}
-                  onChange={(event) => setEditableEmail(event.target.value)}
-                />
-              )}
-              {!isEditView && <Text>{user.email}</Text>}
-            </Container>
-            <Container>
-              <SubTitle>Your Password:</SubTitle>
-              {isEditView && (
-                <Input
-                  type="password"
-                  value={editablePassword}
-                  onChange={(event) => setEditablePassword(event.target.value)}
-                />
-              )}
-              {!isEditView && <Text>{user.password}</Text>}
-            </Container>
+          <div>
+            <SubTitle>Your Name:</SubTitle>
             {isEditView && (
-              <Button onClick={saveChanges}>
-                <BeenhereIcon />
-              </Button>
+              <Input
+                type="text"
+                value={editableName}
+                onChange={(event) => setEditableName(event.target.value)}
+              />
             )}
-            {!isEditView && (
-              <Button onClick={showEditView}>
-                <ImgEdit src={edit} />
-              </Button>
+            {!isEditView && <Text>{user.username}</Text>}
+          </div>
+          <div>
+            <SubTitle>Your Email:</SubTitle>
+            {isEditView && (
+              <Input
+                type="email"
+                value={editableEmail}
+                onChange={(event) => setEditableEmail(event.target.value)}
+              />
             )}
-          </Info>
+            {!isEditView && <Text>{user.email}</Text>}
+          </div>
+          <div>
+            <SubTitle>Your Password:</SubTitle>
+            {isEditView && (
+              <Input
+                type="password"
+                value={editablePassword}
+                onChange={(event) => setEditablePassword(event.target.value)}
+              />
+            )}
+            {!isEditView && <Text>{user.password}</Text>}
+          </div>
+          {isEditView && <Button onClick={saveChanges}>Save</Button>}
+          {!isEditView && <Button onClick={showEditView}>Edit</Button>}
         </Wrapper>
-      </div>
-    </Wrap>
+      </Container>
+    </>
   );
 };

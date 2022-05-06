@@ -1,21 +1,23 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, Navigate } from 'react-router-dom';
+import { NavLink, Navigate, useNavigate } from 'react-router-dom';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { PATH } from '../utils/ROUTES';
 import { Loader } from './Loader';
+import { loginFailure } from '../redux/action';
 import { loginUser } from '../redux/thunk';
-import ellipse from '../pictures/ellipse.png';
-import rectangle from '../pictures/rectangle.png';
+import mail from '../pictures/login/mail.svg';
+import lock from '../pictures/login/lock.svg';
+import ellipse from '../pictures/login/ellipse.png';
+import rectangle from '../pictures/login/rectangle.png';
 import styled from 'styled-components';
 
 export const Wrap = styled.div`
+  display: flex;
   position: absolute;
-  width: 737px;
-  height: 466px;
-  left: 32px;
+  left: 33px;
   top: 68px;
   background: #ffffff;
   border-radius: 10px;
@@ -41,140 +43,92 @@ export const ImgEllipse = styled.img`
   top: 333px;
 `;
 export const Wrapper1 = styled.div`
-  position: absolute;
+  display: flex;
+  flex-direction: column;
   width: 429px;
-  height: 466px;
-  left: 0px;
-  top: 0px;
-  background: #ffffff;
   border-radius: 10px;
 `;
 export const Wrapper2 = styled.div`
-  position: absolute;
   width: 308px;
   height: 466px;
-  right: 0;
-  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   background: #06a67e;
-  border-radius: 0 10px 10px 0;
+  border-radius: 10px;
   animation: slideIn 1.5s;
   @keyframes slideIn {
     from {
-      transform: translateX(20%);
+      transform: translateX(50%);
     }
     to {
       transform: translateX(-150%);
     }
   }
 `;
-
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+`;
 export const Social = styled.div`
   display: flex;
-  position: absolute;
-  left: 176px;
-  top: 144px;
 `;
 export const Title = styled.h3`
-  position: absolute;
-  left: 70px;
-  top: 70px;
-  margin: auto;
   font-style: normal;
   font-weight: 800;
   font-size: 26px;
+  margin: 16px;
   letter-spacing: 1.5px;
   color: ${(props) => (props.primary ? '#38b593' : '#FFFFFF')};
   cursor: default;
 `;
-export const Title2 = styled.h3`
-  position: absolute;
-  left: 70px;
-  top: 126px;
-  font-style: normal;
-  font-weight: 800;
-  font-size: 26px;
-  letter-spacing: 1.5px;
-  color: #ffffff;
-  cursor: default;
-`;
 export const Text = styled.p`
-  position: absolute;
-  left: 149px;
-  top: 178px;
+  margin: 16px;
   font-size: 11px;
+  color: ${(props) => (props.primary ? ' #9a9a9a' : '#FFFFFF')};
   text-align: center;
-  color: #9a9a9a;
   cursor: default;
 `;
-export const SubTitle = styled.h5`
-  position: absolute;
-  width: 198px;
-  left: 59px;
-  top: 191px;
-  font-weight: 400;
-  font-size: 12px;
-  text-align: center;
-  color: #ffffff;
-  cursor: default;
+export const CastomInput = styled.div`
+  position: relative;
 `;
-export const InputEmail = styled.input`
+export const Img = styled.img`
   position: absolute;
+  top: 10px;
+  left: 10px;
+`;
+export const Input = styled.input`
   width: 242px;
   height: 36px;
-  left: 94px;
-  top: 222px;
+  margin-bottom: 8px;
+  padding-left: 40px;
   border: none;
   background: #f4f8f5;
 `;
-export const InputPas = styled.input`
-  position: absolute;
-  width: 242px;
-  height: 36px;
-  left: 94px;
-  top: 266px;
-  border: none;
-  background: #f4f8f5;
-`;
-const Forgot = styled.a`
-  position: absolute;
-  width: 92px;
+const Forgot = styled.div`
   height: 14px;
-  left: 169px;
-  top: 318px;
+  margin: 8px 0;
   font-weight: 700;
   font-size: 10px;
   text-align: center;
   text-decoration-line: underline;
   color: #373737;
 `;
-export const Button1 = styled.button`
-  position: absolute;
+export const Button = styled.button`
   width: 158px;
   height: 39px;
-  left: 136px;
-  top: 348px;
+  margin-top: 10px;
   font-weight: 600;
   font-size: 10px;
   text-transform: uppercase;
   color: #ffffff;
-  background: #38b593;
+  background: ${(props) => (props.primary ? '#38b593' : 'transparent')};
   border-radius: 20px;
-  border: none;
+  border: ${(props) => (props.primary ? 'none' : '1px solid #FFFFFF')};
   cursor: pointer;
-`;
-export const Button2 = styled.button`
-  position: absolute;
-  width: 158px;
-  height: 39px;
-  left: 84.8px;
-  top: 289px;
-  font-size: 10px;
-  text-transform: uppercase;
-  border: 1px solid #ffffff;
-  background: transparent;
-  color: #ffffff;
-  box-sizing: border-box;
-  border-radius: 20px;
 `;
 
 export const Login = () => {
@@ -226,6 +180,11 @@ export const Login = () => {
         break;
     }
   };
+  const navigate = useNavigate();
+  const transitionSignUp = () => {
+    navigate('/signup');
+    dispatch(loginFailure(''));
+  };
 
   if (isAuthorized) {
     return <Navigate to={'/profile'} />;
@@ -247,53 +206,63 @@ export const Login = () => {
       <Wrap>
         <Wrapper1>
           <div>{loading && <Loader />}</div>
-          <form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit}>
             <Title primary>Sign In to Your Account</Title>
             <Social>
-              <TwitterIcon />
-              <FacebookIcon />
-              <LinkedInIcon />
+              <a href="https://twitter.com/" target={'blank'}>
+                <TwitterIcon />
+              </a>
+              <a href="https://facebook.com/" target={'blank'}>
+                <FacebookIcon />
+              </a>
+              <a href="https://linkedin.com/" target={'blank'}>
+                <LinkedInIcon />
+              </a>
             </Social>
             <Text primary>use your email account</Text>
             {emailDirty && emailError && (
               <div style={{ color: 'red' }}>{emailError}</div>
             )}
-            <InputEmail
-              type="text"
-              placeholder="Email"
-              name="email"
-              onBlur={blurHandler}
-              onChange={userEmail}
-              value={email}
-            />
-            {passwordDirty && passwordError && (
-              <div style={{ color: 'red' }}>{passwordError}</div>
-            )}
-            <InputPas
-              type="password"
-              placeholder="Password"
-              name="password"
-              onBlur={blurHandler}
-              onChange={userPassword}
-              value={password}
-            />
+            <CastomInput>
+              <Img src={mail} />
+              <Input
+                type="text"
+                placeholder="Email"
+                name="email"
+                onBlur={blurHandler}
+                onChange={userEmail}
+                value={email}
+              />
+              {passwordDirty && passwordError && (
+                <div style={{ color: 'red' }}>{passwordError}</div>
+              )}
+            </CastomInput>
+            <CastomInput>
+              <Img src={lock} />
+              <Input
+                type="password"
+                placeholder="Password"
+                name="password"
+                onBlur={blurHandler}
+                onChange={userPassword}
+                value={password}
+              />
+            </CastomInput>
             <Forgot>
               <NavLink to={PATH.PASSWORDRECOVERY}>Forgot Password?</NavLink>
             </Forgot>
-            <Button1 type="submit">Sign in</Button1>
             <span style={{ color: 'red' }}>{error}</span>
-          </form>
+            <Button primary type="submit">
+              Sign in
+            </Button>
+          </Form>
         </Wrapper1>
         <Wrapper2>
-          <Title2>Hello Friend!</Title2>
-          <SubTitle>
+          <Title>Hello Friend!</Title>
+          <Text>
             Enter your personal details and start your journey with us
-          </SubTitle>
-          <Button2>
-            <NavLink to={PATH.REGISTRATION} style={{ color: 'white' }}>
-              Sign Up
-            </NavLink>
-          </Button2>
+          </Text>
+          <Button onClick={transitionSignUp}>Sign Up</Button>
         </Wrapper2>
       </Wrap>
     </Container>

@@ -1,6 +1,6 @@
 import { uniqueId } from 'lodash';
 import { ACTION_TYPES } from './consts';
-import user_photo from '../pictures/user_photo.png';
+import user_photo from '../pictures/profile/user_photo.png';
 
 const initialState = {
   user: {

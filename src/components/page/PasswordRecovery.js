@@ -10,28 +10,14 @@ import {
   Wrap,
   Wrapper1,
   Wrapper2,
+  Form,
   Title,
-  Title2,
-  InputEmail,
-  InputPas,
-  SubTitle,
-  Button1,
-  Button2,
+  Text,
+  Input,
+  Button,
 } from '../../auth/Login';
-import ellipse from '../../pictures/ellipse.png';
-import rectangle from '../../pictures/rectangle.png';
-import styled from '@emotion/styled';
-
-const Text = styled.p`
-  position: absolute;
-  left: 68px;
-  top: 129px;
-  width: 250px;
-  font-size: 14px;
-  text-align: center;
-  color: #9a9a9a;
-  cursor: default;
-`;
+import ellipse from '../../pictures/login/ellipse.png';
+import rectangle from '../../pictures/login/rectangle.png';
 
 export const PasswordRecovery = () => {
   const dispatch = useDispatch();
@@ -59,38 +45,42 @@ export const PasswordRecovery = () => {
       <ImgEllipse src={ellipse} />
       <Wrap>
         <Wrapper1>
-          <form>
+          <Form>
             <Title primary>Reset Password </Title>
-            <Text>
+            <Text primary>
               Please enter your email address so that we will send you a link to
               reset your password.
             </Text>
-            <InputEmail
+            <Input
               name="email"
               placeholder="Enter a spare email"
               onChange={handlerChange}
             />
             {showChangePassword ? (
-              <InputPas name="password" placeholder="Enter new password" />
+              <Input name="password" placeholder="Enter new password" />
             ) : null}
             {showChangePassword ? (
-              <Button1 onClick={saveChanges}>Save new password</Button1>
+              <Button primary onClick={saveChanges}>
+                Save new password
+              </Button>
             ) : (
-              <Button1 onClick={sendMail}>Send</Button1>
+              <Button primary onClick={sendMail}>
+                Send
+              </Button>
             )}
             <p style={{ color: 'red' }}>{error}</p>
-          </form>
+          </Form>
         </Wrapper1>
         <Wrapper2>
-          <Title2>Hello Friend!</Title2>
-          <SubTitle>
+          <Title>Hello Friend!</Title>
+          <Text>
             Enter your personal details and start your journey with us
-          </SubTitle>
-          <Button2>
+          </Text>
+          <Button>
             <NavLink to={PATH.LOGIN} style={{ color: 'white' }}>
               Back to login
             </NavLink>
-          </Button2>
+          </Button>
         </Wrapper2>
       </Wrap>
     </Container>
