@@ -1,6 +1,16 @@
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { PATH } from '../../utils/ROUTES';
+import { Logo } from '../Navbar';
+import { Button, ButtonSecondary } from '../../styles/buttons';
+import {
+  MainTitle,
+  TitlePlants,
+  SubTitle,
+  Name,
+  NumberPlants,
+} from '../../styles/title';
+import { baseTheme } from '../../styles/baseTheme';
 import leaves from '../../pictures/home_page/leaves.jpg';
 import logo from '../../pictures/home_page/logo.svg';
 import foliage from '../../pictures/home_page/foliage.png';
@@ -17,105 +27,32 @@ const HiddenNavbar = styled.div`
   position: absolute;
   left: 40px;
   top: 40px;
-  font-size: 20px;
+  font-size: ${baseTheme.fontSize.subtitleImg}px;
   a:visited {
-    color: #ffffff;
-  }
-`;
-const Logo = styled.img`
-  width: 40px;
-  object-fit: fill;
-`;
-export const Title = styled.h2`
-  position: absolute;
-  left: calc(50% - 500px / 2);
-  top: 250px;
-  width: 500px;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 64px;
-  text-align: center;
-  background: linear-gradient(
-    180deg,
-    rgba(240, 255, 172, 0.8) 0%,
-    #ffffff 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
-`;
-export const SubTitle = styled.h4`
-  position: absolute;
-  width: 500px;
-  height: 117px;
-  left: calc(50% - 500px / 2);
-  top: 428px;
-  font-weight: 400;
-  font-size: 30px;
-  text-align: center;
-  color: rgba(255, 255, 255, 0.8);
-`;
-const Button = styled.button`
-  position: absolute;
-  width: 200px;
-  height: 40px;
-  left: calc(50% - 200px / 2);
-  top: 717px;
-  font-size: 18px;
-  text-transform: uppercase;
-  background: rgba(0, 0, 0, 0.8);
-  border: 1px solid #ffffff;
-  box-sizing: border-box;
-  border-radius: 20px;
-  color: #ffffff;
-  cursor: pointer;
-`;
-const ButtonTry = styled.button`
-  width: 260px;
-  height: 60px;
-  margin: 40px auto 24px;
-  font-weight: 700;
-  font-size: 24px;
-  color: #ffffff;
-  background: #375739;
-  border: none;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
-  border-radius: 40px;
-  cursor: pointer;
-  :hover {
-    background: #b7eaaf;
-    color: #000000;
+    color: ${baseTheme.colors.primary};
   }
 `;
 const SubTitleGr = styled.p`
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 100%;
+  font-weight: ${baseTheme.fontWeight.weight};
+  font-size: ${baseTheme.fontSize.subtitleImg}px;
   text-align: center;
   text-transform: uppercase;
-  color: #b7eaaf;
+  color: ${baseTheme.colors.transition};
   cursor: default;
 `;
 const Text = styled.p`
   width: 432px;
   margin: auto;
-  font-weight: 400;
-  font-size: 16px;
+  font-weight: ${baseTheme.fontWeight.normal};
+  font-size: ${baseTheme.fontSize.list}px;
   text-align: center;
-  color: #000000;
+  color: ${baseTheme.colors.secondary};
   cursor: default;
 `;
 const Img = styled.img`
   max-width: 1600px;
   min-width: 375px;
   object-fit: fill;
-`;
-const TitlePlants = styled.h2`
-  font-weight: 700;
-  font-size: 60px;
-  text-align: center;
-  color: #355342;
-  cursor: default;
 `;
 const Container = styled.div`
   display: flex;
@@ -128,24 +65,6 @@ export const ImgType = styled.img`
 export const Wrapper = styled.div`
   position: relative;
   object-fit: fill;
-`;
-export const Name = styled.h6`
-  position: absolute;
-  top: 24px;
-  left: 24px;
-  margin: 0;
-  font-size: 30px;
-  color: #ffffff;
-`;
-export const NumPlants = styled.p`
-  position: absolute;
-  left: 24px;
-  bottom: 24px;
-  margin: 0;
-  font-weight: 700;
-  font-size: 18px;
-  text-transform: uppercase;
-  color: #ffffff;
 `;
 
 export const HomePage = () => {
@@ -161,13 +80,13 @@ export const HomePage = () => {
           <NavLink to={PATH.LOGIN}>Login</NavLink>
         </HiddenNavbar>
       ) : null}
-      <Title>Let us find your love plants.</Title>
+      <MainTitle>Let us find your love plants.</MainTitle>
       <SubTitle>
         Add some color to your home, give it a little attention, the plants will
         accompany you quietly
       </SubTitle>
       <Button>Watch the video</Button>
-      <ButtonTry>Try for service</ButtonTry>
+      <ButtonSecondary>Try for service</ButtonSecondary>
       <SubTitleGr>Get a beautiful home</SubTitleGr>
       <Text>
         If you do not know what plants you can add to the space We can provide
@@ -178,22 +97,22 @@ export const HomePage = () => {
         <Wrapper>
           <ImgType src={foliage} />
           <Name>Foliage</Name>
-          <NumPlants>21 Plants</NumPlants>
+          <NumberPlants>21 Plants</NumberPlants>
         </Wrapper>
         <Wrapper>
           <ImgType src={roses} />
           <Name>Flower</Name>
-          <NumPlants>4 Plants</NumPlants>
+          <NumberPlants>4 Plants</NumberPlants>
         </Wrapper>
         <Wrapper>
           <ImgType src={succulent} />
           <Name>Succulent</Name>
-          <NumPlants>8 Plants</NumPlants>
+          <NumberPlants>8 Plants</NumberPlants>
         </Wrapper>
         <Wrapper>
           <ImgType src={strawberry} />
           <Name>Strawberry</Name>
-          <NumPlants>10 Plants</NumPlants>
+          <NumberPlants>10 Plants</NumberPlants>
         </Wrapper>
       </Container>
     </Wrap>

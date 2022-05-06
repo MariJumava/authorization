@@ -1,3 +1,6 @@
+import { baseTheme } from '../../styles/baseTheme';
+import { ButtonPrimary } from '../../styles/buttons';
+import { TitlePlants } from '../../styles/title';
 import { Logo } from '../Navbar';
 import location from '../../pictures/location_page/location.png';
 import wave from '../../pictures/service_page/wave.png';
@@ -33,30 +36,16 @@ const Container = styled.div`
   backdrop-filter: blur(40px);
   border-radius: 12px;
 `;
-const Title = styled.h2`
+const Title = styled(TitlePlants)`
   margin: 0;
-  font-weight: 700;
-  font-size: 64px;
-  text-align: center;
   color: #d2ffcb;
 `;
 const SubTitle = styled.h4`
   width: 400px;
-  font-weight: 700;
-  font-size: 24px;
+  font-weight: ${baseTheme.fontWeight.weight};
+  font-size: ${baseTheme.fontSize.subtitle}px;
   text-align: center;
-  color: #ffffff;
-`;
-const Button = styled.button`
-  width: 260px;
-  height: 60px;
-  font-size: 24px;
-  color: #ffffff;
-  background: linear-gradient(90deg, rgba(127, 202, 33, 0.8) 0%, #105200 100%);
-  border: none;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
-  border-radius: 40px;
-  cursor: pointer;
+  color: ${baseTheme.colors.primary};
 `;
 
 export const LocationPage = () => {
@@ -72,7 +61,7 @@ export const LocationPage = () => {
           (R.O.C.)
         </SubTitle>
         <SubTitle>Open 11:00 - 22:00</SubTitle>
-        <Button>Contact Me</Button>
+        <ButtonPrimary>Contact Me</ButtonPrimary>
       </Container>
     </Wrap>
   );

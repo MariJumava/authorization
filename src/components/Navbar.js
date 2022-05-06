@@ -3,6 +3,13 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { PATH } from '../utils/ROUTES';
 import { logout, loginFailure } from '../redux/action';
+import { ButtonLogout } from '../styles/buttons';
+import {
+  DropDownList,
+  DropDownListContainer,
+  ListItem,
+} from '../styles/dropDown';
+import { baseTheme } from '../styles/baseTheme';
 import logo from '../pictures/home_page/logo.svg';
 import styled from 'styled-components';
 
@@ -12,66 +19,22 @@ const Wrap = styled.div`
   justify-content: space-between;
   position: fixed;
   left: 25%;
-  width: 680px;
-  height: 40px;
+  ${baseTheme.sizes.navbar};
   margin: 50px auto 0;
   object-fit: fill;
   overflow: hidden;
 `;
 export const Logo = styled.img`
   width: 40px;
+  object-fit: fill;
 `;
 const Title = styled.h3`
-  font-size: 20px;
+  font-size: ${baseTheme.fontSize.subtitleImg}px;
   a:link {
-    color: #ffffff;
+    color: ${baseTheme.colors.primary};
   }
   a:visited {
-    color: #ffffff;
-  }
-`;
-const DropDownContainer = styled.div``;
-const DropDownListContainer = styled.div`
-  position: fixed;
-  left: 33%;
-  width: 240px;
-  text-align: center;
-`;
-const DropDownList = styled.ul`
-  padding: 10px 0;
-  margin: 0;
-  background: #213f36;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
-  border-radius: 15px;
-  box-sizing: border-box;
-  font-size: 1.3rem;
-`;
-const ListItem = styled.li`
-  list-style: none;
-  padding: 5px;
-  a:link {
-    color: #ffffff;
-  }
-  a:visited {
-    color: #ffffff;
-  }
-  a:hover {
-    color: #000000;
-  }
-  :hover {
-    background: #b7eaaf;
-`;
-const ButtonLogout = styled.button`
-  width: 160px;
-  height: 40px;
-  font-size: 20px;
-  font-weight: 700;
-  background: #b7eaaf;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-  :hover {
-    color: red;
+    color: ${baseTheme.colors.primary};
   }
 `;
 
@@ -99,7 +62,7 @@ export const Navbar = () => {
         <Title>
           <NavLink to={PATH.SERVICE}>Service</NavLink>
         </Title>
-        <DropDownContainer>
+        <div>
           <Title onMouseEnter={() => setIsMenuOpen(true)}>
             <NavLink to={PATH.SHOP}>Shop</NavLink>
           </Title>
@@ -121,12 +84,12 @@ export const Navbar = () => {
               </DropDownList>
             </DropDownListContainer>
           )}
-        </DropDownContainer>
+        </div>
         <Title>
           <NavLink to={PATH.PROFILE}>Profile</NavLink>
         </Title>
         <Title>
-          <NavLink to={PATH.LOCATION}>location</NavLink>
+          <NavLink to={PATH.LOCATION}>Location</NavLink>
         </Title>
         {!isAuthorized ? (
           <NavLink to={PATH.REGISTRATION}>SignUp</NavLink>

@@ -6,6 +6,8 @@ import {
   EditUserEmail,
   EditUserPassword,
 } from '../../redux/action';
+import { ButtonPrimary } from '../../styles/buttons';
+import { baseTheme } from '../../styles/baseTheme';
 import profile from '../../pictures/profile/profile.jpg';
 import styled from 'styled-components';
 
@@ -27,37 +29,26 @@ const Container = styled.div`
   width: 800px;
   height: 350px;
   left: 22%;
-  top: 170px;
+  top: 60%;
   box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(40px);
   border-radius: 12px;
 `;
 const SubTitle = styled.h4`
-  font-size: 20px;
-  color: #ffffff;
-`;
-const Text = styled.p`
-  font-size: 20px;
-  color: #ffffff;
+  font-size: ${baseTheme.fontSize.subtitleImg}px;
+  color: ${baseTheme.colors.primary};
 `;
 const Input = styled.input`
   height: 30px;
-  font-size: 17px;
+  font-size: ${baseTheme.fontSize.list}px;
   border: solid 1px #dcdcdc;
   border-radius: 7px;
-  color: #696969;
+  color: ${baseTheme.colors.input};
 `;
-const Button = styled.button`
+const Button = styled(ButtonPrimary)`
   width: 100px;
   height: 40px;
-  font-size: 17px;
-  font-weight: 700;
-  color: #ffffff;
-  background: linear-gradient(90deg, rgba(127, 202, 33, 0.8) 0%, #105200 100%);
-  border: none;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
-  border-radius: 40px;
-  cursor: pointer;
+  font-size: ${baseTheme.fontSize.list}px;
 `;
 const ImgUser = styled.img`
   width: 80px;
@@ -104,7 +95,7 @@ export const UserPage = () => {
                 onChange={(event) => setEditableName(event.target.value)}
               />
             )}
-            {!isEditView && <Text>{user.username}</Text>}
+            {!isEditView && <SubTitle>{user.username}</SubTitle>}
           </div>
           <div>
             <SubTitle>Your Email:</SubTitle>
@@ -115,7 +106,7 @@ export const UserPage = () => {
                 onChange={(event) => setEditableEmail(event.target.value)}
               />
             )}
-            {!isEditView && <Text>{user.email}</Text>}
+            {!isEditView && <SubTitle>{user.email}</SubTitle>}
           </div>
           <div>
             <SubTitle>Your Password:</SubTitle>
@@ -126,7 +117,7 @@ export const UserPage = () => {
                 onChange={(event) => setEditablePassword(event.target.value)}
               />
             )}
-            {!isEditView && <Text>{user.password}</Text>}
+            {!isEditView && <SubTitle>{user.password}</SubTitle>}
           </div>
           {isEditView && <Button onClick={saveChanges}>Save</Button>}
           {!isEditView && <Button onClick={showEditView}>Edit</Button>}

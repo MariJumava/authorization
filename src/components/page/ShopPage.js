@@ -1,5 +1,6 @@
-import { Title, Text, Button } from './ServicePage';
-import { Wrapper, Name, NumPlants, ImgType } from './HomePage';
+import { Wrapper, ImgType } from './HomePage';
+import { Name, NumberPlants, TitlePrimary, SubTitle } from '../../styles/title';
+import { ButtonPrimary } from '../../styles/buttons';
 import wave from '../../pictures/service_page/wave.png';
 import shop from '../../pictures/shop_page/shop.png';
 import foliage from '../../pictures/home_page/foliage.png';
@@ -35,6 +36,16 @@ const Wrap2 = styled.div`
   top: 200px;
   left: 192px;
 `;
+const Text = styled(SubTitle)`
+  left: calc(50% - 500px / 2 - 160px);
+  top: 248px;
+  text-align: start;
+`;
+const Button = styled(ButtonPrimary)`
+  position: absolute;
+  top: 471px;
+  left: calc(50% - 500px / 2 - 160px);
+`;
 
 export const ShopPage = () => {
   return (
@@ -43,7 +54,7 @@ export const ShopPage = () => {
       <ImgBackground src={wave} />
       <Container>
         <Wrap1>
-          <Title>Service for home plants.</Title>
+          <TitlePrimary>Service for home plants.</TitlePrimary>
           <Text>
             If you do not know what plants you can add to the space,we can
             provide you with selected plants,and configure your space.
@@ -54,12 +65,12 @@ export const ShopPage = () => {
           <Wrapper>
             <ImgType src={foliage} />
             <Name>Foliage</Name>
-            <NumPlants>21 Plants</NumPlants>
+            <NumberPlants>21 Plants</NumberPlants>
           </Wrapper>
           <Wrapper>
             <ImgType src={roses} />
             <Name>Flower</Name>
-            <NumPlants>4 Plants</NumPlants>
+            <NumberPlants>4 Plants</NumberPlants>
           </Wrapper>
         </Wrap2>
       </Container>
