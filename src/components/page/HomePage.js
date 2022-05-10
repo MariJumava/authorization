@@ -22,6 +22,7 @@ import styled from 'styled-components';
 const Wrap = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 const HiddenNavbar = styled.div`
   position: absolute;
@@ -31,6 +32,19 @@ const HiddenNavbar = styled.div`
   a:visited {
     color: ${baseTheme.colors.primary};
   }
+`;
+const Slider = styled.div`
+  width: 1440px;
+  min-width: 375px;
+  max-width: 1600px;
+  height: 900px;
+  min-height: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: url(${leaves});
+  background-size: cover;
 `;
 const SubTitleGr = styled.p`
   font-weight: ${baseTheme.fontWeight.weight};
@@ -48,11 +62,6 @@ const Text = styled.p`
   text-align: center;
   color: ${baseTheme.colors.secondary};
   cursor: default;
-`;
-const Img = styled.img`
-  max-width: 1600px;
-  min-width: 375px;
-  object-fit: fill;
 `;
 const Container = styled.div`
   display: flex;
@@ -72,20 +81,21 @@ export const HomePage = () => {
 
   return (
     <Wrap>
-      <Img src={leaves} />
-      {!isAuthorized ? (
-        <HiddenNavbar>
-          &nbsp;
-          <Logo src={logo} />
-          <NavLink to={PATH.LOGIN}>Login</NavLink>
-        </HiddenNavbar>
-      ) : null}
-      <MainTitle>Let us find your love plants.</MainTitle>
-      <SubTitle>
-        Add some color to your home, give it a little attention, the plants will
-        accompany you quietly
-      </SubTitle>
-      <Button>Watch the video</Button>
+      <Slider>
+        {!isAuthorized ? (
+          <HiddenNavbar>
+            &nbsp;
+            <Logo src={logo} />
+            <NavLink to={PATH.LOGIN}>Login</NavLink>
+          </HiddenNavbar>
+        ) : null}
+        <MainTitle>Let us find your love plants.</MainTitle>
+        <SubTitle>
+          Add some color to your home, give it a little attention, the plants
+          will accompany you quietly
+        </SubTitle>
+        <Button>Watch the video</Button>
+      </Slider>
       <ButtonSecondary>Try for service</ButtonSecondary>
       <SubTitleGr>Get a beautiful home</SubTitleGr>
       <Text>

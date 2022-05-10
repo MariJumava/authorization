@@ -2,13 +2,10 @@ import { baseTheme } from './baseTheme';
 import styled from 'styled-components';
 
 export const MainTitle = styled.h2`
-  position: absolute;
-  left: calc(50% - 500px / 2);
-  top: 250px;
   width: 500px;
   font-style: normal;
   font-weight: ${baseTheme.fontWeight.weight};
-  font-size: ${baseTheme.fontSize.title}px;
+  font-size: calc(30px + 2.5vw);
   text-align: center;
   background: ${baseTheme.colors.title};
   -webkit-background-clip: text;
@@ -16,12 +13,9 @@ export const MainTitle = styled.h2`
   text-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
 `;
 export const TitlePrimary = styled.h2`
-  position: absolute;
   width: 500px;
-  left: calc(50% - 500px / 2 - 160px);
-  top: 0;
   font-style: normal;
-  font-weight: 700;
+  font-weight: ${baseTheme.fontWeight.weight};
   font-size: 80px;
   background: linear-gradient(
     180deg,
@@ -41,11 +35,8 @@ export const TitlePlants = styled.h2`
 `;
 
 export const SubTitle = styled.h4`
-  position: absolute;
   width: 500px;
   height: 117px;
-  left: calc(50% - 500px / 2);
-  top: 428px;
   font-weight: ${baseTheme.fontWeight.normal};
   font-size: ${baseTheme.fontSize.titleImg}px;
   text-align: center;

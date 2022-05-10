@@ -11,25 +11,30 @@ import { baseTheme } from '../../styles/baseTheme';
 import profile from '../../pictures/profile/profile.jpg';
 import styled from 'styled-components';
 
+const Wrap = styled.div`
+  width: 1440px;
+  min-width: 375px;
+  max-width: 1600px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: url(${profile});
+  background-size: cover;
+`;
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: flex-end;
 `;
-const Img = styled.img`
-  max-width: 1440px;
-  min-width: 375px;
-  object-fit: fill;
-`;
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  position: absolute;
-  width: 800px;
+  width: 700px;
   height: 350px;
-  left: 22%;
-  top: 60%;
   box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(40px);
   border-radius: 12px;
@@ -81,8 +86,7 @@ export const UserPage = () => {
   }
 
   return (
-    <>
-      <Img src={profile} />
+    <Wrap>
       <Container>
         <ImgUser src={user.img} />
         <Wrapper>
@@ -123,6 +127,6 @@ export const UserPage = () => {
           {!isEditView && <Button onClick={showEditView}>Edit</Button>}
         </Wrapper>
       </Container>
-    </>
+    </Wrap>
   );
 };

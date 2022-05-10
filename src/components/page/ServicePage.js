@@ -6,29 +6,37 @@ import card_service from '../../pictures/service_page/card_service.png';
 import styled from 'styled-components';
 
 const Wrap = styled.div`
+  padding-left: 40px;
+`;
+const Wave = styled.div`
+  width: 1440px;
+  min-width: 375px;
+  max-width: 1600px;
+  height: 300px;
+  background-image: url(${wave});
+  background-size: cover;
+`;
+const Wrapper = styled.div`
+  width: 900px;
+  min-width: 375px;
+  max-width: 1600px;
   display: flex;
   flex-direction: column;
-`;
-const Img = styled.img`
-  width: fit-content;
-  object-fit: fill;
-`;
-const ImgBackground = styled.img`
-  position: absolute;
-  top: 600px;
-`;
-const Container = styled.div`
-  position: absolute;
-  left: 270px;
-  top: 190px;
+  justify-content: center;
+  margin: 180px auto 0;
+  background-image: url(${card_service});
   border-radius: 16px;
 `;
+const Container = styled.div`
+  min-width: 375px;
+  display: flex;
+  flex-direction: column;
+  background-image: url(${service});
+  background-size: cover;
+`;
 const Mask = styled.div`
-  position: absolute;
   width: 900px;
   height: 600px;
-  left: 0px;
-  top: 0px;
   border-radius: 16px;
   background: linear-gradient(
     113.96deg,
@@ -36,36 +44,29 @@ const Mask = styled.div`
     rgba(33, 63, 54, 0.2) 100%
   );
 `;
-const ImgCard = styled.img`
-  object-fit: fill;
-`;
 const Text = styled(SubTitle)`
-  left: calc(50% - 500px / 2 - 160px);
-  top: 248px;
   text-align: start;
 `;
-const Button = styled(ButtonPrimary)`
-  position: absolute;
-  top: 471px;
-  left: calc(50% - 500px / 2 - 160px);
-`;
+const Button = styled(ButtonPrimary)``;
 
 export const ServicePage = () => {
   return (
-    <Wrap>
-      <Img src={service} />
-      <ImgBackground src={wave} />
+    <>
       <Container>
-        <ImgCard src={card_service} />
-        <Mask>
-          <TitlePrimary>Service for home plants.</TitlePrimary>
-          <Text>
-            If you do not know what plants you can add to the space,we can
-            provide you with selected plants,and configure your space.
-          </Text>
-          <Button>Try on service</Button>
-        </Mask>
+        <Wrapper>
+          <Mask>
+            <Wrap>
+              <TitlePrimary>Service for home plants.</TitlePrimary>
+              <Text>
+                If you do not know what plants you can add to the space,we can
+                provide you with selected plants,and configure your space.
+              </Text>
+              <Button>Try on service</Button>
+            </Wrap>
+          </Mask>
+        </Wrapper>
+        <Wave></Wave>
       </Container>
-    </Wrap>
+    </>
   );
 };

@@ -2,11 +2,8 @@ import { baseTheme } from './baseTheme';
 import styled from 'styled-components';
 
 export const Button = styled.button`
-  position: absolute;
   width: 200px;
   height: 40px;
-  left: calc(50% - 200px / 2);
-  top: 717px;
   font-size: ${baseTheme.fontSize.subtitleImg}px;
   text-transform: uppercase;
   background: rgba(0, 0, 0, 0.8);

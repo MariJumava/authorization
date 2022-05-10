@@ -18,6 +18,7 @@ const Wrap = styled.div`
   align-items: center;
   justify-content: space-between;
   position: fixed;
+  z-index: 10;
   left: 25%;
   ${baseTheme.sizes.navbar};
   margin: 50px auto 0;
