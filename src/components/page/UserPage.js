@@ -12,10 +12,8 @@ import profile from '../../pictures/profile/profile.jpg';
 import styled from 'styled-components';
 
 const Wrap = styled.div`
-  width: 1440px;
   min-width: 375px;
-  max-width: 1600px;
-  height: 600px;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,6 +25,12 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: flex-end;
+  @media (min-width: 320px) and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 10px;
+  }
 `;
 
 const Container = styled.div`
@@ -35,9 +39,13 @@ const Container = styled.div`
   justify-content: center;
   width: 700px;
   height: 350px;
+  margin: 150px 0;
   box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(40px);
   border-radius: 12px;
+  @media (min-width: 320px) and (max-width: 768px) {
+    width: 85%;
+  }
 `;
 const SubTitle = styled.h4`
   font-size: ${baseTheme.fontSize.subtitleImg}px;

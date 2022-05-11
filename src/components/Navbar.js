@@ -24,13 +24,68 @@ const Wrap = styled.div`
   margin: 50px auto 0;
   object-fit: fill;
   overflow: hidden;
+  @media (max-width: 768px) {
+    width: 100%;
+    height: fit-content;
+    flex-flow: column nowrap;
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    transform: ${({ openBurger }) =>
+      openBurger ? 'translateX(-100%)' : 'translateX(0)'};
+    transition: transform 0.3s ease-in-out;
+  }
+  @media (min-width: 769px) and (max-width: 1023px) {
+    left: 10%;
+  }
+`;
+const Hamburger = styled.div``;
+const Header = styled.div`
+  width: 2rem;
+  height: 2rem;
+  position: fixed;
+  top: 15px;
+  left: 20px;
+  z-index: 20;
+  display: none;
+
+  @media (max-width: 768px) {
+    display: flex;
+    justify-content: space-around;
+    flex-flow: column nowrap;
+  }
+
+  div {
+    width: 2rem;
+    height: 0.25rem;
+    background-color: ${({ openBurger }) =>
+      openBurger ? baseTheme.colors.transition : baseTheme.colors.primary};
+    border-radius: 10px;
+    transform-origin: 1px;
+    transition: transform 0.3s ease-in-out;
+    &:nth-child(1) {
+      transform: ${({ openBurger }) =>
+        openBurger ? 'rotate(0)' : 'rotate(45deg)'};
+    }
+    &:nth-child(2) {
+      transform: ${({ openBurger }) =>
+        openBurger ? 'translateX(0)' : 'translateX(100%)'};
+      opacity: ${({ openBurger }) => (openBurger ? 1 : 0)};
+    }
+    &:nth-child(3) {
+      transform: ${({ openBurger }) =>
+        openBurger ? 'rotate(0)' : 'rotate(-45deg)'};
+    }
+  }
 `;
 export const Logo = styled.img`
   width: 40px;
   object-fit: fill;
 `;
 const Title = styled.h3`
-  font-size: ${baseTheme.fontSize.subtitleImg}px;
+  font-size: ${baseTheme.fontSize.subtitle}px;
   a:link {
     color: ${baseTheme.colors.primary};
   }
@@ -42,6 +97,7 @@ const Title = styled.h3`
 export const Navbar = () => {
   const isAuthorized = useSelector((state) => state.authorized);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [openBurger, setOpenBurger] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -54,7 +110,17 @@ export const Navbar = () => {
 
   return (
     <>
-      <Wrap>
+      <Hamburger>
+        <Header
+          openBurger={openBurger}
+          onClick={() => setOpenBurger(!openBurger)}
+        >
+          <div></div>
+          <div></div>
+          <div></div>
+        </Header>
+      </Hamburger>
+      <Wrap openBurger={openBurger}>
         <Title>
           <NavLink to={PATH.MAIN}>
             <Logo src={logo} />

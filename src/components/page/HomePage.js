@@ -5,8 +5,8 @@ import { Logo } from '../Navbar';
 import { Button, ButtonSecondary } from '../../styles/buttons';
 import {
   MainTitle,
-  TitlePlants,
   SubTitle,
+  TitlePlants,
   Name,
   NumberPlants,
 } from '../../styles/title';
@@ -23,6 +23,10 @@ const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media (min-width: 320px) and (max-width: 768px) {
+    width: 100%;
+    margin-left: auto;
+  }
 `;
 const HiddenNavbar = styled.div`
   position: absolute;
@@ -32,9 +36,12 @@ const HiddenNavbar = styled.div`
   a:visited {
     color: ${baseTheme.colors.primary};
   }
+  @media (min-width: 320px) and (max-width: 768px) {
+    width: 100%;
+  }
 `;
 const Slider = styled.div`
-  width: 1440px;
+  width: 100%;
   min-width: 375px;
   max-width: 1600px;
   height: 900px;
@@ -46,6 +53,16 @@ const Slider = styled.div`
   background-image: url(${leaves});
   background-size: cover;
 `;
+const Main = styled(MainTitle)`
+  @media (min-width: 320px) and (max-width: 768px) {
+    width: 80%;
+  }
+`;
+const SubTitleWhite = styled(SubTitle)`
+  @media (min-width: 320px) and (max-width: 768px) {
+    width: 98%;
+  }
+`;
 const SubTitleGr = styled.p`
   font-weight: ${baseTheme.fontWeight.weight};
   font-size: ${baseTheme.fontSize.subtitleImg}px;
@@ -55,7 +72,7 @@ const SubTitleGr = styled.p`
   cursor: default;
 `;
 const Text = styled.p`
-  width: 432px;
+  width: 50%;
   margin: auto;
   font-weight: ${baseTheme.fontWeight.normal};
   font-size: ${baseTheme.fontSize.list}px;
@@ -67,6 +84,15 @@ const Container = styled.div`
   display: flex;
   justify-content: space-evenly;
   margin-bottom: 200px;
+  @media (min-width: 320px) and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  @media (min-width: 769px) and (max-width: 1024px) {
+    display: flex;
+    flex-wrap: wrap;
+  }
 `;
 export const ImgType = styled.img`
   margin-right: 15px;
@@ -89,11 +115,11 @@ export const HomePage = () => {
             <NavLink to={PATH.LOGIN}>Login</NavLink>
           </HiddenNavbar>
         ) : null}
-        <MainTitle>Let us find your love plants.</MainTitle>
-        <SubTitle>
+        <Main>Let us find your love plants.</Main>
+        <SubTitleWhite>
           Add some color to your home, give it a little attention, the plants
           will accompany you quietly
-        </SubTitle>
+        </SubTitleWhite>
         <Button>Watch the video</Button>
       </Slider>
       <ButtonSecondary>Try for service</ButtonSecondary>

@@ -6,6 +6,9 @@ export const DropDownListContainer = styled.div`
   left: 35%;
   width: 200px;
   text-align: center;
+  @media (min-width: 320px) and (max-width: 768px) {
+    display: none;
+  }
 `;
 export const DropDownList = styled.ul`
   padding: 10px 0;

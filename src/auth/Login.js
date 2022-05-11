@@ -21,6 +21,13 @@ export const Wrap = styled.div`
   top: 68px;
   background: #ffffff;
   border-radius: 10px;
+  @media (min-width: 320px) and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 85%;
+    padding-bottom: 10px;
+  }
 `;
 export const Container = styled.div`
   width: 800px;
@@ -28,6 +35,11 @@ export const Container = styled.div`
   position: relative;
   margin: 50px auto;
   background: #f0f4f3;
+  @media (min-width: 320px) and (max-width: 768px) {
+    width: 100%;
+    height: fit-content;
+    margin: 0 auto;
+  }
 `;
 export const ImgRectangle = styled.img`
   position: absolute;
@@ -35,18 +47,28 @@ export const ImgRectangle = styled.img`
   height: 388.58px;
   left: 490.16px;
   top: 0;
+  @media (min-width: 320px) and (max-width: 768px) {
+    display: none;
+  }
 `;
 export const ImgEllipse = styled.img`
   position: absolute;
   width: 269px;
   height: 269px;
   top: 333px;
+  @media (min-width: 320px) and (max-width: 768px) {
+    display: none;
+  }
 `;
 export const Wrapper1 = styled.div`
   display: flex;
   flex-direction: column;
   width: 429px;
   border-radius: 10px;
+  @media (min-width: 320px) and (max-width: 768px) {
+    width: 90%;
+    margin-bottom: 15px;
+  }
 `;
 export const Wrapper2 = styled.div`
   width: 308px;
@@ -65,6 +87,10 @@ export const Wrapper2 = styled.div`
     to {
       transform: translateX(-150%);
     }
+  }
+  @media (min-width: 320px) and (max-width: 768px) {
+    height: 200px;
+    width: 85%;
   }
 `;
 export const Form = styled.form`

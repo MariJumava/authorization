@@ -4,6 +4,7 @@ import styled from 'styled-components';
 export const Button = styled.button`
   width: 200px;
   height: 40px;
+  margin-top: 40px;
   font-size: ${baseTheme.fontSize.subtitleImg}px;
   text-transform: uppercase;
   background: rgba(0, 0, 0, 0.8);
