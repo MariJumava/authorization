@@ -1,17 +1,14 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
 import { PATH } from '../utils/ROUTES';
 import { logout, loginFailure } from '../redux/action';
+import { device } from '../styles/device';
 import { ButtonLogout } from '../styles/buttons';
-import {
-  DropDownList,
-  DropDownListContainer,
-  ListItem,
-} from '../styles/dropDown';
+import { DropDown, DropDownList } from '../components/DropDown';
 import { baseTheme } from '../styles/baseTheme';
 import logo from '../pictures/home_page/logo.svg';
-import styled from 'styled-components';
 
 const Wrap = styled.div`
   display: flex;
@@ -24,7 +21,7 @@ const Wrap = styled.div`
   margin: 50px auto 0;
   object-fit: fill;
   overflow: hidden;
-  @media (max-width: 768px) {
+  @media ${device.tablet} {
     width: 100%;
     height: fit-content;
     flex-flow: column nowrap;
@@ -37,9 +34,6 @@ const Wrap = styled.div`
       openBurger ? 'translateX(-100%)' : 'translateX(0)'};
     transition: transform 0.3s ease-in-out;
   }
-  @media (min-width: 769px) and (max-width: 1023px) {
-    left: 10%;
-  }
 `;
 const Hamburger = styled.div``;
 const Header = styled.div`
@@ -50,18 +44,17 @@ const Header = styled.div`
   left: 20px;
   z-index: 20;
   display: none;
-
-  @media (max-width: 768px) {
+  @media ${device.tablet} {
     display: flex;
     justify-content: space-around;
     flex-flow: column nowrap;
   }
 
   div {
-    width: 2rem;
-    height: 0.25rem;
+    width: 32px;
+    height: 4px;
     background-color: ${({ openBurger }) =>
-      openBurger ? baseTheme.colors.transition : baseTheme.colors.primary};
+      openBurger ? baseTheme.colors.grannySmithApple : baseTheme.colors.white};
     border-radius: 10px;
     transform-origin: 1px;
     transition: transform 0.3s ease-in-out;
@@ -80,23 +73,30 @@ const Header = styled.div`
     }
   }
 `;
+const DropDownContent = styled.div`
+  position: relative;
+  display: inline-block;
+  &:hover ${DropDownList} {
+    display: block;
+  }
+`;
 export const Logo = styled.img`
   width: 40px;
   object-fit: fill;
 `;
 const Title = styled.h3`
+  margin: 0;
   font-size: ${baseTheme.fontSize.subtitle}px;
   a:link {
-    color: ${baseTheme.colors.primary};
+    color: ${baseTheme.colors.white};
   }
   a:visited {
-    color: ${baseTheme.colors.primary};
+    color: ${baseTheme.colors.white};
   }
 `;
 
 export const Navbar = () => {
   const isAuthorized = useSelector((state) => state.authorized);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openBurger, setOpenBurger] = useState(false);
 
   const dispatch = useDispatch();
@@ -121,47 +121,29 @@ export const Navbar = () => {
         </Header>
       </Hamburger>
       <Wrap openBurger={openBurger}>
-        <Title>
+        <Title onClick={() => setOpenBurger(!openBurger)}>
           <NavLink to={PATH.MAIN}>
             <Logo src={logo} />
           </NavLink>
         </Title>
-        <Title>
+        <Title onClick={() => setOpenBurger(!openBurger)}>
           <NavLink to={PATH.SERVICE}>Service</NavLink>
         </Title>
-        <div>
-          <Title onMouseEnter={() => setIsMenuOpen(true)}>
+        <DropDownContent>
+          <Title onClick={() => setOpenBurger(!openBurger)}>
             <NavLink to={PATH.SHOP}>Shop</NavLink>
           </Title>
-          {isMenuOpen && (
-            <DropDownListContainer onMouseLeave={() => setIsMenuOpen(false)}>
-              <DropDownList>
-                <ListItem>
-                  <NavLink to={PATH.FOLIAGE}>Foliage</NavLink>
-                </ListItem>
-                <ListItem>
-                  <NavLink to={PATH.SUCCULENT}>Succulent</NavLink>
-                </ListItem>
-                <ListItem>
-                  <NavLink to={PATH.FLOWER}>Flower</NavLink>
-                </ListItem>
-                <ListItem>
-                  <NavLink to={PATH.FRUIT}>Fruit</NavLink>
-                </ListItem>
-              </DropDownList>
-            </DropDownListContainer>
-          )}
-        </div>
-        <Title>
+          <DropDown />
+        </DropDownContent>
+        <Title onClick={() => setOpenBurger(!openBurger)}>
           <NavLink to={PATH.PROFILE}>Profile</NavLink>
         </Title>
-        <Title>
+        <Title onClick={() => setOpenBurger(!openBurger)}>
           <NavLink to={PATH.LOCATION}>Location</NavLink>
         </Title>
         {!isAuthorized ? (
           <NavLink to={PATH.REGISTRATION}>SignUp</NavLink>
         ) : null}
-
         {isAuthorized ? (
           <ButtonLogout onClick={handleLogOut}>LogOut</ButtonLogout>
         ) : (

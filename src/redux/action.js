@@ -20,17 +20,15 @@ export const loginFailure = (error) => {
   };
 };
 
-export const handleSignUp = (payload) => {
+export const handleSignUp = () => {
   return {
     type: ACTION_TYPES.REGISTERED,
-    payload,
   };
 };
 
-export const logout = (payload) => {
+export const logout = () => {
   return {
     type: ACTION_TYPES.LOGOUT,
-    payload,
   };
 };
 

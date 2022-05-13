@@ -1,18 +1,18 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Navigate } from 'react-router-dom';
+import styled from 'styled-components';
 import {
   EditUserName,
   EditUserEmail,
   EditUserPassword,
 } from '../../redux/action';
+import { device } from '../../styles/device';
 import { ButtonPrimary } from '../../styles/buttons';
 import { baseTheme } from '../../styles/baseTheme';
 import profile from '../../pictures/profile/profile.jpg';
-import styled from 'styled-components';
 
 const Wrap = styled.div`
-  min-width: 375px;
   height: fit-content;
   display: flex;
   flex-direction: column;
@@ -25,10 +25,10 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: flex-end;
-  @media (min-width: 320px) and (max-width: 768px) {
+  @media ${device.tablet} {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     padding-left: 10px;
   }
 `;
@@ -43,20 +43,20 @@ const Container = styled.div`
   box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(40px);
   border-radius: 12px;
-  @media (min-width: 320px) and (max-width: 768px) {
+  @media ${device.tablet} {
     width: 85%;
   }
 `;
 const SubTitle = styled.h4`
   font-size: ${baseTheme.fontSize.subtitleImg}px;
-  color: ${baseTheme.colors.primary};
+  color: ${baseTheme.colors.white};
 `;
 const Input = styled.input`
   height: 30px;
   font-size: ${baseTheme.fontSize.list}px;
   border: solid 1px #dcdcdc;
   border-radius: 7px;
-  color: ${baseTheme.colors.input};
+  color: ${baseTheme.colors.dimGray};
 `;
 const Button = styled(ButtonPrimary)`
   width: 100px;

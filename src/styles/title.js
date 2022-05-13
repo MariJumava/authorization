@@ -1,5 +1,5 @@
-import { baseTheme } from './baseTheme';
 import styled from 'styled-components';
+import { baseTheme } from './baseTheme';
 
 export const MainTitle = styled.h2`
   width: 50%;
@@ -30,7 +30,7 @@ export const TitlePlants = styled.h2`
   font-weight: ${baseTheme.fontWeight.weight};
   font-size: ${baseTheme.fontSize.title}px;
   text-align: center;
-  color: ${baseTheme.colors.dropDown};
+  color: ${baseTheme.colors.hunterGreen};
   cursor: default;
 `;
 
@@ -48,7 +48,7 @@ export const Name = styled.h6`
   left: 24px;
   margin: 0;
   font-size: ${baseTheme.fontSize.titleImg}px;
-  color: ${baseTheme.colors.primary};
+  color: ${baseTheme.colors.white};
 `;
 
 export const NumberPlants = styled.p`
@@ -59,5 +59,5 @@ export const NumberPlants = styled.p`
   font-weight: ${baseTheme.fontWeight.weight};
   font-size: ${baseTheme.fontSize.subtitleImg}px;
   text-transform: uppercase;
-  color: ${baseTheme.colors.primary};
+  color: ${baseTheme.colors.white};
 `;

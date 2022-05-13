@@ -1,7 +1,9 @@
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import styled from 'styled-components';
 import { PATH } from '../../utils/ROUTES';
 import { Logo } from '../Navbar';
+import { device } from '../../styles/device';
 import { Button, ButtonSecondary } from '../../styles/buttons';
 import {
   MainTitle,
@@ -17,16 +19,11 @@ import foliage from '../../pictures/home_page/foliage.png';
 import roses from '../../pictures/home_page/roses.png';
 import strawberry from '../../pictures/home_page/strawberry.png';
 import succulent from '../../pictures/home_page/succulent.png';
-import styled from 'styled-components';
 
 const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  @media (min-width: 320px) and (max-width: 768px) {
-    width: 100%;
-    margin-left: auto;
-  }
 `;
 const HiddenNavbar = styled.div`
   position: absolute;
@@ -34,18 +31,12 @@ const HiddenNavbar = styled.div`
   top: 40px;
   font-size: ${baseTheme.fontSize.subtitleImg}px;
   a:visited {
-    color: ${baseTheme.colors.primary};
-  }
-  @media (min-width: 320px) and (max-width: 768px) {
-    width: 100%;
+    color: ${baseTheme.colors.white};
   }
 `;
 const Slider = styled.div`
   width: 100%;
-  min-width: 375px;
-  max-width: 1600px;
   height: 900px;
-  min-height: 450px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -54,13 +45,13 @@ const Slider = styled.div`
   background-size: cover;
 `;
 const Main = styled(MainTitle)`
-  @media (min-width: 320px) and (max-width: 768px) {
+  @media ${device.mobileL} {
     width: 80%;
   }
 `;
 const SubTitleWhite = styled(SubTitle)`
-  @media (min-width: 320px) and (max-width: 768px) {
-    width: 98%;
+  @media ${device.tablet} {
+    width: 90%;
   }
 `;
 const SubTitleGr = styled.p`
@@ -68,7 +59,7 @@ const SubTitleGr = styled.p`
   font-size: ${baseTheme.fontSize.subtitleImg}px;
   text-align: center;
   text-transform: uppercase;
-  color: ${baseTheme.colors.transition};
+  color: ${baseTheme.colors.grannySmithApple};
   cursor: default;
 `;
 const Text = styled.p`
@@ -77,19 +68,19 @@ const Text = styled.p`
   font-weight: ${baseTheme.fontWeight.normal};
   font-size: ${baseTheme.fontSize.list}px;
   text-align: center;
-  color: ${baseTheme.colors.secondary};
+  color: ${baseTheme.colors.black};
   cursor: default;
 `;
 const Container = styled.div`
   display: flex;
   justify-content: space-evenly;
   margin-bottom: 200px;
-  @media (min-width: 320px) and (max-width: 768px) {
+  @media ${device.tablet} {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-  @media (min-width: 769px) and (max-width: 1024px) {
+  @media ${device.laptopL} {
     display: flex;
     flex-wrap: wrap;
   }

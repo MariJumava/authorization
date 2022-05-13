@@ -1,5 +1,5 @@
-import error from '../pictures/error.png';
 import styled from 'styled-components';
+import error from '../pictures/error.png';
 
 const Wrap = styled.div`
   display: flex;

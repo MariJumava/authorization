@@ -1,14 +1,14 @@
+import styled from 'styled-components';
 import { baseTheme } from '../../styles/baseTheme';
 import { ButtonPrimary } from '../../styles/buttons';
 import { TitlePlants } from '../../styles/title';
+import { device } from '../../styles/device';
 import { Logo } from '../Navbar';
 import { Wave } from '../page/ServicePage';
 import location from '../../pictures/location_page/location.png';
 import logo from '../../pictures/home_page/logo.svg';
-import styled from 'styled-components';
 
 const Wrap = styled.div`
-  min-width: 375px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -28,17 +28,16 @@ const Container = styled.div`
   box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(40px);
   border-radius: 12px;
-  @media (min-width: 320px) and (max-width: 768px) {
+  @media ${device.tablet} {
     width: 85%;
     height: 50vh;
-    margin: 80px auto 0;
     padding: 10px;
   }
 `;
 const Title = styled(TitlePlants)`
   margin: 0;
   color: #d2ffcb;
-  @media (min-width: 320px) and (max-width: 768px) {
+  @media ${device.tablet} {
     font-size: ${baseTheme.fontSize.titleImg}px;
   }
 `;
@@ -47,14 +46,13 @@ const SubTitle = styled.h4`
   font-weight: ${baseTheme.fontWeight.weight};
   font-size: ${baseTheme.fontSize.subtitle}px;
   text-align: center;
-  color: ${baseTheme.colors.primary};
-  @media (min-width: 320px) and (max-width: 768px) {
-    margin-top: 10px;
+  color: ${baseTheme.colors.white};
+  @media ${device.tablet} {
     font-size: ${baseTheme.fontSize.subtitleImg}px;
   }
 `;
 const Button = styled(ButtonPrimary)`
-  @media (min-width: 320px) and (max-width: 768px) {
+  @media ${device.tablet} {
     width: 140px;
     height: 40px;
     font-size: ${baseTheme.fontSize.subtitleImg}px;

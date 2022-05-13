@@ -1,23 +1,23 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { PATH } from '../../utils/ROUTES';
-import { compareEmail } from '../../redux/thunk';
+import { PATH } from '../utils/ROUTES';
+import { compareEmail } from '../redux/thunk';
 import {
   Container,
   ImgRectangle,
   ImgEllipse,
   Wrap,
-  Wrapper1,
-  Wrapper2,
+  WrapForm,
+  WrapHi,
   Form,
   Title,
   Text,
   Input,
   Button,
-} from '../../auth/Login';
-import ellipse from '../../pictures/login/ellipse.png';
-import rectangle from '../../pictures/login/rectangle.png';
+} from './Login';
+import ellipse from '../pictures/login/ellipse.png';
+import rectangle from '../pictures/login/rectangle.png';
 
 export const PasswordRecovery = () => {
   const dispatch = useDispatch();
@@ -44,7 +44,7 @@ export const PasswordRecovery = () => {
       <ImgRectangle src={rectangle} />
       <ImgEllipse src={ellipse} />
       <Wrap>
-        <Wrapper1>
+        <WrapForm>
           <Form>
             <Title primary>Reset Password </Title>
             <Text primary>
@@ -70,8 +70,8 @@ export const PasswordRecovery = () => {
             )}
             <p style={{ color: 'red' }}>{error}</p>
           </Form>
-        </Wrapper1>
-        <Wrapper2>
+        </WrapForm>
+        <WrapHi>
           <Title>Hello Friend!</Title>
           <Text>
             Enter your personal details and start your journey with us
@@ -81,7 +81,7 @@ export const PasswordRecovery = () => {
               Back to login
             </NavLink>
           </Button>
-        </Wrapper2>
+        </WrapHi>
       </Wrap>
     </Container>
   );

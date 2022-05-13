@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, Navigate, useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
@@ -8,25 +9,25 @@ import { PATH } from '../utils/ROUTES';
 import { Loader } from './Loader';
 import { loginFailure } from '../redux/action';
 import { loginUser } from '../redux/thunk';
+import { device } from '../styles/device';
+import { baseTheme } from '../styles/baseTheme';
 import mail from '../pictures/login/mail.svg';
 import lock from '../pictures/login/lock.svg';
 import ellipse from '../pictures/login/ellipse.png';
 import rectangle from '../pictures/login/rectangle.png';
-import styled from 'styled-components';
 
 export const Wrap = styled.div`
   display: flex;
   position: absolute;
-  left: 33px;
-  top: 68px;
-  background: #ffffff;
+  left: 35px;
+  top: 70px;
+  background: ${baseTheme.colors.white};
   border-radius: 10px;
-  @media (min-width: 320px) and (max-width: 768px) {
+  @media ${device.tablet} {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 85%;
-    padding-bottom: 10px;
+    width: 100%;
   }
 `;
 export const Container = styled.div`
@@ -34,8 +35,8 @@ export const Container = styled.div`
   height: 600px;
   position: relative;
   margin: 50px auto;
-  background: #f0f4f3;
-  @media (min-width: 320px) and (max-width: 768px) {
+  background: ${baseTheme.colors.cultured};
+  @media ${device.tablet} {
     width: 100%;
     height: fit-content;
     margin: 0 auto;
@@ -43,41 +44,40 @@ export const Container = styled.div`
 `;
 export const ImgRectangle = styled.img`
   position: absolute;
-  width: 310.87px;
-  height: 388.58px;
-  left: 490.16px;
+  width: 310px;
+  height: 390px;
+  left: 490px;
   top: 0;
-  @media (min-width: 320px) and (max-width: 768px) {
+  @media ${device.tablet} {
     display: none;
   }
 `;
 export const ImgEllipse = styled.img`
   position: absolute;
-  width: 269px;
-  height: 269px;
-  top: 333px;
-  @media (min-width: 320px) and (max-width: 768px) {
+  width: 270px;
+  height: 270px;
+  top: 330px;
+  @media ${device.tablet} {
     display: none;
   }
 `;
-export const Wrapper1 = styled.div`
+export const WrapForm = styled.div`
   display: flex;
   flex-direction: column;
-  width: 429px;
+  width: 430px;
   border-radius: 10px;
-  @media (min-width: 320px) and (max-width: 768px) {
-    width: 90%;
+  @media ${device.tablet} {
     margin-bottom: 15px;
   }
 `;
-export const Wrapper2 = styled.div`
-  width: 308px;
-  height: 466px;
+export const WrapHi = styled.div`
+  width: 310px;
+  height: 465px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #06a67e;
+  background: ${baseTheme.colors.jungleGreen};
   border-radius: 10px;
   animation: slideIn 1.5s;
   @keyframes slideIn {
@@ -88,9 +88,8 @@ export const Wrapper2 = styled.div`
       transform: translateX(-150%);
     }
   }
-  @media (min-width: 320px) and (max-width: 768px) {
+  @media ${device.tablet} {
     height: 200px;
-    width: 85%;
   }
 `;
 export const Form = styled.form`
@@ -105,16 +104,18 @@ export const Social = styled.div`
 export const Title = styled.h3`
   font-style: normal;
   font-weight: 800;
-  font-size: 26px;
+  font-size: ${baseTheme.fontSize.subtitle}px;
   margin: 16px;
   letter-spacing: 1.5px;
-  color: ${(props) => (props.primary ? '#38b593' : '#FFFFFF')};
+  color: ${(props) =>
+    props.primary ? baseTheme.colors.jungleGreen : baseTheme.colors.white};
   cursor: default;
 `;
 export const Text = styled.p`
   margin: 16px;
   font-size: 11px;
-  color: ${(props) => (props.primary ? ' #9a9a9a' : '#FFFFFF')};
+  color: ${(props) =>
+    props.primary ? baseTheme.colors.dimGray : baseTheme.colors.white};
   text-align: center;
   cursor: default;
 `;
@@ -127,31 +128,32 @@ export const Img = styled.img`
   left: 10px;
 `;
 export const Input = styled.input`
-  width: 242px;
-  height: 36px;
+  width: 240px;
+  height: 35px;
   margin-bottom: 8px;
   padding-left: 40px;
   border: none;
-  background: #f4f8f5;
+  background: ${baseTheme.colors.cultured};
 `;
 const Forgot = styled.div`
-  height: 14px;
+  height: 15px;
   margin: 8px 0;
-  font-weight: 700;
-  font-size: 10px;
+  font-weight: ${baseTheme.fontWeight.weight};
+  font-size: ${baseTheme.fontSize.login}px;
   text-align: center;
   text-decoration-line: underline;
-  color: #373737;
+  color: ${baseTheme.colors.jet};
 `;
 export const Button = styled.button`
-  width: 158px;
-  height: 39px;
+  width: 160px;
+  height: 40px;
   margin-top: 10px;
-  font-weight: 600;
-  font-size: 10px;
+  font-weight: ${baseTheme.fontWeight.weight};
+  font-size: ${baseTheme.fontSize.login}px;
   text-transform: uppercase;
-  color: #ffffff;
-  background: ${(props) => (props.primary ? '#38b593' : 'transparent')};
+  color: ${baseTheme.colors.white};
+  background: ${(props) =>
+    props.primary ? baseTheme.colors.jungleGreen : 'transparent'};
   border-radius: 20px;
   border: ${(props) => (props.primary ? 'none' : '1px solid #FFFFFF')};
   cursor: pointer;
@@ -230,7 +232,7 @@ export const Login = () => {
       <ImgRectangle src={rectangle} />
       <ImgEllipse src={ellipse} />
       <Wrap>
-        <Wrapper1>
+        <WrapForm>
           <div>{loading && <Loader />}</div>
           <Form onSubmit={handleSubmit}>
             <Title primary>Sign In to Your Account</Title>
@@ -282,14 +284,14 @@ export const Login = () => {
               Sign in
             </Button>
           </Form>
-        </Wrapper1>
-        <Wrapper2>
+        </WrapForm>
+        <WrapHi>
           <Title>Hello Friend!</Title>
           <Text>
             Enter your personal details and start your journey with us
           </Text>
           <Button onClick={transitionSignUp}>Sign Up</Button>
-        </Wrapper2>
+        </WrapHi>
       </Wrap>
     </Container>
   );

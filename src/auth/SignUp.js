@@ -4,7 +4,6 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-//import { Loader } from './Loader';
 import { loginFailure } from '../redux/action';
 import { registeredUser, loginUser } from '../redux/thunk';
 import {
@@ -12,8 +11,8 @@ import {
   ImgRectangle,
   ImgEllipse,
   Wrap,
-  Wrapper1,
-  Wrapper2,
+  WrapForm,
+  WrapHi,
   Title,
   Input,
   Button,
@@ -31,7 +30,6 @@ import user from '../pictures/login/user.svg';
 
 export const SignUp = () => {
   const isRegistrated = useSelector((state) => state.authorized);
-  //const loading = useSelector((state) => state.loading);
   const error = useSelector((state) => state.error);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -130,15 +128,14 @@ export const SignUp = () => {
       <ImgRectangle src={rectangle} />
       <ImgEllipse src={ellipse} />
       <Wrap>
-        <Wrapper2>
+        <WrapHi>
           <Title>Welcome Back!</Title>
           <Text>
             To keep connected with us plase login with your personal info
           </Text>
           <Button onClick={transitionSignIn}>Sign in</Button>
-        </Wrapper2>
-        <Wrapper1>
-          {/* <div>{loading && <Loader />}</div> */}
+        </WrapHi>
+        <WrapForm>
           <Form onSubmit={handleSubmit}>
             <Title primary>Create Account</Title>
             <Social>
@@ -209,7 +206,7 @@ export const SignUp = () => {
               SignUp
             </Button>
           </Form>
-        </Wrapper1>
+        </WrapForm>
       </Wrap>
     </Container>
   );
