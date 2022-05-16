@@ -11,6 +11,7 @@ export const baseTheme = {
     cultured: '#F0F4F3',
     jungleGreen: '#06A67E',
     jet: '#373737',
+    red: '#FF0000',
   },
   sizes: {
     navbar: { width: 680, height: 40 },

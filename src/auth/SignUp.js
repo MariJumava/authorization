@@ -21,6 +21,7 @@ import {
   Form,
   CastomInput,
   Img,
+  Error,
 } from './Login';
 import ellipse from '../pictures/login/ellipse.png';
 import rectangle from '../pictures/login/rectangle.png';
@@ -35,16 +36,9 @@ export const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [usernameDirty, setUsernameDirty] = useState(false);
-  const [emailDirty, setEmailDirty] = useState(false);
-  const [passwordDirty, setPasswordDirty] = useState(false);
-  const [usernameError, setUsernameError] = useState(
-    'User name cannot be empty'
-  );
-  const [emailError, setEmailError] = useState('Email cannot be empty');
-  const [passwordError, setPasswordError] = useState(
-    'Password cannot be empty'
-  );
+  const [usernameError, setUsernameError] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
   const dispatch = useDispatch();
 
@@ -74,9 +68,6 @@ export const SignUp = () => {
       setPasswordError(
         'Password must be longer than 3 and not more than 10 characters'
       );
-      if (!e.target.value) {
-        setPasswordError('Password cannot be empty');
-      }
     } else {
       setPasswordError('');
     }
@@ -86,19 +77,6 @@ export const SignUp = () => {
     setConfirmPassword(e.target.value);
   };
 
-  const blurHandler = (e) => {
-    switch (e.target.name) {
-      case 'username':
-        setUsernameDirty(true);
-        break;
-      case 'email':
-        setEmailDirty(true);
-        break;
-      case 'password':
-        setPasswordDirty(true);
-        break;
-    }
-  };
   const navigate = useNavigate();
   const transitionSignIn = () => {
     navigate('/login');
@@ -116,7 +94,15 @@ export const SignUp = () => {
       };
       await dispatch(loginUser(data));
     })();
-    dispatch(registeredUser(newUser));
+    if (username === '') {
+      setUsernameError('Name cannot be empty');
+    } else if (email === '') {
+      setEmailError('Email cannot be empty');
+    } else if (password === '') {
+      setPasswordError('Password cannot be empty');
+    } else {
+      dispatch(registeredUser(newUser));
+    }
   };
 
   if (isRegistrated) {
@@ -144,23 +130,18 @@ export const SignUp = () => {
               <LinkedInIcon />
             </Social>
             <Text primary>or use your email for registration</Text>
-            {usernameDirty && usernameError && (
-              <div style={{ color: 'red' }}>{usernameError}</div>
-            )}
+            {usernameError && <Error>{usernameError}</Error>}
             <CastomInput>
               <Img src={user} />
               <Input
                 type="text"
                 placeholder="Name"
                 name="username"
-                onBlur={blurHandler}
                 onChange={createUserName}
                 value={username}
                 required
               />
-              {emailDirty && emailError && (
-                <div style={{ color: 'red' }}>{emailError}</div>
-              )}
+              {emailError && <Error>{emailError}</Error>}
             </CastomInput>
             <CastomInput>
               <Img src={mail} />
@@ -168,14 +149,11 @@ export const SignUp = () => {
                 type="email"
                 placeholder="Email"
                 name="email"
-                onBlur={blurHandler}
                 onChange={createUserEmail}
                 value={email}
                 required
               />
-              {passwordDirty && passwordError && (
-                <div style={{ color: 'red' }}>{passwordError}</div>
-              )}
+              {passwordError && <Error>{passwordError}</Error>}
             </CastomInput>
             <CastomInput>
               <Img src={lock} />
@@ -183,7 +161,6 @@ export const SignUp = () => {
                 type="password"
                 placeholder="Password"
                 name="password"
-                onBlur={blurHandler}
                 onChange={createUserPassword}
                 value={password}
                 required
@@ -195,13 +172,12 @@ export const SignUp = () => {
                 type="password"
                 placeholder="Repeat password"
                 name="confirmPassword"
-                onBlur={blurHandler}
                 onChange={repeatUserPassword}
                 value={confirmPassword}
                 required
               />
             </CastomInput>
-            <span style={{ color: 'red' }}>{error}</span>
+            <Error>{error}</Error>
             <Button primary disabled={!password || password != confirmPassword}>
               SignUp
             </Button>

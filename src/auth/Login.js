@@ -158,6 +158,11 @@ export const Button = styled.button`
   border: ${(props) => (props.primary ? 'none' : '1px solid #FFFFFF')};
   cursor: pointer;
 `;
+export const Error = styled.div`
+  width: 240px;
+  text-align: center;
+  color: ${baseTheme.colors.red};
+`;
 
 export const Login = () => {
   const isAuthorized = useSelector((state) => state.authorized);
@@ -165,12 +170,8 @@ export const Login = () => {
   const error = useSelector((state) => state.error);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [emailDirty, setEmailDirty] = useState(false);
-  const [passwordDirty, setPasswordDirty] = useState(false);
-  const [emailError, setEmailError] = useState('Email cannot be empty');
-  const [passwordError, setPasswordError] = useState(
-    'Password cannot be empty'
-  );
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
   const dispatch = useDispatch();
 
@@ -190,24 +191,11 @@ export const Login = () => {
       setPasswordError(
         'Password must be longer than 3 and not more than 10 characters'
       );
-      if (!e.target.value) {
-        setPasswordError('Password cannot be empty');
-      }
     } else {
       setPasswordError('');
     }
   };
 
-  const blurHandler = (e) => {
-    switch (e.target.name) {
-      case 'email':
-        setEmailDirty(true);
-        break;
-      case 'password':
-        setPasswordDirty(true);
-        break;
-    }
-  };
   const navigate = useNavigate();
   const transitionSignUp = () => {
     navigate('/signup');
@@ -222,9 +210,14 @@ export const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(loginUser(data));
-    setEmail('');
     setPassword('');
+    if (email === '') {
+      setEmailError('Email cannot be empty');
+    } else if (password === '') {
+      setPasswordError('Password cannot be empty');
+    } else {
+      dispatch(loginUser(data));
+    }
   };
 
   return (
@@ -248,22 +241,17 @@ export const Login = () => {
               </a>
             </Social>
             <Text primary>use your email account</Text>
-            {emailDirty && emailError && (
-              <div style={{ color: 'red' }}>{emailError}</div>
-            )}
+            {emailError && <Error>{emailError}</Error>}
             <CastomInput>
               <Img src={mail} />
               <Input
                 type="text"
                 placeholder="Email"
                 name="email"
-                onBlur={blurHandler}
                 onChange={userEmail}
                 value={email}
               />
-              {passwordDirty && passwordError && (
-                <div style={{ color: 'red' }}>{passwordError}</div>
-              )}
+              {passwordError && <Error>{passwordError}</Error>}
             </CastomInput>
             <CastomInput>
               <Img src={lock} />
@@ -271,7 +259,6 @@ export const Login = () => {
                 type="password"
                 placeholder="Password"
                 name="password"
-                onBlur={blurHandler}
                 onChange={userPassword}
                 value={password}
               />
@@ -279,7 +266,7 @@ export const Login = () => {
             <Forgot>
               <NavLink to={PATH.PASSWORDRECOVERY}>Forgot Password?</NavLink>
             </Forgot>
-            <span style={{ color: 'red' }}>{error}</span>
+            <Error>{error}</Error>
             <Button primary type="submit">
               Sign in
             </Button>
