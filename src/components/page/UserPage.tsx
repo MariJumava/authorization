@@ -6,7 +6,7 @@ import {
   EditUserName,
   EditUserEmail,
   EditUserPassword,
-} from '../../redux/action';
+} from '../../redux/user/UserAction';
 import { device } from '../../styles/device';
 import { ButtonPrimary } from '../../styles/buttons';
 import { baseTheme } from '../../styles/baseTheme';

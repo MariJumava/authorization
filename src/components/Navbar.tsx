@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { IStore } from '../redux/user/UserReducer';
 import styled from 'styled-components';
 import { PATH } from '../utils/ROUTES';
-import { logout, loginFailure } from '../redux/action';
+import { logout, loginFailure } from '../redux/user/UserAction';
 import { device } from '../styles/device';
 import { ButtonLogout } from '../styles/buttons';
-import { DropDown, DropDownList } from '../components/DropDown';
+import { DropDown, DropDownList } from './DropDown';
 import { baseTheme } from '../styles/baseTheme';
 import logo from '../pictures/home_page/logo.svg';
 
@@ -96,8 +97,8 @@ const Title = styled.h3`
 `;
 
 export const Navbar = () => {
-  const isAuthorized = useSelector((state) => state.authorized);
-  const [openBurger, setOpenBurger] = useState(false);
+  const isAuthorized = useSelector((state: IStore) => state.authorized);
+  const [openBurger, setOpenBurger] = useState<boolean>(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();

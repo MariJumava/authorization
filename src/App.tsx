@@ -10,10 +10,11 @@ import { ServicePage } from './components/page/ServicePage';
 import { Navbar } from './components/Navbar';
 import { PasswordRecovery } from './auth/PasswordRecovery';
 import { UserPage } from './components/page/UserPage';
+import { IStore } from './redux/user/UserReducer';
 
-export const App = () => {
+export const App: React.FC = () => {
   const isAuthorized = localStorage.getItem('authToken');
-  const isAuthorizedStore = useSelector((state) => state.authorized);
+  const isAuthorizedStore = useSelector((state: IStore) => state.authorized);
   return (
     <>
       {isAuthorized && isAuthorizedStore && <Navbar />}

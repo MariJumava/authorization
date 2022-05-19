@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { SyntheticEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, Navigate, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -7,14 +7,16 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { PATH } from '../utils/ROUTES';
 import { Loader } from './Loader';
-import { loginFailure } from '../redux/action';
+import { loginFailure } from '../redux/user/UserAction';
 import { loginUser } from '../redux/thunk';
+import { IStore, IUser } from '../redux/user/UserReducer';
 import { device } from '../styles/device';
 import { baseTheme } from '../styles/baseTheme';
 import mail from '../pictures/login/mail.svg';
 import lock from '../pictures/login/lock.svg';
 import ellipse from '../pictures/login/ellipse.png';
 import rectangle from '../pictures/login/rectangle.png';
+import { IUserFind } from '../redux/user/UserTypes';
 
 export const Wrap = styled.div`
   display: flex;
@@ -165,17 +167,17 @@ export const Error = styled.div`
 `;
 
 export const Login = () => {
-  const isAuthorized = useSelector((state) => state.authorized);
-  const loading = useSelector((state) => state.loading);
-  const error = useSelector((state) => state.error);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+  const isAuthorized = useSelector((state: IStore) => state.authorized);
+  const loading = useSelector((state: IStore) => state.loading);
+  const error = useSelector((state: IStore) => state.error);
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [emailError, setEmailError] = useState<string>('');
+  const [passwordError, setPasswordError] = useState<string>('');
 
   const dispatch = useDispatch();
 
-  const userEmail = (e) => {
+  const userEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
     const re = /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i;
     if (!re.test(String(e.target.value).toLocaleLowerCase())) {
@@ -185,12 +187,10 @@ export const Login = () => {
     }
   };
 
-  const userPassword = (e) => {
+  const userPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
-    if (e.target.value < 3 || e.target.value > 10) {
-      setPasswordError(
-        'Password must be longer than 3 and not more than 10 characters'
-      );
+    if (e.target.value < '3' || e.target.value > '10') {
+      setPasswordError('Password must be between 3 and 10 characters');
     } else {
       setPasswordError('');
     }
@@ -206,9 +206,7 @@ export const Login = () => {
     return <Navigate to={'/profile'} />;
   }
 
-  const data = { email, password };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     setPassword('');
     if (email === '') {
@@ -216,7 +214,7 @@ export const Login = () => {
     } else if (password === '') {
       setPasswordError('Password cannot be empty');
     } else {
-      dispatch(loginUser(data));
+      dispatch(loginUser(email, password));
     }
   };
 

@@ -4,7 +4,7 @@ import { ButtonPrimary } from '../../styles/buttons';
 import { TitlePlants } from '../../styles/title';
 import { device } from '../../styles/device';
 import { Logo } from '../Navbar';
-import { Wave } from '../page/ServicePage';
+import { Wave } from './ServicePage';
 import location from '../../pictures/location_page/location.png';
 import logo from '../../pictures/home_page/logo.svg';
 

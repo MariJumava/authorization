@@ -1,15 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import { reducer } from './redux/reduser';
-import thunk from 'redux-thunk';
+//import thunk from 'redux-thunk';
+//import { configureStore } from '@reduxjs/toolkit';
+import { rootReducer, setupStore } from './redux/user/index';
 import { BrowserRouter } from 'react-router-dom';
 import { App } from './App';
 import './index.css';
 
-const store = createStore(reducer, applyMiddleware(thunk));
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const store = setupStore();
+//const store = configureStore({ reducer: rootReducer, middleware: [thunk] });
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
+);
 root.render(
   <React.StrictMode>
     <Provider store={store}>

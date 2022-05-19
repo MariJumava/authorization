@@ -4,7 +4,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import { loginFailure } from '../redux/action';
+import { loginFailure } from '../redux/user/UserAction';
 import { registeredUser, loginUser } from '../redux/thunk';
 import {
   Container,

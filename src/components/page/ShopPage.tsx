@@ -7,7 +7,7 @@ import { baseTheme } from '../../styles/baseTheme';
 import { Name, NumberPlants, TitlePrimary, SubTitle } from '../../styles/title';
 import { ButtonPrimary } from '../../styles/buttons';
 import { device } from '../../styles/device';
-import { Wave } from '../page/ServicePage';
+import { Wave } from './ServicePage';
 import shop from '../../pictures/shop_page/shop.png';
 import foliage from '../../pictures/home_page/foliage.png';
 import roses from '../../pictures/home_page/roses.png';
