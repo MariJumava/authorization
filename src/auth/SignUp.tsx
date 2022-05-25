@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import { loginFailure } from '../redux/user/UserAction';
-import { registeredUser, loginUser } from '../redux/thunk';
+import { Loader } from './Loader';
+import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import { loginFailure } from '../redux/user/UserReducer';
+import { registeredUser } from '../redux/thunk';
 import {
   Container,
   ImgRectangle,
@@ -30,20 +31,21 @@ import lock from '../pictures/login/lock.svg';
 import user from '../pictures/login/user.svg';
 
 export const SignUp = () => {
-  const isRegistrated = useSelector((state) => state.authorized);
-  const error = useSelector((state) => state.error);
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [usernameError, setUsernameError] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+  const { error, isRegistrated, loading } = useAppSelector(
+    (state) => state.user
+  );
+  const [username, setUsername] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const [usernameError, setUsernameError] = useState<string>('');
+  const [emailError, setEmailError] = useState<string>('');
+  const [passwordError, setPasswordError] = useState<string>('');
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const createUserName = (e) => {
-    setUsername(e.target.value);
+  const createUserName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUsername(event.target.value);
     const nameCheck = /^[A-Za-z0-9]$/;
     if (!nameCheck) {
       setUsernameError('Incorrect user name');
@@ -52,29 +54,27 @@ export const SignUp = () => {
     }
   };
 
-  const createUserEmail = (e) => {
-    setEmail(e.target.value);
+  const createUserEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
     const re = /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i;
-    if (!re.test(String(e.target.value).toLocaleLowerCase())) {
+    if (!re.test(String(event.target.value).toLocaleLowerCase())) {
       setEmailError('Incorrect email');
     } else {
       setEmailError('');
     }
   };
 
-  const createUserPassword = (e) => {
-    setPassword(e.target.value);
-    if (e.target.value < 3 || e.target.value > 10) {
-      setPasswordError(
-        'Password must be longer than 3 and not more than 10 characters'
-      );
+  const createUserPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value);
+    if (event.target.value.length < 3 || event.target.value.length > 10) {
+      setPasswordError('Password must be between 3 and 10 characters');
     } else {
       setPasswordError('');
     }
   };
 
-  const repeatUserPassword = (e) => {
-    setConfirmPassword(e.target.value);
+  const repeatUserPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setConfirmPassword(event.target.value);
   };
 
   const navigate = useNavigate();
@@ -82,17 +82,11 @@ export const SignUp = () => {
     navigate('/login');
     dispatch(loginFailure(''));
   };
-  const newUser = { username, email, password };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
     (async () => {
-      await dispatch(registeredUser(newUser));
-      const data = {
-        email: newUser.email,
-        password: newUser.password,
-      };
-      await dispatch(loginUser(data));
+      dispatch(registeredUser());
     })();
     if (username === '') {
       setUsernameError('Name cannot be empty');
@@ -101,7 +95,7 @@ export const SignUp = () => {
     } else if (password === '') {
       setPasswordError('Password cannot be empty');
     } else {
-      dispatch(registeredUser(newUser));
+      dispatch(registeredUser());
     }
   };
 
@@ -122,6 +116,7 @@ export const SignUp = () => {
           <Button onClick={transitionSignIn}>Sign in</Button>
         </WrapHi>
         <WrapForm>
+          <div>{loading && <Loader />}</div>
           <Form onSubmit={handleSubmit}>
             <Title primary>Create Account</Title>
             <Social>

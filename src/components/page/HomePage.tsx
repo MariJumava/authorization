@@ -1,9 +1,10 @@
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { PATH } from '../../utils/ROUTES';
 import { Logo } from '../Navbar';
 import { device } from '../../styles/device';
+import { useAppSelector } from '../../hooks/redux';
+import { baseTheme } from '../../styles/baseTheme';
 import { Button, ButtonSecondary } from '../../styles/buttons';
 import {
   MainTitle,
@@ -12,7 +13,6 @@ import {
   Name,
   NumberPlants,
 } from '../../styles/title';
-import { baseTheme } from '../../styles/baseTheme';
 import leaves from '../../pictures/home_page/leaves.jpg';
 import logo from '../../pictures/home_page/logo.svg';
 import foliage from '../../pictures/home_page/foliage.png';
@@ -94,7 +94,7 @@ export const Wrapper = styled.div`
 `;
 
 export const HomePage = () => {
-  const isAuthorized = useSelector((state) => state.authorized);
+  const isAuthorized = useAppSelector((state) => state.user.authorized);
 
   return (
     <Wrap>

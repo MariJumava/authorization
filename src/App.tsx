@@ -1,5 +1,4 @@
 import { Routes, Route } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { Login } from './auth/Login';
 import { NotFound } from './auth/NotFound';
 import { SignUp } from './auth/SignUp';
@@ -10,11 +9,11 @@ import { ServicePage } from './components/page/ServicePage';
 import { Navbar } from './components/Navbar';
 import { PasswordRecovery } from './auth/PasswordRecovery';
 import { UserPage } from './components/page/UserPage';
-import { IStore } from './redux/user/UserReducer';
+import { useAppSelector } from './hooks/redux';
 
 export const App: React.FC = () => {
   const isAuthorized = localStorage.getItem('authToken');
-  const isAuthorizedStore = useSelector((state: IStore) => state.authorized);
+  const isAuthorizedStore = useAppSelector((state) => state.user.authorized);
   return (
     <>
       {isAuthorized && isAuthorizedStore && <Navbar />}

@@ -1,22 +1,21 @@
-import React, { SyntheticEvent, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
 import { NavLink, Navigate, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import { PATH } from '../utils/ROUTES';
+import { Loader } from './Loader';
+import { loginFailure } from '../redux/user/UserReducer';
+import { loginUser } from '../redux/thunk';
+import { ColorProps } from '../redux/user/UserTypes';
+import { device } from '../styles/device';
+import { baseTheme } from '../styles/baseTheme';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import { PATH } from '../utils/ROUTES';
-import { Loader } from './Loader';
-import { loginFailure } from '../redux/user/UserAction';
-import { loginUser } from '../redux/thunk';
-import { IStore, IUser } from '../redux/user/UserReducer';
-import { device } from '../styles/device';
-import { baseTheme } from '../styles/baseTheme';
 import mail from '../pictures/login/mail.svg';
 import lock from '../pictures/login/lock.svg';
 import ellipse from '../pictures/login/ellipse.png';
 import rectangle from '../pictures/login/rectangle.png';
-import { IUserFind } from '../redux/user/UserTypes';
 
 export const Wrap = styled.div`
   display: flex;
@@ -66,6 +65,7 @@ export const ImgEllipse = styled.img`
 export const WrapForm = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 430px;
   border-radius: 10px;
   @media ${device.tablet} {
@@ -103,21 +103,21 @@ export const Form = styled.form`
 export const Social = styled.div`
   display: flex;
 `;
-export const Title = styled.h3`
+export const Title = styled.h3<ColorProps>`
   font-style: normal;
   font-weight: 800;
   font-size: ${baseTheme.fontSize.subtitle}px;
   margin: 16px;
   letter-spacing: 1.5px;
-  color: ${(props) =>
-    props.primary ? baseTheme.colors.jungleGreen : baseTheme.colors.white};
+  color: ${({ primary }) =>
+    primary ? baseTheme.colors.jungleGreen : baseTheme.colors.white};
   cursor: default;
 `;
-export const Text = styled.p`
+export const Text = styled.p<ColorProps>`
   margin: 16px;
   font-size: 11px;
-  color: ${(props) =>
-    props.primary ? baseTheme.colors.dimGray : baseTheme.colors.white};
+  color: ${({ primary }) =>
+    primary ? baseTheme.colors.dimGray : baseTheme.colors.white};
   text-align: center;
   cursor: default;
 `;
@@ -146,7 +146,7 @@ const Forgot = styled.div`
   text-decoration-line: underline;
   color: ${baseTheme.colors.jet};
 `;
-export const Button = styled.button`
+export const Button = styled.button<ColorProps>`
   width: 160px;
   height: 40px;
   margin-top: 10px;
@@ -154,10 +154,10 @@ export const Button = styled.button`
   font-size: ${baseTheme.fontSize.login}px;
   text-transform: uppercase;
   color: ${baseTheme.colors.white};
-  background: ${(props) =>
-    props.primary ? baseTheme.colors.jungleGreen : 'transparent'};
+  background: ${({ primary }) =>
+    primary ? baseTheme.colors.jungleGreen : 'transparent'};
   border-radius: 20px;
-  border: ${(props) => (props.primary ? 'none' : '1px solid #FFFFFF')};
+  border: ${({ primary }) => (primary ? 'none' : '1px solid #FFFFFF')};
   cursor: pointer;
 `;
 export const Error = styled.div`
@@ -166,30 +166,28 @@ export const Error = styled.div`
   color: ${baseTheme.colors.red};
 `;
 
-export const Login = () => {
-  const isAuthorized = useSelector((state: IStore) => state.authorized);
-  const loading = useSelector((state: IStore) => state.loading);
-  const error = useSelector((state: IStore) => state.error);
+export const Login: React.FC = () => {
+  const { authorized, loading, error } = useAppSelector((state) => state.user);
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [emailError, setEmailError] = useState<string>('');
   const [passwordError, setPasswordError] = useState<string>('');
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const userEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
+  const userEmail = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setEmail(event.target.value);
     const re = /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i;
-    if (!re.test(String(e.target.value).toLocaleLowerCase())) {
+    if (!re.test(String(event.target.value).toLocaleLowerCase())) {
       setEmailError('Incorrect email');
     } else {
       setEmailError('');
     }
   };
 
-  const userPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-    if (e.target.value < '3' || e.target.value > '10') {
+  const userPassword = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setPassword(event.target.value);
+    if (event.target.value.length < 3 || event.target.value.length > 10) {
       setPasswordError('Password must be between 3 and 10 characters');
     } else {
       setPasswordError('');
@@ -202,12 +200,12 @@ export const Login = () => {
     dispatch(loginFailure(''));
   };
 
-  if (isAuthorized) {
+  if (authorized) {
     return <Navigate to={'/profile'} />;
   }
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
     setPassword('');
     if (email === '') {
       setEmailError('Email cannot be empty');

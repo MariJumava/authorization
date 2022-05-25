@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { Navigate } from 'react-router-dom';
 import styled from 'styled-components';
 import {
   EditUserName,
   EditUserEmail,
   EditUserPassword,
-} from '../../redux/user/UserAction';
+} from '../../redux/user/UserReducer';
 import { device } from '../../styles/device';
 import { ButtonPrimary } from '../../styles/buttons';
 import { baseTheme } from '../../styles/baseTheme';
@@ -70,33 +70,33 @@ const ImgUser = styled.img`
 `;
 
 export const UserPage = () => {
-  const isAuthorized = useSelector((state) => state.authorized);
-  const user = useSelector((state) => state.user);
-  const [isEditView, setIsEditView] = useState(false);
-  const [editableName, setEditableName] = useState(user.username);
-  const [editableEmail, setEditableEmail] = useState(user.email);
-  const [editablePassword, setEditablePassword] = useState(user.password);
+  const { authorized, user } = useAppSelector((state) => state.user);
+  const [isEditView, setIsEditView] = useState<boolean>(false);
+  const [editableName, setEditableName] = useState<any>(user.username);
+  const [editableEmail, setEditableEmail] = useState<any>(user.email);
+  const [editablePassword, setEditablePassword] = useState<any>(user.password);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const showEditView = () => {
+  const showEditView = (): void => {
     setIsEditView(true);
   };
 
-  const saveChanges = () => {
+  const saveChanges = (): void => {
     setIsEditView(false);
     dispatch(EditUserName(editableName));
     dispatch(EditUserEmail(editableEmail));
     dispatch(EditUserPassword(editablePassword));
   };
-  if (!isAuthorized) {
+
+  if (!authorized) {
     return <Navigate to={'/login'} />;
   }
 
   return (
     <Wrap>
       <Container>
-        <ImgUser src={user.img} />
+        <ImgUser src={user.img.user_photo} />
         <Wrapper>
           <div>
             <SubTitle>Your Name:</SubTitle>

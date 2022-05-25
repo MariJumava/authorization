@@ -1,17 +1,20 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { IStore } from '../redux/user/UserReducer';
 import styled from 'styled-components';
+import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { PATH } from '../utils/ROUTES';
-import { logout, loginFailure } from '../redux/user/UserAction';
+import { logout, loginFailure } from '../redux/user/UserReducer';
 import { device } from '../styles/device';
 import { ButtonLogout } from '../styles/buttons';
 import { DropDown, DropDownList } from './DropDown';
 import { baseTheme } from '../styles/baseTheme';
 import logo from '../pictures/home_page/logo.svg';
 
-const Wrap = styled.div`
+interface HamburgerProps {
+  openBurger: boolean;
+}
+
+const Wrap = styled.div<HamburgerProps>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -36,8 +39,9 @@ const Wrap = styled.div`
     transition: transform 0.3s ease-in-out;
   }
 `;
+const Menu = styled.div``;
 const Hamburger = styled.div``;
-const Header = styled.div`
+const Header = styled.div<HamburgerProps>`
   width: 2rem;
   height: 2rem;
   position: fixed;
@@ -51,7 +55,7 @@ const Header = styled.div`
     flex-flow: column nowrap;
   }
 
-  div {
+  ${Menu} {
     width: 32px;
     height: 4px;
     background-color: ${({ openBurger }) =>
@@ -74,6 +78,7 @@ const Header = styled.div`
     }
   }
 `;
+
 const DropDownContent = styled.div`
   position: relative;
   display: inline-block;
@@ -97,28 +102,28 @@ const Title = styled.h3`
 `;
 
 export const Navbar = () => {
-  const isAuthorized = useSelector((state: IStore) => state.authorized);
+  const isAuthorized = useAppSelector((state) => state.user.authorized);
   const [openBurger, setOpenBurger] = useState<boolean>(false);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const handleLogOut = () => {
+  const handleLogOut = (): void => {
     dispatch(logout());
     dispatch(loginFailure(''));
     localStorage.clear();
     navigate('/login');
   };
+  const changeOpenBurger = (): void => {
+    setOpenBurger(!openBurger);
+  };
 
   return (
     <>
       <Hamburger>
-        <Header
-          openBurger={openBurger}
-          onClick={() => setOpenBurger(!openBurger)}
-        >
-          <div></div>
-          <div></div>
-          <div></div>
+        <Header openBurger={openBurger} onClick={changeOpenBurger}>
+          <Menu></Menu>
+          <Menu></Menu>
+          <Menu></Menu>
         </Header>
       </Hamburger>
       <Wrap openBurger={openBurger}>
@@ -142,9 +147,6 @@ export const Navbar = () => {
         <Title onClick={() => setOpenBurger(!openBurger)}>
           <NavLink to={PATH.LOCATION}>Location</NavLink>
         </Title>
-        {!isAuthorized ? (
-          <NavLink to={PATH.REGISTRATION}>SignUp</NavLink>
-        ) : null}
         {isAuthorized ? (
           <ButtonLogout onClick={handleLogOut}>LogOut</ButtonLogout>
         ) : (

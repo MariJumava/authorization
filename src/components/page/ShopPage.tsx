@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
-import { PATH } from '../../utils/ROUTES';
 import styled from 'styled-components';
+import { PATH } from '../../utils/ROUTES';
 import { ListItem } from '../DropDown';
 import { Wrapper, ImgType } from './HomePage';
 import { baseTheme } from '../../styles/baseTheme';

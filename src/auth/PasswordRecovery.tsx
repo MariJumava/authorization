@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { PATH } from '../utils/ROUTES';
+import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { compareEmail } from '../redux/thunk';
 import {
   Container,
@@ -20,22 +20,22 @@ import ellipse from '../pictures/login/ellipse.png';
 import rectangle from '../pictures/login/rectangle.png';
 
 export const PasswordRecovery = () => {
-  const dispatch = useDispatch();
-  const [email, setEmail] = useState('');
-  const error = useSelector((state) => state.error);
-  const [showChangePassword, setShowChangePassword] = useState(false);
+  const dispatch = useAppDispatch();
 
-  const sendMail = (e) => {
-    e.preventDefault();
+  const [email, setEmail] = useState<string>('');
+  const error = useAppSelector((state) => state.user.error);
+  const [showChangePassword, setShowChangePassword] = useState<boolean>(false);
+
+  const sendMail = (event: any) => {
+    event.preventDefault();
     setShowChangePassword(true);
-    console.log(email);
     dispatch(compareEmail(email));
   };
-  const handlerChange = (e) => {
-    setEmail(e.target.value);
+  const handlerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
   };
 
-  const saveChanges = () => {
+  const saveChanges = (): void => {
     setShowChangePassword(false);
   };
 
