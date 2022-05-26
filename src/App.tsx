@@ -8,8 +8,9 @@ import { ShopPage } from './components/page/ShopPage';
 import { ServicePage } from './components/page/ServicePage';
 import { Navbar } from './components/Navbar';
 import { PasswordRecovery } from './auth/PasswordRecovery';
-import { UserPage } from './components/page/UserPage';
+import { UserPage } from './components/page/user_page/UserPage';
 import { useAppSelector } from './hooks/redux';
+import { FoliagePage } from './components/page/FoliagePage';
 
 export const App: React.FC = () => {
   const isAuthorized = localStorage.getItem('authToken');
@@ -26,6 +27,7 @@ export const App: React.FC = () => {
         <Route path="/location" element={<LocationPage />} />
         <Route path="/shop" element={<ShopPage />} />
         <Route path="/service" element={<ServicePage />} />
+        <Route path="/shop/foliage" element={<FoliagePage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

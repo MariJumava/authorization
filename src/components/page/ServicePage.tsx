@@ -7,7 +7,7 @@ import service from '../../pictures/service_page/service.png';
 import wave from '../../pictures/service_page/wave.png';
 import card_service from '../../pictures/service_page/card_service.png';
 
-const Wrap = styled.div`
+export const Wrap = styled.div`
   padding-left: 40px;
 `;
 export const Wave = styled.div`
@@ -15,7 +15,7 @@ export const Wave = styled.div`
   background-image: url(${wave});
   background-size: cover;
 `;
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -29,7 +29,7 @@ const Wrapper = styled.div`
     width: 80%;
   }
 `;
-const Container = styled.div`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -52,13 +52,13 @@ const Mask = styled.div`
     width: 100%;
   }
 `;
-const Title = styled(TitlePrimary)`
+export const Title = styled(TitlePrimary)`
   @media ${device.tablet} {
     width: 100%;
     font-size: ${baseTheme.fontSize.titleImg}px;
   }
 `;
-const Text = styled(SubTitle)`
+export const Text = styled(SubTitle)`
   width: 70%;
   text-align: start;
   @media ${device.tablet} {

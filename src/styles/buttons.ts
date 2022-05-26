@@ -50,7 +50,7 @@ export const ButtonSecondary = styled.button`
 `;
 
 export const ButtonLogout = styled.button`
-  width: 160px;
+  width: 120px;
   height: 40px;
   font-size: ${baseTheme.fontSize.subtitleImg}px;
   font-weight: ${baseTheme.fontWeight.weight};
