@@ -1,11 +1,8 @@
 import { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { PATH } from '../utils/ROUTES';
-import { logout, loginFailure } from '../redux/user/UserReducer';
 import { device } from '../styles/device';
-import { ButtonLogout } from '../styles/buttons';
 import { DropDown, DropDownList } from './DropDown';
 import { baseTheme } from '../styles/baseTheme';
 import logo from '../pictures/home_page/logo.svg';
@@ -102,17 +99,8 @@ const Title = styled.h3`
 `;
 
 export const Navbar = () => {
-  const isAuthorized = useAppSelector((state) => state.user.authorized);
   const [openBurger, setOpenBurger] = useState<boolean>(false);
 
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const handleLogOut = (): void => {
-    dispatch(logout());
-    dispatch(loginFailure(''));
-    localStorage.clear();
-    navigate('/login');
-  };
   const changeOpenBurger = (): void => {
     setOpenBurger(!openBurger);
   };
@@ -147,13 +135,6 @@ export const Navbar = () => {
         <Title onClick={() => setOpenBurger(!openBurger)}>
           <NavLink to={PATH.LOCATION}>Location</NavLink>
         </Title>
-        {isAuthorized ? (
-          <ButtonLogout onClick={handleLogOut}>LogOut</ButtonLogout>
-        ) : (
-          <span>
-            <NavLink to={PATH.LOGIN}>Login</NavLink>
-          </span>
-        )}
       </Wrap>
     </>
   );

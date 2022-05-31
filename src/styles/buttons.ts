@@ -54,11 +54,14 @@ export const ButtonLogout = styled.button`
   height: 40px;
   font-size: ${baseTheme.fontSize.subtitleImg}px;
   font-weight: ${baseTheme.fontWeight.weight};
-  background: ${baseTheme.colors.grannySmithApple};
-  border-radius: 10px;
+  color: ${baseTheme.colors.white};
+  background: ${baseTheme.colors.hunterGreen};
   border: none;
+  border-radius: 40px;
+  text-transform: uppercase;
   cursor: pointer;
   :hover {
-    color: red;
+    background: ${baseTheme.colors.grannySmithApple};
+    color: ${baseTheme.colors.black};
   }
 `;

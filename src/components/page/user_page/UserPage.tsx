@@ -1,12 +1,13 @@
 import { useState } from 'react';
-import { useAppSelector } from '../../../hooks/redux';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useAppSelector, useAppDispatch } from '../../../hooks/redux';
+import { logout, loginFailure } from '../../../redux/user/UserReducer';
+import { ButtonLogout, ButtonSecondary } from '../../../styles/buttons';
 import { UserSettings } from './UserSettings';
 import { device } from '../../../styles/device';
 import { baseTheme } from '../../../styles/baseTheme';
 import { UserPlants } from './UserPlants';
-import { plants } from 'components/Plants';
 import profile from '../../../pictures/profile/profile.jpg';
 
 const Wrap = styled.div`
@@ -31,7 +32,7 @@ export const Wrapper = styled.div`
 `;
 const WrapSettings = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: space-around;
 `;
 const Container = styled.div`
   display: flex;
@@ -46,29 +47,27 @@ const Container = styled.div`
     width: 85%;
   }
 `;
-export const SubTitle = styled.h4`
-  margin-left: 10px;
+const Header = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`;
+export const SubTitle = styled(ButtonSecondary)`
+  width: 150px;
+  height: 40px;
   font-size: ${baseTheme.fontSize.subtitleImg}px;
-  color: ${baseTheme.colors.white};
   cursor: pointer;
 `;
 const ImgUser = styled.img`
   width: 80px;
   height: 80px;
-  margin: 0 auto;
-`;
-const Menu = styled.div`
-  display: flex;
-  margin: auto;
+  padding: 10px;
 `;
 
 export const UserPage = () => {
-  const { authorized, user } = useAppSelector((state) => state.user);
+  const { user } = useAppSelector((state) => state.user);
+  const userPlants = useAppSelector((state) => state.user.user.myplants);
   const [showUserSettings, setShowUserSettings] = useState<boolean>(false);
-
-  if (!authorized) {
-    return <Navigate to={'/login'} />;
-  }
 
   const showMyPlants = (): void => {
     setShowUserSettings(false);
@@ -78,24 +77,34 @@ export const UserPage = () => {
     setShowUserSettings(true);
   };
 
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const handleLogOut = (): void => {
+    dispatch(logout());
+    dispatch(loginFailure(''));
+    localStorage.clear();
+    navigate('/login');
+  };
+
   return (
     <Wrap>
       <Container>
-        <ImgUser src={user.img.user_photo} />
-        <Menu>
-          <SubTitle onClick={showSettings}>My settings</SubTitle>
+        <Header>
+          <ImgUser src={user.img.user_photo} />
+          <ButtonLogout onClick={handleLogOut}>LogOut</ButtonLogout>
+        </Header>
+        <WrapSettings>
           <SubTitle onClick={showMyPlants}>My plants</SubTitle>
-        </Menu>
+          <SubTitle onClick={showSettings}>My settings</SubTitle>
+        </WrapSettings>
         <div>
-          <Wrapper>{showUserSettings ? <UserSettings /> : null}</Wrapper>
-          <WrapSettings>
-            {showUserSettings
-              ? null
-              : plants.map((plant) => {
-                  return <UserPlants plant={plant} key={plant.id} />;
-                })}
-          </WrapSettings>
+          {showUserSettings
+            ? null
+            : userPlants?.map((plant) => {
+                return <UserPlants key={plant.id} plant={plant} />;
+              })}
         </div>
+        <div>{showUserSettings ? <UserSettings /> : null}</div>
       </Container>
     </Wrap>
   );

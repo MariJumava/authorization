@@ -1,6 +1,7 @@
 import { nanoid } from 'nanoid';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import user_photo from '../../pictures/profile/user_photo.png';
+import { IPlant, plants } from 'components/Plants';
 
 export interface IUser {
   id?: string;
@@ -9,9 +10,11 @@ export interface IUser {
   password: string;
   token?: string;
   img?: { user_photo: string };
+  myplants?: IPlant[];
 }
 
 export interface IStore {
+  plants: IPlant[];
   user: IUser;
   loading: boolean;
   authorized: boolean;
@@ -20,6 +23,7 @@ export interface IStore {
 }
 
 const initialState: IStore = {
+  plants: plants,
   user: {
     id: nanoid(),
     username: '',
@@ -27,6 +31,7 @@ const initialState: IStore = {
     password: '',
     token: '',
     img: { user_photo },
+    myplants: [],
   },
   loading: false,
   authorized: false,
@@ -72,6 +77,19 @@ export const userSlice = createSlice({
       state.user.email = action.payload;
       state.loading = false;
     },
+    addPlant(state, action: PayloadAction<IPlant>) {
+      // const plants = [...state.user.myplants];
+      state.user = {
+        ...state.user,
+        myplants: [action.payload],
+      };
+      // state.user.myplants?.push(action.payload);
+    },
+    deletePlant(state, action: PayloadAction<string>) {
+      state.user.myplants = state.user.myplants?.filter(
+        (el) => el.id !== action.payload
+      );
+    },
   },
 });
 
@@ -85,6 +103,8 @@ export const {
   EditUserEmail,
   EditUserPassword,
   verificationEmail,
+  addPlant,
+  deletePlant,
 } = userSlice.actions;
 
 export default userSlice.reducer;

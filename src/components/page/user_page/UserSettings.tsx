@@ -1,15 +1,25 @@
 import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import styled from 'styled-components';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import {
   EditUserName,
   EditUserEmail,
   EditUserPassword,
 } from '../../../redux/user/UserReducer';
-import { SubTitle } from './UserPage';
+import { SubTitle } from '../../../styles/title';
 import { ButtonPrimary } from '../../../styles/buttons';
 import { baseTheme } from '../../../styles/baseTheme';
 
+const Wrap = styled.div`
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  padding: 10px;
+`;
+const Title = styled(SubTitle)`
+  width: auto;
+  font-size: ${baseTheme.fontSize.subtitle}px;
+`;
 const Input = styled.input`
   height: 30px;
   font-size: ${baseTheme.fontSize.list}px;
@@ -44,9 +54,9 @@ export const UserSettings = () => {
   };
 
   return (
-    <>
+    <Wrap>
       <div>
-        <SubTitle>Your Name:</SubTitle>
+        <Title>Your Name:</Title>
         {isEditView && (
           <Input
             type="text"
@@ -54,10 +64,10 @@ export const UserSettings = () => {
             onChange={(event) => setEditableName(event.target.value)}
           />
         )}
-        {!isEditView && <SubTitle>{user.username}</SubTitle>}
+        {!isEditView && <Title>{user.username}</Title>}
       </div>
       <div>
-        <SubTitle>Your Email:</SubTitle>
+        <Title>Your Email:</Title>
         {isEditView && (
           <Input
             type="email"
@@ -65,10 +75,10 @@ export const UserSettings = () => {
             onChange={(event) => setEditableEmail(event.target.value)}
           />
         )}
-        {!isEditView && <SubTitle>{user.email}</SubTitle>}
+        {!isEditView && <Title>{user.email}</Title>}
       </div>
       <div>
-        <SubTitle>Your Password:</SubTitle>
+        <Title>Your Password:</Title>
         {isEditView && (
           <Input
             type="password"
@@ -76,10 +86,10 @@ export const UserSettings = () => {
             onChange={(event) => setEditablePassword(event.target.value)}
           />
         )}
-        {!isEditView && <SubTitle>{user.password}</SubTitle>}
+        {!isEditView && <Title>{user.password}</Title>}
       </div>
       {isEditView && <Button onClick={saveChanges}>Save</Button>}
       {!isEditView && <Button onClick={showEditView}>Edit</Button>}
-    </>
+    </Wrap>
   );
 };

@@ -13,7 +13,7 @@ export const DropDownListContainer = styled.div`
 export const DropDownList = styled.ul`
   display: none;
   position: fixed;
-  left: 35%;
+  left: 43%;
   z-index: 100;
   width: 200px;
   padding: 10px 0;

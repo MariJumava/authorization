@@ -1,10 +1,12 @@
+//import { useState, useMemo } from 'react';
 import styled from 'styled-components';
 import { Container, Title, Text } from './ServicePage';
 import { FoliageCard } from './FoliageCard';
-import { plants } from 'components/Plants';
+//import { IPlant, plants } from 'components/Plants';
 import { device } from '../../styles/device';
 import { baseTheme } from '../../styles/baseTheme';
 import wave_white from '../../pictures/shop_page/wave_white.png';
+import { useAppSelector } from 'hooks/redux';
 
 const Wave = styled.div`
   height: 300px;
@@ -15,7 +17,7 @@ const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 150px auto 0;
+  margin: 100px auto 0;
   text-align: center;
   @media ${device.tablet} {
     width: 80%;
@@ -43,6 +45,18 @@ const NumberPlants = styled.h6`
 `;
 
 export const FoliagePage = () => {
+  const plants = useAppSelector((state) => state.user.plants);
+  //  const [selectedItem, setSelectedItem] = useState<IPlant | null>(null);
+
+  // const selectedPlant = useMemo(
+  //   () => plants?.find((el) => el.id === selectedItem.id),
+  //   [selectedItem, plants]
+  // );
+  // const selectPlant = () => {
+  //   setSelectedItem(selectedPlant);
+
+  // };
+
   return (
     <>
       <Container>
@@ -57,8 +71,14 @@ export const FoliagePage = () => {
           <Name>Foliage for plants</Name>
           <NumberPlants>{plants.length} plants</NumberPlants>
           <div>
-            {plants.map((plant) => {
-              return <FoliageCard key={plant.id} plant={plant} />;
+            {plants?.map((plant) => {
+              return (
+                <FoliageCard
+                  //selectPlant={selectPlant}
+                  key={plant.id}
+                  plant={plant}
+                />
+              );
             })}
           </div>
         </Wrapper>
