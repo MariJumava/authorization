@@ -78,12 +78,11 @@ export const userSlice = createSlice({
       state.loading = false;
     },
     addPlant(state, action: PayloadAction<IPlant>) {
-      // const plants = [...state.user.myplants];
+      const plantsUser = [...state.user.myplants];
       state.user = {
         ...state.user,
-        myplants: [action.payload],
+        myplants: [...plantsUser, action.payload],
       };
-      // state.user.myplants?.push(action.payload);
     },
     deletePlant(state, action: PayloadAction<string>) {
       state.user.myplants = state.user.myplants?.filter(

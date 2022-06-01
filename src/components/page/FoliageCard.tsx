@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { baseTheme } from '../../styles/baseTheme';
 import { addPlant } from 'redux/user/UserReducer';
+import { IPlant } from 'components/Plants';
 
 const Wrap = styled.div`
   display: flex;
@@ -22,7 +23,7 @@ export const Button = styled.button`
   border: none;
 `;
 
-export const FoliageCard = ({ plant }: any) => {
+export const FoliageCard = ({ plant }: { plant: IPlant }) => {
   //const myPlants = useAppSelector((state) => state.user.user.myplants);
   //const [showButtonClone, setShowButtonClone] = useState<boolean>(true);
 

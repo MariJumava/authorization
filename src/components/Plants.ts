@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid';
 
 export interface IPlant {
-  id: string;
+  id?: string;
   name: string;
   description?: string;
   popularity?: number;

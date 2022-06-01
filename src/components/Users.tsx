@@ -10,6 +10,7 @@ export const users: IUser[] = [
     img: { user_photo },
     password: '123q',
     token: nanoid(),
+    myplants: [],
   },
   {
     id: nanoid(),
@@ -18,6 +19,7 @@ export const users: IUser[] = [
     img: { user_photo },
     password: '123q',
     token: nanoid(),
+    myplants: [],
   },
   {
     id: nanoid(),
@@ -26,6 +28,7 @@ export const users: IUser[] = [
     img: { user_photo },
     password: '123q',
     token: nanoid(),
+    myplants: [],
   },
   {
     id: nanoid(),
@@ -34,6 +37,7 @@ export const users: IUser[] = [
     img: { user_photo },
     password: '123q',
     token: nanoid(),
+    myplants: [],
   },
   {
     id: nanoid(),
@@ -42,6 +46,7 @@ export const users: IUser[] = [
     img: { user_photo },
     password: '123q',
     token: nanoid(),
+    myplants: [],
   },
   {
     id: nanoid(),
@@ -50,6 +55,7 @@ export const users: IUser[] = [
     img: { user_photo },
     password: '123q',
     token: nanoid(),
+    myplants: [],
   },
   {
     id: nanoid(),
@@ -58,6 +64,7 @@ export const users: IUser[] = [
     img: { user_photo },
     password: '123q',
     token: nanoid(),
+    myplants: [],
   },
   {
     id: nanoid(),
@@ -66,6 +73,7 @@ export const users: IUser[] = [
     img: { user_photo },
     password: '123q',
     token: nanoid(),
+    myplants: [],
   },
   {
     id: nanoid(),
@@ -74,6 +82,7 @@ export const users: IUser[] = [
     img: { user_photo },
     password: '123q',
     token: nanoid(),
+    myplants: [],
   },
   {
     id: nanoid(),
@@ -82,6 +91,7 @@ export const users: IUser[] = [
     img: { user_photo },
     password: '123q',
     token: nanoid(),
+    myplants: [],
   },
   {
     id: nanoid(),
@@ -90,6 +100,7 @@ export const users: IUser[] = [
     img: { user_photo },
     password: '123q',
     token: nanoid(),
+    myplants: [],
   },
   {
     id: nanoid(),
@@ -98,5 +109,6 @@ export const users: IUser[] = [
     img: { user_photo },
     password: '123q',
     token: nanoid(),
+    myplants: [],
   },
 ];

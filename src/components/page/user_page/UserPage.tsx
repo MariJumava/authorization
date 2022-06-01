@@ -85,7 +85,7 @@ export const UserPage = () => {
     localStorage.clear();
     navigate('/login');
   };
-
+  console.log(userPlants);
   return (
     <Wrap>
       <Container>
