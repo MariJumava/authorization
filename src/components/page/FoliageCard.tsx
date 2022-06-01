@@ -1,4 +1,3 @@
-//import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { baseTheme } from '../../styles/baseTheme';
@@ -21,33 +20,28 @@ export const Button = styled.button`
   color: ${baseTheme.colors.black};
   border-radius: 10px;
   border: none;
+  cursor: pointer;
 `;
 
-export const FoliageCard = ({ plant }: { plant: IPlant }) => {
-  //const myPlants = useAppSelector((state) => state.user.user.myplants);
-  //const [showButtonClone, setShowButtonClone] = useState<boolean>(true);
+export const FoliageCard = ({
+  plant,
+  isShowButton,
+}: {
+  plant: IPlant;
+  isShowButton: any;
+}) => {
+  const myPlants = useAppSelector((state) => state.user.user.myplants);
 
   const dispatch = useAppDispatch();
 
-  // useEffect(() => {
-  //   if (myPlants?.findIndex((x) => x.id === selectPlant.id) < 0) {
-  //     setShowButtonClone(false);
-  //   } else {
-  //     setShowButtonClone(true);
-  //   }
-  // }, [selectPlant, myPlants]);
-
   const clonePlant = () => {
-    console.log(plant);
     dispatch(addPlant(plant));
   };
 
   return (
     <Wrap>
       <Name>{plant.name}</Name>
-      {/* {showButtonClone ? */}
-      <Button onClick={clonePlant}>+</Button>
-      {/* : null} */}
+      {isShowButton && <Button onClick={clonePlant}>+</Button>}
     </Wrap>
   );
 };

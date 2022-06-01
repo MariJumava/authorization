@@ -1,8 +1,6 @@
-//import { useState, useMemo } from 'react';
 import styled from 'styled-components';
 import { Container, Title, Text } from './ServicePage';
 import { FoliageCard } from './FoliageCard';
-//import { IPlant, plants } from 'components/Plants';
 import { device } from '../../styles/device';
 import { baseTheme } from '../../styles/baseTheme';
 import wave_white from '../../pictures/shop_page/wave_white.png';
@@ -46,16 +44,11 @@ const NumberPlants = styled.h6`
 
 export const FoliagePage = () => {
   const plants = useAppSelector((state) => state.user.plants);
-  //  const [selectedItem, setSelectedItem] = useState<IPlant | null>(null);
+  const userPlants = useAppSelector((state) => state.user.user.myplants);
 
-  // const selectedPlant = useMemo(
-  //   () => plants?.find((el) => el.id === selectedItem.id),
-  //   [selectedItem, plants]
-  // );
-  // const selectPlant = () => {
-  //   setSelectedItem(selectedPlant);
-
-  // };
+  const isShowButton = (id: string) => () => {
+    return !userPlants?.find((item) => item.id === id);
+  };
 
   return (
     <>
@@ -64,7 +57,7 @@ export const FoliagePage = () => {
           <Title>Foliage for plants.</Title>
           <Text>
             Add some color to your home, give it a little attention, the plants
-            will accompany you quietly
+            will accompany you quietlyю
           </Text>
         </Wrap>
         <Wrapper>
@@ -74,9 +67,9 @@ export const FoliagePage = () => {
             {plants?.map((plant) => {
               return (
                 <FoliageCard
-                  //selectPlant={selectPlant}
                   key={plant.id}
                   plant={plant}
+                  isShowButton={isShowButton(plant.id)()}
                 />
               );
             })}
