@@ -65,3 +65,12 @@ export const ButtonLogout = styled.button`
     color: ${baseTheme.colors.black};
   }
 `;
+
+export const ButtonClose = styled.button`
+  height: 100px;
+  font-size: ${baseTheme.fontSize.titleImg}px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: ${baseTheme.colors.white};
+`;

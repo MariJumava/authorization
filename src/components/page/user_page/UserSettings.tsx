@@ -16,7 +16,7 @@ const Wrap = styled.div`
   justify-content: space-around;
   padding: 10px;
 `;
-const Title = styled(SubTitle)`
+export const Title = styled(SubTitle)`
   width: auto;
   font-size: ${baseTheme.fontSize.subtitle}px;
 `;

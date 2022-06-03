@@ -22,6 +22,11 @@ export interface IStore {
   error: string | null;
 }
 
+export interface IPlantEdit {
+  id: string;
+  count: number;
+}
+
 const initialState: IStore = {
   plants: plants,
   user: {
@@ -89,6 +94,17 @@ export const userSlice = createSlice({
         (el) => el.id !== action.payload
       );
     },
+    editPlant(state, action: PayloadAction<IPlantEdit>) {
+      state.user = {
+        ...state.user,
+        myplants: state.user.myplants?.map((selectPlant) => {
+          if (selectPlant.id === action.payload.id) {
+            selectPlant.count = action.payload.count;
+          }
+          return selectPlant;
+        }),
+      };
+    },
   },
 });
 
@@ -104,6 +120,7 @@ export const {
   verificationEmail,
   addPlant,
   deletePlant,
+  editPlant,
 } = userSlice.actions;
 
 export default userSlice.reducer;

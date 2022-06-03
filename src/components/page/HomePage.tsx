@@ -95,6 +95,12 @@ export const Wrapper = styled.div`
 
 export const HomePage = () => {
   const isAuthorized = useAppSelector((state) => state.user.authorized);
+  const plants = useAppSelector((state) => state.user.plants);
+
+  const foliageCategory = plants?.filter((el) => el.category === 'Foliage');
+  const succulentCategory = plants?.filter((el) => el.category === 'Succulent');
+  const flowerCategory = plants?.filter((el) => el.category === 'Flower');
+  const fruitCategory = plants?.filter((el) => el.category === 'Fruit');
 
   return (
     <Wrap>
@@ -124,22 +130,22 @@ export const HomePage = () => {
         <Wrapper>
           <ImgType src={foliage} />
           <Name>Foliage</Name>
-          <NumberPlants>21 Plants</NumberPlants>
+          <NumberPlants>{foliageCategory.length} Plants</NumberPlants>
         </Wrapper>
         <Wrapper>
           <ImgType src={roses} />
           <Name>Flower</Name>
-          <NumberPlants>4 Plants</NumberPlants>
+          <NumberPlants>{flowerCategory.length} Plants</NumberPlants>
         </Wrapper>
         <Wrapper>
           <ImgType src={succulent} />
           <Name>Succulent</Name>
-          <NumberPlants>8 Plants</NumberPlants>
+          <NumberPlants>{succulentCategory.length} Plants</NumberPlants>
         </Wrapper>
         <Wrapper>
           <ImgType src={strawberry} />
-          <Name>Strawberry</Name>
-          <NumberPlants>10 Plants</NumberPlants>
+          <Name>Fruit</Name>
+          <NumberPlants>{fruitCategory.length} Plants</NumberPlants>
         </Wrapper>
       </Container>
     </Wrap>

@@ -4,10 +4,12 @@ import styled from 'styled-components';
 import { useAppSelector, useAppDispatch } from '../../../hooks/redux';
 import { logout, loginFailure } from '../../../redux/user/UserReducer';
 import { ButtonLogout, ButtonSecondary } from '../../../styles/buttons';
-import { UserSettings } from './UserSettings';
+import { UserSettings, Title } from './UserSettings';
+import { OpenCard } from './OpenCard';
 import { device } from '../../../styles/device';
 import { baseTheme } from '../../../styles/baseTheme';
 import { UserPlants } from './UserPlants';
+import { IPlant } from 'components/Plants';
 import profile from '../../../pictures/profile/profile.jpg';
 
 const Wrap = styled.div`
@@ -68,6 +70,8 @@ export const UserPage = () => {
   const { user } = useAppSelector((state) => state.user);
   const userPlants = useAppSelector((state) => state.user.user.myplants);
   const [showUserSettings, setShowUserSettings] = useState<boolean>(false);
+  const [showOpenCard, setShowOpenCard] = useState<boolean>(false);
+  const [selectedPlant, setSelectedPlant] = useState<IPlant | null>(null);
 
   const showMyPlants = (): void => {
     setShowUserSettings(false);
@@ -77,14 +81,25 @@ export const UserPage = () => {
     setShowUserSettings(true);
   };
 
+  const openSelectedPlant = (id: any): void => {
+    setShowOpenCard(true);
+    setSelectedPlant(() => userPlants?.find((el) => el.id === id));
+  };
+
+  const closeOpenCard = (): void => {
+    setShowOpenCard(false);
+  };
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
   const handleLogOut = (): void => {
     dispatch(logout());
     dispatch(loginFailure(''));
     localStorage.clear();
     navigate('/login');
   };
+
   return (
     <Wrap>
       <Container>
@@ -100,11 +115,20 @@ export const UserPage = () => {
           {showUserSettings
             ? null
             : userPlants?.map((plant) => {
-                return <UserPlants key={plant.id} plant={plant} />;
+                return (
+                  <UserPlants
+                    key={plant.id}
+                    plant={plant}
+                    openSelectedPlant={() => openSelectedPlant(plant.id)}
+                  />
+                );
               })}
         </div>
         <div>{showUserSettings ? <UserSettings /> : null}</div>
       </Container>
+      {showOpenCard ? (
+        <OpenCard selectedPlant={selectedPlant} closeOpenCard={closeOpenCard} />
+      ) : null}
     </Wrap>
   );
 };
