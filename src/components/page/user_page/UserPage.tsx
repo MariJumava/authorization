@@ -84,7 +84,6 @@ export const UserPage = () => {
       0
     );
     const count = userPlants?.reduce((prev, curr) => prev + curr.count, 0);
-    console.log(price);
     setTotalPlant({ price, count });
   }, [userPlants]);
 
