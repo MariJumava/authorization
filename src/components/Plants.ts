@@ -8,6 +8,7 @@ export interface IPlant {
   category?: string;
   price?: number;
   count?: number;
+  priceTotal?: number;
 }
 
 export const plants: IPlant[] = [
@@ -19,6 +20,7 @@ export const plants: IPlant[] = [
     category: 'Foliage',
     price: 23,
     count: 1,
+    priceTotal: 23,
   },
   {
     id: nanoid(),
@@ -28,6 +30,7 @@ export const plants: IPlant[] = [
     category: 'Foliage',
     price: 5,
     count: 1,
+    priceTotal: 5,
   },
   {
     id: nanoid(),
@@ -37,6 +40,7 @@ export const plants: IPlant[] = [
     category: 'Foliage',
     price: 150,
     count: 1,
+    priceTotal: 150,
   },
   {
     id: nanoid(),
@@ -46,6 +50,7 @@ export const plants: IPlant[] = [
     category: 'Foliage',
     price: 33,
     count: 1,
+    priceTotal: 33,
   },
   {
     id: nanoid(),
@@ -55,6 +60,7 @@ export const plants: IPlant[] = [
     category: 'Foliage',
     price: 74,
     count: 1,
+    priceTotal: 74,
   },
   {
     id: nanoid(),
@@ -64,6 +70,7 @@ export const plants: IPlant[] = [
     category: 'Foliage',
     price: 9,
     count: 1,
+    priceTotal: 9,
   },
   {
     id: nanoid(),
@@ -73,6 +80,7 @@ export const plants: IPlant[] = [
     category: 'Foliage',
     price: 96,
     count: 1,
+    priceTotal: 96,
   },
   {
     id: nanoid(),
@@ -82,6 +90,7 @@ export const plants: IPlant[] = [
     category: 'Succulent',
     price: 50,
     count: 1,
+    priceTotal: 50,
   },
   {
     id: nanoid(),
@@ -91,6 +100,7 @@ export const plants: IPlant[] = [
     category: 'Succulent',
     price: 42,
     count: 1,
+    priceTotal: 42,
   },
   {
     id: nanoid(),
@@ -100,6 +110,7 @@ export const plants: IPlant[] = [
     category: 'Succulent',
     price: 11,
     count: 1,
+    priceTotal: 11,
   },
   {
     id: nanoid(),
@@ -109,6 +120,7 @@ export const plants: IPlant[] = [
     category: 'Succulent',
     price: 88,
     count: 1,
+    priceTotal: 88,
   },
   {
     id: nanoid(),
@@ -118,6 +130,7 @@ export const plants: IPlant[] = [
     category: 'Flower',
     price: 63,
     count: 1,
+    priceTotal: 63,
   },
   {
     id: nanoid(),
@@ -127,6 +140,7 @@ export const plants: IPlant[] = [
     category: 'Flower',
     price: 14,
     count: 1,
+    priceTotal: 14,
   },
   {
     id: nanoid(),
@@ -136,6 +150,7 @@ export const plants: IPlant[] = [
     category: 'Flower',
     price: 8,
     count: 1,
+    priceTotal: 8,
   },
   {
     id: nanoid(),
@@ -145,6 +160,7 @@ export const plants: IPlant[] = [
     category: 'Flower',
     price: 113,
     count: 1,
+    priceTotal: 113,
   },
   {
     id: nanoid(),
@@ -154,6 +170,7 @@ export const plants: IPlant[] = [
     category: 'Fruit',
     price: 29,
     count: 1,
+    priceTotal: 29,
   },
   {
     id: nanoid(),
@@ -163,6 +180,7 @@ export const plants: IPlant[] = [
     category: 'Fruit',
     price: 37,
     count: 1,
+    priceTotal: 37,
   },
   {
     id: nanoid(),
@@ -172,5 +190,6 @@ export const plants: IPlant[] = [
     category: 'Fruit',
     price: 18,
     count: 1,
+    priceTotal: 18,
   },
 ];

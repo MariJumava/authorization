@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAppSelector, useAppDispatch } from '../../../hooks/redux';
@@ -11,6 +11,7 @@ import { baseTheme } from '../../../styles/baseTheme';
 import { UserPlants } from './UserPlants';
 import { IPlant } from 'components/Plants';
 import profile from '../../../pictures/profile/profile.jpg';
+import { FooterUserPlants } from './FooterUserPlants';
 
 const Wrap = styled.div`
   height: fit-content;
@@ -72,6 +73,20 @@ export const UserPage = () => {
   const [showUserSettings, setShowUserSettings] = useState<boolean>(false);
   const [showOpenCard, setShowOpenCard] = useState<boolean>(false);
   const [selectedPlant, setSelectedPlant] = useState<IPlant | null>(null);
+  const [totalPlant, setTotalPlant] = useState<Partial<IPlant>>({
+    price: 0,
+    count: 0,
+  });
+
+  useEffect(() => {
+    const price = userPlants?.reduce(
+      (prev, curr) => prev + curr.price * curr.count,
+      0
+    );
+    const count = userPlants?.reduce((prev, curr) => prev + curr.count, 0);
+    console.log(price);
+    setTotalPlant({ price, count });
+  }, [userPlants]);
 
   const showMyPlants = (): void => {
     setShowUserSettings(false);
@@ -124,6 +139,7 @@ export const UserPage = () => {
                 );
               })}
         </div>
+        <FooterUserPlants totalPlant={totalPlant} />
         <div>{showUserSettings ? <UserSettings /> : null}</div>
       </Container>
       {showOpenCard ? (

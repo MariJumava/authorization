@@ -12,7 +12,7 @@ export const Name = styled.div`
   color: ${baseTheme.colors.black};
   cursor: pointer;
 `;
-const Wrap = styled.div`
+export const Wrap = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
