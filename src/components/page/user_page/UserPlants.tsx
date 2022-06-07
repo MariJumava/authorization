@@ -44,7 +44,7 @@ export const UserPlants = ({
   plant: IPlant;
   openSelectedPlant: any;
 }) => {
-  const [count, setCount] = useState<number>(1);
+  const [count, setCount] = useState<number>(plant.count);
   const dispatch = useAppDispatch();
 
   const calculateCurrentPrise = () => {
