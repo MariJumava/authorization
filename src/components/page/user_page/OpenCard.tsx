@@ -30,6 +30,9 @@ const Container = styled.div`
   background: ${baseTheme.colors.white};
   border-radius: 50px 10px 10px 10px;
 `;
+const Title = styled(TitlePlants)`
+  font-size: ${baseTheme.fontSize.titleImg}px;
+`;
 const Descrption = styled(Name)`
   color: ${baseTheme.colors.black};
 `;
@@ -45,9 +48,9 @@ export const OpenCard = ({
     <Wrap>
       <ButtonClose onClick={closeOpenCard}>&times;</ButtonClose>
       <Container>
-        <TitlePlants>{selectedPlant.name}</TitlePlants>
-        <span>{selectedPlant.price}$</span>
+        <Title>{selectedPlant.name}</Title>
         <Descrption>{selectedPlant.description}</Descrption>
+        <span>{selectedPlant.price}$</span>
       </Container>
     </Wrap>
   );

@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { PATH } from '../../utils/ROUTES';
 import { Logo } from '../Navbar';
@@ -102,6 +102,11 @@ export const HomePage = () => {
   const flowerCategory = plants?.filter((el) => el.category === 'Flower');
   const fruitCategory = plants?.filter((el) => el.category === 'Fruit');
 
+  const navigate = useNavigate();
+  const followFoliage = () => {
+    navigate('/shop/foliage');
+  };
+
   return (
     <Wrap>
       <Slider>
@@ -127,7 +132,7 @@ export const HomePage = () => {
       </Text>
       <TitlePlants>4 types of plants</TitlePlants>
       <Container>
-        <Wrapper>
+        <Wrapper onClick={followFoliage}>
           <ImgType src={foliage} />
           <Name>Foliage</Name>
           <NumberPlants>{foliageCategory.length} Plants</NumberPlants>

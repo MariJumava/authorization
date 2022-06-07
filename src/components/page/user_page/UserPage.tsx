@@ -48,6 +48,7 @@ const Container = styled.div`
   border-radius: 12px;
   @media ${device.tablet} {
     width: 85%;
+    margin: 50px 0;
   }
 `;
 const Header = styled.div`

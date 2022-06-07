@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import BackspaceIcon from '@mui/icons-material/Backspace';
+import { device } from '../../styles/device';
 
 const Wrap = styled.div`
   position: relative;
@@ -15,6 +16,9 @@ const StyledInput = styled.input`
   padding: 5px;
   border: none;
   border-radius: 4px;
+  @media ${device.tablet} {
+    width: auto;
+  }
 `;
 
 export const SearchPlant = ({ handleChange, setSearch }) => {

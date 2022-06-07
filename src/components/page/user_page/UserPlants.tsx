@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useAppDispatch } from 'hooks/redux';
 import { deletePlant, editPlant } from 'redux/user/UserReducer';
 import { baseTheme } from '../../../styles/baseTheme';
+import { device } from '../../../styles/device';
 import { Button } from '../FoliageCard';
 import { IPlant } from 'components/Plants';
 
@@ -22,6 +23,14 @@ export const Wrap = styled.div`
   background: ${baseTheme.colors.subtitle};
   border: none;
   border-radius: 15px;
+  @media ${device.tablet} {
+    margin: 20px 0;
+    padding: 0;
+  }
+`;
+const Count = styled.div`
+  display: flex;
+  align-items: center;
 `;
 const ButtonDelete = styled(Button)`
   height: 30px;
@@ -45,12 +54,13 @@ export const UserPlants = ({
   openSelectedPlant: any;
 }) => {
   const [count, setCount] = useState<number>(plant.count);
+
   const dispatch = useAppDispatch();
 
   const calculateCurrentPrise = () => {
     dispatch(editPlant({ id: plant.id, count: count }));
   };
-  console.log(calculateCurrentPrise);
+
   useEffect(() => {
     calculateCurrentPrise();
   }, [count]);
@@ -66,13 +76,13 @@ export const UserPlants = ({
 
   return (
     <Wrap>
-      <div>
+      <Count>
         <ButtonCount onClick={() => setCount(count - 1)} disabled={count < 2}>
           -
         </ButtonCount>
         {count}
         <ButtonCount onClick={() => setCount(count + 1)}>+</ButtonCount>
-      </div>
+      </Count>
       <Name onClick={openSelectedPlant}>{plant.name}</Name>
       <p>{plant.price * plant.count}$</p>
       <ButtonDelete onClick={removePlant}>x</ButtonDelete>
