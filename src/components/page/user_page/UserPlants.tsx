@@ -50,7 +50,7 @@ export const UserPlants = ({
   const calculateCurrentPrise = () => {
     dispatch(editPlant({ id: plant.id, count: count }));
   };
-
+  console.log(calculateCurrentPrise);
   useEffect(() => {
     calculateCurrentPrise();
   }, [count]);
