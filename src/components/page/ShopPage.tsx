@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { PATH } from '../../utils/ROUTES';
 import { ListItem } from '../DropDown';
 import { Wrapper, ImgType } from './HomePage';
+import { useAppSelector } from 'hooks/redux';
 import { baseTheme } from '../../styles/baseTheme';
 import { Name, NumberPlants, TitlePrimary, SubTitle } from '../../styles/title';
 import { ButtonPrimary } from '../../styles/buttons';
@@ -79,6 +80,10 @@ const Text = styled(SubTitle)`
 const Button = styled(ButtonPrimary)``;
 
 export const ShopPage = () => {
+  const plants = useAppSelector((state) => state.user.plants);
+
+  const foliageCategory = plants?.filter((el) => el.category === 'Foliage');
+  const flowerCategory = plants?.filter((el) => el.category === 'Flower');
   return (
     <>
       <Container>
@@ -109,12 +114,12 @@ export const ShopPage = () => {
             <Wrapper>
               <ImgType src={foliage} />
               <Name>Foliage</Name>
-              <NumberPlants>21 Plants</NumberPlants>
+              <NumberPlants>{foliageCategory.length} Plants</NumberPlants>
             </Wrapper>
             <Wrapper>
               <ImgType src={roses} />
               <Name>Flower</Name>
-              <NumberPlants>4 Plants</NumberPlants>
+              <NumberPlants>{flowerCategory.length} Plants</NumberPlants>
             </Wrapper>
           </WrapPlants>
         </Wrap>

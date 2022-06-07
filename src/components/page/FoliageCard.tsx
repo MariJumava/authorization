@@ -30,8 +30,6 @@ export const FoliageCard = ({
   plant: IPlant;
   isShowButton: any;
 }) => {
-  // const myPlants = useAppSelector((state) => state.user.user.myplants);
-
   const dispatch = useAppDispatch();
 
   const clonePlant = () => {

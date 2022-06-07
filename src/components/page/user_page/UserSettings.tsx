@@ -9,16 +9,25 @@ import {
 import { SubTitle } from '../../../styles/title';
 import { ButtonPrimary } from '../../../styles/buttons';
 import { baseTheme } from '../../../styles/baseTheme';
+import { device } from '../../../styles/device';
 
 const Wrap = styled.div`
   display: flex;
   align-items: flex-end;
   justify-content: space-around;
   padding: 10px;
+  @media ${device.tablet} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 export const Title = styled(SubTitle)`
   width: auto;
   font-size: ${baseTheme.fontSize.subtitle}px;
+  @media ${device.tablet} {
+    margin: 20px;
+  }
 `;
 const Input = styled.input`
   height: 30px;

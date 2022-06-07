@@ -48,6 +48,7 @@ const Container = styled.div`
   border-radius: 12px;
   @media ${device.tablet} {
     width: 85%;
+    margin: 50px 0;
   }
 `;
 const Header = styled.div`
@@ -71,6 +72,7 @@ export const UserPage = () => {
   const { user } = useAppSelector((state) => state.user);
   const userPlants = useAppSelector((state) => state.user.user.myplants);
   const [showUserSettings, setShowUserSettings] = useState<boolean>(false);
+  const [showFooter, setShowFooter] = useState<boolean>(true);
   const [showOpenCard, setShowOpenCard] = useState<boolean>(false);
   const [selectedPlant, setSelectedPlant] = useState<IPlant | null>(null);
   const [totalPlant, setTotalPlant] = useState<Partial<IPlant>>({
@@ -84,16 +86,17 @@ export const UserPage = () => {
       0
     );
     const count = userPlants?.reduce((prev, curr) => prev + curr.count, 0);
-    console.log(price);
     setTotalPlant({ price, count });
   }, [userPlants]);
 
   const showMyPlants = (): void => {
     setShowUserSettings(false);
+    setShowFooter(true);
   };
 
   const showSettings = (): void => {
     setShowUserSettings(true);
+    setShowFooter(false);
   };
 
   const openSelectedPlant = (id: any): void => {
@@ -139,8 +142,8 @@ export const UserPage = () => {
                 );
               })}
         </div>
-        <FooterUserPlants totalPlant={totalPlant} />
         <div>{showUserSettings ? <UserSettings /> : null}</div>
+        {showFooter ? <FooterUserPlants totalPlant={totalPlant} /> : null}
       </Container>
       {showOpenCard ? (
         <OpenCard selectedPlant={selectedPlant} closeOpenCard={closeOpenCard} />
