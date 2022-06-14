@@ -4,7 +4,7 @@ import { useAppDispatch } from 'hooks/redux';
 import { deletePlant, editPlant } from 'redux/user/UserReducer';
 import { baseTheme } from '../../../styles/baseTheme';
 import { device } from '../../../styles/device';
-import { Button } from '../FoliageCard';
+import { Button } from '../shopPage/foliage/FoliageCard';
 import { IPlant } from 'components/Plants';
 
 export const Name = styled.div`

@@ -106,6 +106,9 @@ export const HomePage = () => {
   const followFoliage = () => {
     navigate('/shop/foliage');
   };
+  const followFlower = () => {
+    navigate('/shop/flower');
+  };
 
   return (
     <Wrap>
@@ -137,7 +140,7 @@ export const HomePage = () => {
           <Name>Foliage</Name>
           <NumberPlants>{foliageCategory.length} Plants</NumberPlants>
         </Wrapper>
-        <Wrapper>
+        <Wrapper onClick={followFlower}>
           <ImgType src={roses} />
           <Name>Flower</Name>
           <NumberPlants>{flowerCategory.length} Plants</NumberPlants>

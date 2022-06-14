@@ -11,7 +11,7 @@ import { baseTheme } from '../../../styles/baseTheme';
 import { UserPlants } from './UserPlants';
 import { IPlant } from 'components/Plants';
 import profile from '../../../pictures/profile/profile.jpg';
-import { FooterUserPlants } from './FooterUserPlants';
+import { FooterUserPlants } from '../shopPage/foliage/FooterUserPlants';
 
 const Wrap = styled.div`
   height: fit-content;

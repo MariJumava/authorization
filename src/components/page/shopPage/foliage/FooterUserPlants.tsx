@@ -1,4 +1,4 @@
-import { Name, Wrap } from './UserPlants';
+import { Name, Wrap } from '../../user_page/UserPlants';
 
 export const FooterUserPlants = ({ totalPlant }) => {
   const { count, price } = totalPlant;

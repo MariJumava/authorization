@@ -5,7 +5,7 @@ import { ButtonClose } from 'styles/buttons';
 import { Name } from './UserPlants';
 import { IPlant } from 'components/Plants';
 
-const Wrap = styled.div`
+export const Wrap = styled.div`
   position: fixed;
   top: 0;
   right: 0;
@@ -19,7 +19,7 @@ const Wrap = styled.div`
   height: 100vh;
   background: rgba(0, 0, 0, 0.8);
 `;
-const Container = styled.div`
+export const Container = styled.div`
   position: absolute;
   top: 30%;
   display: flex;
@@ -30,10 +30,10 @@ const Container = styled.div`
   background: ${baseTheme.colors.white};
   border-radius: 50px 10px 10px 10px;
 `;
-const Title = styled(TitlePlants)`
+export const Title = styled(TitlePlants)`
   font-size: ${baseTheme.fontSize.titleImg}px;
 `;
-const Descrption = styled(Name)`
+export const Descrption = styled(Name)`
   color: ${baseTheme.colors.black};
 `;
 

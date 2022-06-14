@@ -1,17 +1,22 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { PATH } from '../../utils/ROUTES';
-import { ListItem } from '../DropDown';
-import { Wrapper, ImgType } from './HomePage';
+import { PATH } from '../../../utils/ROUTES';
+import { ListItem } from '../../DropDown';
+import { Wrapper, ImgType } from '../HomePage';
 import { useAppSelector } from 'hooks/redux';
-import { baseTheme } from '../../styles/baseTheme';
-import { Name, NumberPlants, TitlePrimary, SubTitle } from '../../styles/title';
-import { ButtonPrimary } from '../../styles/buttons';
-import { device } from '../../styles/device';
-import { Wave } from './ServicePage';
-import shop from '../../pictures/shop_page/shop.png';
-import foliage from '../../pictures/home_page/foliage.png';
-import roses from '../../pictures/home_page/roses.png';
+import { baseTheme } from '../../../styles/baseTheme';
+import {
+  Name,
+  NumberPlants,
+  TitlePrimary,
+  SubTitle,
+} from '../../../styles/title';
+import { ButtonPrimary } from '../../../styles/buttons';
+import { device } from '../../../styles/device';
+import { Wave } from '../ServicePage';
+import shop from '../../../pictures/shop_page/shop.png';
+import foliage from '../../../pictures/home_page/foliage.png';
+import roses from '../../../pictures/home_page/roses.png';
 
 const Wrap = styled.div`
   display: flex;
@@ -84,6 +89,15 @@ export const ShopPage = () => {
 
   const foliageCategory = plants?.filter((el) => el.category === 'Foliage');
   const flowerCategory = plants?.filter((el) => el.category === 'Flower');
+
+  const navigate = useNavigate();
+  const followFoliage = () => {
+    navigate('/shop/foliage');
+  };
+  const followFlower = () => {
+    navigate('/shop/flower');
+  };
+
   return (
     <>
       <Container>
@@ -111,12 +125,12 @@ export const ShopPage = () => {
             <Button>Try for service</Button>
           </WrapInfo>
           <WrapPlants>
-            <Wrapper>
+            <Wrapper onClick={followFoliage}>
               <ImgType src={foliage} />
               <Name>Foliage</Name>
               <NumberPlants>{foliageCategory.length} Plants</NumberPlants>
             </Wrapper>
-            <Wrapper>
+            <Wrapper onClick={followFlower}>
               <ImgType src={roses} />
               <Name>Flower</Name>
               <NumberPlants>{flowerCategory.length} Plants</NumberPlants>

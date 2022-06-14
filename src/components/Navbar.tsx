@@ -76,7 +76,7 @@ const Header = styled.div<HamburgerProps>`
   }
 `;
 
-const DropDownContent = styled.div`
+export const DropDownContent = styled.div`
   position: relative;
   display: inline-block;
   &:hover ${DropDownList} {
