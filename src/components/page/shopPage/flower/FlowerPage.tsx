@@ -4,6 +4,7 @@ import { useAppSelector } from 'hooks/redux';
 import { FilterFlower } from './FilterFlower';
 import { FlowerCard } from './FlowerCard';
 // import { IPlant } from 'components/Plants';
+import { device } from '../../../../styles/device';
 import { baseTheme } from 'styles/baseTheme';
 import flower_page from '../../../../pictures/shop_page/flower_page.jpg';
 import { OpenModalFlower } from './OpenModalFlower';
@@ -13,8 +14,13 @@ const Wrap = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  background-image: url(${flower_page});
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url(${flower_page});
   background-size: contain;
+  @media ${device.tablet} {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 const Container = styled.div`
   display: flex;
@@ -26,10 +32,16 @@ const WrapCards = styled.div`
   flex-wrap: wrap;
   justify-content: space-evenly;
   margin-top: 160px;
+  @media ${device.tablet} {
+    margin-top: 0;
+  }
 `;
 const Pagination = styled.div`
   margin-bottom: 30px;
   background: ${baseTheme.colors.grannySmithApple};
+  @media ${device.tablet} {
+    margin-bottom: 0;
+  }
 `;
 
 export const FlowerPage = () => {
@@ -41,8 +53,8 @@ export const FlowerPage = () => {
   const [sortCategory, setSortCategory] = useState<any>([]);
   const [sortType, setSortType] = useState<any>('all');
 
-  const [currentPage, setCurrentPage] = useState<number>(2);
-  const [rowsPerPage, setRowsPerPage] = useState<number>(6);
+  const [currentPage, setCurrentPage] = useState<number>(0);
+  const [rowsPerPage, setRowsPerPage] = useState<number>(5);
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null,
     newPage: number
@@ -126,7 +138,7 @@ export const FlowerPage = () => {
         </WrapCards>
         <Pagination>
           <TablePagination
-            rowsPerPageOptions={[6, 10, 25, 50, 100]}
+            rowsPerPageOptions={[5, 10, 25, 50, 100]}
             component="div"
             count={plants.length}
             page={currentPage}

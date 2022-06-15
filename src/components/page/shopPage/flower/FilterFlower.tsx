@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { baseTheme } from 'styles/baseTheme';
+import { device } from '../../../../styles/device';
 import { SubTitle } from 'styles/title';
 
 const Wrap = styled.div`
@@ -13,6 +14,9 @@ const Wrap = styled.div`
   background: ${baseTheme.colors.MSUGreen};
   box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.08);
   border-radius: 10px;
+  @media ${device.tablet} {
+    margin: 50px auto;
+  }
 `;
 const Container = styled.div`
   display: flex;

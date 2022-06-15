@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { PATH } from '../../utils/ROUTES';
@@ -71,6 +72,14 @@ const Text = styled.p`
   color: ${baseTheme.colors.black};
   cursor: default;
 `;
+const Iframe = styled.iframe`
+  width: 600px;
+  height: 350px;
+  @media ${device.tablet} {
+    width: 350px;
+    height: 200px;
+  }
+`;
 const Container = styled.div`
   display: flex;
   justify-content: space-evenly;
@@ -91,11 +100,16 @@ export const ImgType = styled.img`
 export const Wrapper = styled.div`
   position: relative;
   object-fit: fill;
+  cursor: pointer;
 `;
 
 export const HomePage = () => {
   const isAuthorized = useAppSelector((state) => state.user.authorized);
   const plants = useAppSelector((state) => state.user.plants);
+  const [play, setPlay] = useState<boolean>(false);
+  const url = play
+    ? `https://www.youtube.com/embed/YyOS9HmIR1s`
+    : `https://www.youtube.com/embed/tu-bgIg-Luo`;
 
   const foliageCategory = plants?.filter((el) => el.category === 'Foliage');
   const succulentCategory = plants?.filter((el) => el.category === 'Succulent');
@@ -108,6 +122,9 @@ export const HomePage = () => {
   };
   const followFlower = () => {
     navigate('/shop/flower');
+  };
+  const tryToService = () => {
+    navigate('/service');
   };
 
   return (
@@ -125,9 +142,15 @@ export const HomePage = () => {
           Add some color to your home, give it a little attention, the plants
           will accompany you quietly
         </SubTitleWhite>
-        <Button>Watch the video</Button>
+        {play && (
+          <Iframe
+            src={url}
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          ></Iframe>
+        )}
+        <Button onClick={() => setPlay(true)}>Watch the video</Button>
       </Slider>
-      <ButtonSecondary>Try for service</ButtonSecondary>
+      <ButtonSecondary onClick={tryToService}>Try a service</ButtonSecondary>
       <SubTitleGr>Get a beautiful home</SubTitleGr>
       <Text>
         If you do not know what plants you can add to the space We can provide

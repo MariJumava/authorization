@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { useAppDispatch } from 'hooks/redux';
 import { addPlant } from 'redux/user/UserReducer';
 import { baseTheme } from 'styles/baseTheme';
+import { device } from '../../../../styles/device';
 import { IPlant } from 'components/Plants';
 import { ButtonSecondary } from 'styles/buttons';
 
@@ -16,6 +17,8 @@ const Wrap = styled.div`
   box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(40px);
   border-radius: 10px;
+  @media ${device.tablet} {
+  }
 `;
 const Img = styled.img`
   width: 260px;

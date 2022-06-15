@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import BackspaceIcon from '@mui/icons-material/Backspace';
-import { device } from '../../styles/device';
+import { device } from '../../../../styles/device';
 
 const Wrap = styled.div`
   position: relative;
