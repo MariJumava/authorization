@@ -1,6 +1,6 @@
+import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { PATH } from '../utils/ROUTES';
-import styled from 'styled-components';
 import { device } from '../styles/device';
 import { baseTheme } from '../styles/baseTheme';
 
@@ -14,7 +14,6 @@ export const DropDownList = styled.ul`
   display: none;
   position: fixed;
   left: 43%;
-  z-index: 100;
   width: 200px;
   padding: 10px 0;
   margin: 0;

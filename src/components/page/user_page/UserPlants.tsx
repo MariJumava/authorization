@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { MouseEventHandler, useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useAppDispatch } from 'hooks/redux';
 import { deletePlant, editPlant } from 'redux/user/UserReducer';
 import { baseTheme } from '../../../styles/baseTheme';
 import { device } from '../../../styles/device';
-import { Button } from '../FoliageCard';
+import { Button } from '../shopPage/foliage/FoliageCard';
 import { IPlant } from 'components/Plants';
 
 export const Name = styled.div`
@@ -51,19 +51,22 @@ export const UserPlants = ({
   openSelectedPlant,
 }: {
   plant: IPlant;
-  openSelectedPlant: any;
+  openSelectedPlant: MouseEventHandler<HTMLDivElement>;
 }) => {
   const [count, setCount] = useState<number>(plant.count);
 
   const dispatch = useAppDispatch();
 
-  const calculateCurrentPrise = () => {
-    dispatch(editPlant({ id: plant.id, count: count }));
-  };
+  const calculateCurrentPrise = useCallback(
+    (count: number) => {
+      dispatch(editPlant({ id: plant.id, count: count }));
+    },
+    [dispatch, plant.id]
+  );
 
   useEffect(() => {
-    calculateCurrentPrise();
-  }, [count]);
+    calculateCurrentPrise(count);
+  }, [calculateCurrentPrise, count]);
 
   const deleteItem = (id: string) => {
     dispatch(deletePlant(id));

@@ -4,15 +4,16 @@ import { NotFound } from './auth/NotFound';
 import { SignUp } from './auth/SignUp';
 import { HomePage } from './components/page/HomePage';
 import { LocationPage } from './components/page/LocationPage';
-import { ShopPage } from './components/page/ShopPage';
+import { ShopPage } from './components/page/shopPage/ShopPage';
 import { ServicePage } from './components/page/ServicePage';
 import { Navbar } from './components/Navbar';
 import { PasswordRecovery } from './auth/PasswordRecovery';
 import { UserPage } from './components/page/user_page/UserPage';
 import { useAppSelector } from './hooks/redux';
-import { FoliagePage } from './components/page/FoliagePage';
+import { FoliagePage } from './components/page/shopPage/foliage/FoliagePage';
+import { FlowerPage } from 'components/page/shopPage/flower/FlowerPage';
 
-export const App: React.FC = () => {
+export const App = () => {
   const isAuthorized = localStorage.getItem('authToken');
   const isAuthorizedStore = useAppSelector((state) => state.user.authorized);
   return (
@@ -28,6 +29,7 @@ export const App: React.FC = () => {
         <Route path="/shop" element={<ShopPage />} />
         <Route path="/service" element={<ServicePage />} />
         <Route path="/shop/foliage" element={<FoliagePage />} />
+        <Route path="/shop/flower" element={<FlowerPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

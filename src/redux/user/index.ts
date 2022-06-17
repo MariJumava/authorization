@@ -1,5 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit';
-import thunk from 'redux-thunk';
 import userSlice from './UserReducer';
 
 const store = configureStore({

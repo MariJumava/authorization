@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { useAppDispatch, useAppSelector } from 'hooks/redux';
-import { baseTheme } from '../../styles/baseTheme';
+import { useAppDispatch } from 'hooks/redux';
+import { baseTheme } from '../../../../styles/baseTheme';
 import { addPlant } from 'redux/user/UserReducer';
 import { IPlant } from 'components/Plants';
 
@@ -28,11 +28,11 @@ export const FoliageCard = ({
   isShowButton,
 }: {
   plant: IPlant;
-  isShowButton: any;
+  isShowButton: boolean;
 }) => {
   const dispatch = useAppDispatch();
 
-  const clonePlant = () => {
+  const clonePlant = (): void => {
     dispatch(addPlant(plant));
   };
 

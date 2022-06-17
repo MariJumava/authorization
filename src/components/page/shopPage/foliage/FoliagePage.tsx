@@ -1,12 +1,12 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
-import { Container, Title, Text } from './ServicePage';
+import { Container, Title, Text } from '../../ServicePage';
 import { FoliageCard } from './FoliageCard';
 import { SearchPlant } from './SearchPlant';
 import { useAppSelector } from 'hooks/redux';
-import { device } from '../../styles/device';
-import { baseTheme } from '../../styles/baseTheme';
-import wave_white from '../../pictures/shop_page/wave_white.png';
+import { device } from '../../../../styles/device';
+import { baseTheme } from '../../../../styles/baseTheme';
+import wave_white from '../../../../pictures/shop_page/wave_white.png';
 
 const Wave = styled.div`
   height: 300px;
@@ -56,45 +56,43 @@ export const FoliagePage = () => {
     return plant.name.toLowerCase().includes(search.toLocaleLowerCase());
   });
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     event.preventDefault();
     setSearch(event.target.value);
   };
 
-  const isShowButton = (id: string) => () => {
+  const isShowButton = (id: string) => (): boolean => {
     return !userPlants?.find((item) => item.id === id);
   };
 
   return (
-    <>
-      <Container>
-        <Wrap>
-          <Title>Foliage for plants.</Title>
-          <Text>
-            Add some color to your home, give it a little attention, the plants
-            will accompany you quietlyю
-          </Text>
-        </Wrap>
-        <WrapSearch>
-          <Wrapper>
-            <Name>Foliage for plants</Name>
-            <NumberPlants>{plants.length} plants</NumberPlants>
-            <div>
-              {searchPlant?.map((plant) => {
-                return (
-                  <FoliageCard
-                    key={plant.id}
-                    plant={plant}
-                    isShowButton={isShowButton(plant.id)()}
-                  />
-                );
-              })}
-            </div>
-          </Wrapper>
-          <SearchPlant handleChange={handleChange} setSearch={setSearch} />
-        </WrapSearch>
-        <Wave></Wave>
-      </Container>
-    </>
+    <Container>
+      <Wrap>
+        <Title>Foliage for plants.</Title>
+        <Text>
+          Add some color to your home, give it a little attention, the plants
+          will accompany you quietlyю
+        </Text>
+      </Wrap>
+      <WrapSearch>
+        <Wrapper>
+          <Name>Foliage for plants</Name>
+          <NumberPlants>{plants.length} plants</NumberPlants>
+          <div>
+            {searchPlant?.map((plant) => {
+              return (
+                <FoliageCard
+                  key={plant.id}
+                  plant={plant}
+                  isShowButton={isShowButton(plant.id)()}
+                />
+              );
+            })}
+          </div>
+        </Wrapper>
+        <SearchPlant handleChange={handleChange} setSearch={setSearch} />
+      </WrapSearch>
+      <Wave></Wave>
+    </Container>
   );
 };

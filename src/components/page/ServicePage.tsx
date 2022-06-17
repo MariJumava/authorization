@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { SubTitle, TitlePrimary } from '../../styles/title';
 import { ButtonPrimary } from '../../styles/buttons';
+import { ModalService } from './ModalService';
 import { baseTheme } from '../../styles/baseTheme';
 import { device } from '../../styles/device';
 import service from '../../pictures/service_page/service.png';
@@ -74,23 +76,32 @@ const Button = styled(ButtonPrimary)`
 `;
 
 export const ServicePage = () => {
+  const [showOpenModal, setShowOpenModal] = useState<boolean>(false);
+  const openSelectedPlant = (): void => {
+    setShowOpenModal(true);
+  };
+  const closeModalService = (): void => {
+    setShowOpenModal(false);
+  };
+
   return (
-    <>
-      <Container>
-        <Wrapper>
-          <Mask>
-            <Wrap>
-              <Title>Service for home plants.</Title>
-              <Text>
-                If you do not know what plants you can add to the space,we can
-                provide you with selected plants,and configure your space.
-              </Text>
-              <Button>Try on service</Button>
-            </Wrap>
-          </Mask>
-        </Wrapper>
-        <Wave></Wave>
-      </Container>
-    </>
+    <Container>
+      <Wrapper>
+        <Mask>
+          {showOpenModal ? (
+            <ModalService closeModalService={closeModalService} />
+          ) : null}
+          <Wrap>
+            <Title>Service for home plants.</Title>
+            <Text>
+              If you do not know what plants you can add to the space,we can
+              provide you with selected plants,and configure your space.
+            </Text>
+            <Button onClick={openSelectedPlant}>Try a service</Button>
+          </Wrap>
+        </Mask>
+      </Wrapper>
+      <Wave></Wave>
+    </Container>
   );
 };

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import BackspaceIcon from '@mui/icons-material/Backspace';
-import { device } from '../../styles/device';
+import { device } from '../../../../styles/device';
+import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 
 const Wrap = styled.div`
   position: relative;
@@ -21,8 +22,14 @@ const StyledInput = styled.input`
   }
 `;
 
-export const SearchPlant = ({ handleChange, setSearch }) => {
-  const clearForm = () => {
+export const SearchPlant = ({
+  handleChange,
+  setSearch,
+}: {
+  handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  setSearch: Dispatch<SetStateAction<string>>;
+}) => {
+  const clearForm = (): void => {
     setSearch('');
   };
   return (

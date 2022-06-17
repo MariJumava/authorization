@@ -4,6 +4,7 @@
     "es2021": true
   },
   "extends": [
+    "react-app",
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
@@ -16,6 +17,7 @@
     "prettier"
   ],
   "parserOptions": {
+    "project": ["./tsconfig.json"],
     "ecmaFeatures": {
       "jsx": true
     },
@@ -33,6 +35,17 @@
   },
   "plugins": ["react"],
   "rules": {
-    "import/extensions": "off"
+    "import/extensions": "off",
+    "object-curly-spacing": ["error", "always"],
+    "no-unused-expressions": "off",
+    "import/no-cycle": 0,
+    "no-plusplus": 0,
+    "no-else-return": 0,
+    "no-nested-ternary": 0,
+    "no-param-reassign": 0,
+    "import/prefer-default-export": 0,
+    "react/jsx-props-no-spreading": "off",
+    "arrow-body-style": "off",
+    "jsx-quotes": [1, "prefer-double"]
   }
 }

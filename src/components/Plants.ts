@@ -1,4 +1,8 @@
 import { nanoid } from 'nanoid';
+import berries from '../pictures/shop_page/berries.jpg';
+import vegitables from '../pictures/shop_page/vegitables.jpg';
+import vegitable from '../pictures/shop_page/vegitable.jpg';
+import fruit from '../pictures/shop_page/fruit.jpg';
 
 export interface IPlant {
   id?: string;
@@ -9,6 +13,7 @@ export interface IPlant {
   price?: number;
   count?: number;
   priceTotal?: number;
+  img?: string;
 }
 
 export const plants: IPlant[] = [
@@ -21,6 +26,7 @@ export const plants: IPlant[] = [
     price: 23,
     count: 1,
     priceTotal: 23,
+    img: berries,
   },
   {
     id: nanoid(),
@@ -31,6 +37,7 @@ export const plants: IPlant[] = [
     price: 5,
     count: 1,
     priceTotal: 5,
+    img: vegitable,
   },
   {
     id: nanoid(),
@@ -41,6 +48,7 @@ export const plants: IPlant[] = [
     price: 150,
     count: 1,
     priceTotal: 150,
+    img: fruit,
   },
   {
     id: nanoid(),
@@ -51,6 +59,7 @@ export const plants: IPlant[] = [
     price: 33,
     count: 1,
     priceTotal: 33,
+    img: vegitables,
   },
   {
     id: nanoid(),
@@ -61,6 +70,7 @@ export const plants: IPlant[] = [
     price: 74,
     count: 1,
     priceTotal: 74,
+    img: vegitable,
   },
   {
     id: nanoid(),
@@ -71,6 +81,7 @@ export const plants: IPlant[] = [
     price: 9,
     count: 1,
     priceTotal: 9,
+    img: fruit,
   },
   {
     id: nanoid(),
@@ -81,6 +92,7 @@ export const plants: IPlant[] = [
     price: 96,
     count: 1,
     priceTotal: 96,
+    img: vegitable,
   },
   {
     id: nanoid(),
@@ -91,6 +103,7 @@ export const plants: IPlant[] = [
     price: 50,
     count: 1,
     priceTotal: 50,
+    img: vegitables,
   },
   {
     id: nanoid(),
@@ -101,6 +114,7 @@ export const plants: IPlant[] = [
     price: 42,
     count: 1,
     priceTotal: 42,
+    img: berries,
   },
   {
     id: nanoid(),
@@ -111,6 +125,7 @@ export const plants: IPlant[] = [
     price: 11,
     count: 1,
     priceTotal: 11,
+    img: vegitable,
   },
   {
     id: nanoid(),
@@ -121,6 +136,7 @@ export const plants: IPlant[] = [
     price: 88,
     count: 1,
     priceTotal: 88,
+    img: fruit,
   },
   {
     id: nanoid(),
@@ -131,6 +147,7 @@ export const plants: IPlant[] = [
     price: 63,
     count: 1,
     priceTotal: 63,
+    img: vegitables,
   },
   {
     id: nanoid(),
@@ -141,6 +158,7 @@ export const plants: IPlant[] = [
     price: 14,
     count: 1,
     priceTotal: 14,
+    img: fruit,
   },
   {
     id: nanoid(),
@@ -151,6 +169,7 @@ export const plants: IPlant[] = [
     price: 8,
     count: 1,
     priceTotal: 8,
+    img: vegitable,
   },
   {
     id: nanoid(),
@@ -161,6 +180,7 @@ export const plants: IPlant[] = [
     price: 113,
     count: 1,
     priceTotal: 113,
+    img: vegitables,
   },
   {
     id: nanoid(),
@@ -171,6 +191,7 @@ export const plants: IPlant[] = [
     price: 29,
     count: 1,
     priceTotal: 29,
+    img: berries,
   },
   {
     id: nanoid(),
@@ -181,6 +202,7 @@ export const plants: IPlant[] = [
     price: 37,
     count: 1,
     priceTotal: 37,
+    img: fruit,
   },
   {
     id: nanoid(),
@@ -191,5 +213,6 @@ export const plants: IPlant[] = [
     price: 18,
     count: 1,
     priceTotal: 18,
+    img: vegitables,
   },
 ];

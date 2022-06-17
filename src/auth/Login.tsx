@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import { NavLink, Navigate, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
@@ -6,7 +6,6 @@ import { PATH } from '../utils/ROUTES';
 import { Loader } from './Loader';
 import { loginFailure } from '../redux/user/UserReducer';
 import { loginUser } from '../redux/thunk';
-import { ColorProps } from '../redux/user/UserTypes';
 import { device } from '../styles/device';
 import { baseTheme } from '../styles/baseTheme';
 import TwitterIcon from '@mui/icons-material/Twitter';
@@ -16,6 +15,10 @@ import mail from '../pictures/login/mail.svg';
 import lock from '../pictures/login/lock.svg';
 import ellipse from '../pictures/login/ellipse.png';
 import rectangle from '../pictures/login/rectangle.png';
+
+interface ColorProps {
+  primary?: boolean;
+}
 
 export const Wrap = styled.div`
   display: flex;
@@ -166,7 +169,7 @@ export const Error = styled.div`
   color: ${baseTheme.colors.red};
 `;
 
-export const Login: React.FC = () => {
+export const Login = () => {
   const { authorized, loading, error } = useAppSelector((state) => state.user);
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -175,7 +178,7 @@ export const Login: React.FC = () => {
 
   const dispatch = useAppDispatch();
 
-  const userEmail = (event: React.ChangeEvent<HTMLInputElement>): void => {
+  const userEmail = (event: ChangeEvent<HTMLInputElement>): void => {
     setEmail(event.target.value);
     const re = /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i;
     if (!re.test(String(event.target.value).toLocaleLowerCase())) {
@@ -185,7 +188,7 @@ export const Login: React.FC = () => {
     }
   };
 
-  const userPassword = (event: React.ChangeEvent<HTMLInputElement>): void => {
+  const userPassword = (event: ChangeEvent<HTMLInputElement>): void => {
     setPassword(event.target.value);
     if (event.target.value.length < 3 || event.target.value.length > 10) {
       setPasswordError('Password must be between 3 and 10 characters');
@@ -195,7 +198,7 @@ export const Login: React.FC = () => {
   };
 
   const navigate = useNavigate();
-  const transitionSignUp = () => {
+  const transitionSignUp = (): void => {
     navigate('/signup');
     dispatch(loginFailure(''));
   };
@@ -204,7 +207,7 @@ export const Login: React.FC = () => {
     return <Navigate to={'/profile'} />;
   }
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = (event: SyntheticEvent): void => {
     event.preventDefault();
     setPassword('');
     if (email === '') {
