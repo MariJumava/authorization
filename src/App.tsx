@@ -13,7 +13,7 @@ import { useAppSelector } from './hooks/redux';
 import { FoliagePage } from './components/page/shopPage/foliage/FoliagePage';
 import { FlowerPage } from 'components/page/shopPage/flower/FlowerPage';
 
-export const App: React.FC = () => {
+export const App = () => {
   const isAuthorized = localStorage.getItem('authToken');
   const isAuthorizedStore = useAppSelector((state) => state.user.authorized);
   return (

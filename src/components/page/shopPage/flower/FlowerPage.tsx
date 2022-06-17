@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, ChangeEvent, MouseEvent } from 'react';
 import { useAppSelector } from 'hooks/redux';
 import { FilterFlower } from './FilterFlower';
 import { FlowerCard } from './FlowerCard';
-// import { IPlant } from 'components/Plants';
+import { IPlant } from 'components/Plants';
 import { device } from '../../../../styles/device';
 import { baseTheme } from 'styles/baseTheme';
 import flower_page from '../../../../pictures/shop_page/flower_page.jpg';
@@ -48,27 +48,27 @@ export const FlowerPage = () => {
   const plants = useAppSelector((state) => state.user.plants);
   const userPlants = useAppSelector((state) => state.user.user.myplants);
   const [showOpenModal, setShowOpenModal] = useState<boolean>(false);
-  const [selectedPlantId, setSelectedPlantId] = useState<any>(null);
+  const [selectedPlantId, setSelectedPlantId] = useState<string | null>(null);
   const [search, setSearch] = useState<string>('');
-  const [sortCategory, setSortCategory] = useState<any>([]);
-  const [sortType, setSortType] = useState<any>('all');
+  const [sortCategory, setSortCategory] = useState<string>('');
+  const [sortType, setSortType] = useState<string>('all');
 
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(5);
   const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null,
-    newPage: number
+    event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
+    page: number
   ) => {
-    setCurrentPage(newPage);
+    setCurrentPage(page);
   };
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setCurrentPage(0);
   };
   const searchPlant = plants
-    .filter((plant) => {
+    .filter((plant: IPlant) => {
       return plant.name.toLowerCase().includes(search.toLowerCase());
     })
     .sort((plantA, plantB): any => {
@@ -81,17 +81,17 @@ export const FlowerPage = () => {
       return plantA;
     })
     .filter((plant) => {
-      return sortCategory?.length
+      return sortCategory.length
         ? sortCategory.includes(plant.category)
         : plant;
     })
     .slice(currentPage * rowsPerPage, currentPage * rowsPerPage + rowsPerPage);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     event.preventDefault();
     setSearch(event.target.value);
   };
-  const isShowButton = (id: string) => () => {
+  const isShowButton = (id: string) => (): boolean => {
     return !userPlants?.find((item) => item.id === id);
   };
   const selectedPlant = useMemo(
@@ -99,12 +99,12 @@ export const FlowerPage = () => {
     [selectedPlantId, plants]
   );
 
-  const openSelectedPlant = (plantId): any => {
+  const openSelectedPlant = (plantId: string): void => {
     setShowOpenModal(true);
     setSelectedPlantId(plantId);
   };
 
-  const closeModalPlant = () => {
+  const closeModalPlant = (): void => {
     setShowOpenModal(false);
   };
 

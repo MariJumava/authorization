@@ -42,7 +42,7 @@ export const OpenCard = ({
   closeOpenCard,
 }: {
   selectedPlant: IPlant;
-  closeOpenCard: any;
+  closeOpenCard: () => void;
 }) => {
   return (
     <Wrap>

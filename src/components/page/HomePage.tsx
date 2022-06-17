@@ -117,13 +117,13 @@ export const HomePage = () => {
   const fruitCategory = plants?.filter((el) => el.category === 'Fruit');
 
   const navigate = useNavigate();
-  const followFoliage = () => {
+  const followFoliage = (): void => {
     navigate('/shop/foliage');
   };
-  const followFlower = () => {
+  const followFlower = (): void => {
     navigate('/shop/flower');
   };
-  const tryToService = () => {
+  const tryToService = (): void => {
     navigate('/service');
   };
 

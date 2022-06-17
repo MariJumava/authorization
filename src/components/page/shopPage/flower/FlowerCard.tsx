@@ -1,3 +1,4 @@
+import { MouseEventHandler } from 'react';
 import styled from 'styled-components';
 import { useAppDispatch } from 'hooks/redux';
 import { addPlant } from 'redux/user/UserReducer';
@@ -45,8 +46,8 @@ export const FlowerCard = ({
   openSelectedPlant,
 }: {
   plant: IPlant;
-  isShowButton: any;
-  openSelectedPlant: any;
+  isShowButton: boolean;
+  openSelectedPlant: MouseEventHandler<HTMLDivElement>;
 }) => {
   const dispatch = useAppDispatch();
 

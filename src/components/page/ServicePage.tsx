@@ -2,12 +2,12 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { SubTitle, TitlePrimary } from '../../styles/title';
 import { ButtonPrimary } from '../../styles/buttons';
+import { ModalService } from './ModalService';
 import { baseTheme } from '../../styles/baseTheme';
 import { device } from '../../styles/device';
 import service from '../../pictures/service_page/service.png';
 import wave from '../../pictures/service_page/wave.png';
 import card_service from '../../pictures/service_page/card_service.png';
-import { ModalService } from './ModalService';
 
 export const Wrap = styled.div`
   padding-left: 40px;

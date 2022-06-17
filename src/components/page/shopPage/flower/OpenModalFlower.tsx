@@ -6,12 +6,19 @@ import {
   Descrption,
 } from 'components/page/user_page/OpenCard';
 import { ButtonClose } from 'styles/buttons';
+import { IPlant } from 'components/Plants';
 
 const Img = styled.img`
   border-radius: 10px;
 `;
 
-export const OpenModalFlower = ({ selectedPlant, closeModalPlant }: any) => {
+export const OpenModalFlower = ({
+  selectedPlant,
+  closeModalPlant,
+}: {
+  selectedPlant: IPlant;
+  closeModalPlant: () => void;
+}) => {
   return (
     <Wrap>
       <ButtonClose onClick={closeModalPlant}>&times;</ButtonClose>

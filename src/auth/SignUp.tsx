@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -44,7 +44,7 @@ export const SignUp = () => {
 
   const dispatch = useAppDispatch();
 
-  const createUserName = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const createUserName = (event: ChangeEvent<HTMLInputElement>): void => {
     setUsername(event.target.value);
     const nameCheck = /^[A-Za-z0-9]$/;
     if (!nameCheck) {
@@ -54,7 +54,7 @@ export const SignUp = () => {
     }
   };
 
-  const createUserEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const createUserEmail = (event: ChangeEvent<HTMLInputElement>): void => {
     setEmail(event.target.value);
     const re = /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i;
     if (!re.test(String(event.target.value).toLocaleLowerCase())) {
@@ -64,7 +64,7 @@ export const SignUp = () => {
     }
   };
 
-  const createUserPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const createUserPassword = (event: ChangeEvent<HTMLInputElement>): void => {
     setPassword(event.target.value);
     if (event.target.value.length < 3 || event.target.value.length > 10) {
       setPasswordError('Password must be between 3 and 10 characters');
@@ -73,17 +73,17 @@ export const SignUp = () => {
     }
   };
 
-  const repeatUserPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const repeatUserPassword = (event: ChangeEvent<HTMLInputElement>): void => {
     setConfirmPassword(event.target.value);
   };
 
   const navigate = useNavigate();
-  const transitionSignIn = () => {
+  const transitionSignIn = (): void => {
     navigate('/login');
     dispatch(loginFailure(''));
   };
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = (event: SyntheticEvent): void => {
     event.preventDefault();
     (async () => {
       dispatch(registeredUser());
@@ -173,7 +173,10 @@ export const SignUp = () => {
               />
             </CastomInput>
             <Error>{error}</Error>
-            <Button primary disabled={!password || password != confirmPassword}>
+            <Button
+              primary
+              disabled={!password || password !== confirmPassword}
+            >
               SignUp
             </Button>
           </Form>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 import { Container, Title, Text } from '../../ServicePage';
 import { FoliageCard } from './FoliageCard';
@@ -56,12 +56,12 @@ export const FoliagePage = () => {
     return plant.name.toLowerCase().includes(search.toLocaleLowerCase());
   });
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     event.preventDefault();
     setSearch(event.target.value);
   };
 
-  const isShowButton = (id: string) => () => {
+  const isShowButton = (id: string) => (): boolean => {
     return !userPlants?.find((item) => item.id === id);
   };
 

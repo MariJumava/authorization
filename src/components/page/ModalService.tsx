@@ -1,12 +1,14 @@
-// import styled from 'styled-components';
-// import { baseTheme } from 'styles/baseTheme';
 import { Wrap, Container } from '../page/user_page/OpenCard';
 import { ButtonClose } from 'styles/buttons';
 
-export const ModalService = ({ closeModalService }) => {
+type ModalPropsType = {
+  closeModalService: () => void;
+};
+
+export const ModalService = (props: ModalPropsType) => {
   return (
     <Wrap>
-      <ButtonClose onClick={closeModalService}>&times;</ButtonClose>
+      <ButtonClose onClick={props.closeModalService}>&times;</ButtonClose>
       <Container>Try our service right now!</Container>
     </Wrap>
   );

@@ -82,7 +82,6 @@ const Text = styled(SubTitle)`
     width: 70%;
   }
 `;
-const Button = styled(ButtonPrimary)``;
 
 export const ShopPage = () => {
   const plants = useAppSelector((state) => state.user.plants);
@@ -91,10 +90,10 @@ export const ShopPage = () => {
   const flowerCategory = plants?.filter((el) => el.category === 'Flower');
 
   const navigate = useNavigate();
-  const followFoliage = () => {
+  const followFoliage = (): void => {
     navigate('/shop/foliage');
   };
-  const followFlower = () => {
+  const followFlower = (): void => {
     navigate('/shop/flower');
   };
 
@@ -122,7 +121,7 @@ export const ShopPage = () => {
               If you do not know what plants you can add to the space,we can
               provide you with selected plants,and configure your space.
             </Text>
-            <Button>Try for service</Button>
+            <ButtonPrimary>Try for service</ButtonPrimary>
           </WrapInfo>
           <WrapPlants>
             <Wrapper onClick={followFoliage}>

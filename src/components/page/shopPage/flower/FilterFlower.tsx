@@ -1,3 +1,4 @@
+import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import { baseTheme } from 'styles/baseTheme';
 import { device } from '../../../../styles/device';
@@ -66,10 +67,16 @@ export const FilterFlower = ({
   setSortCategory,
   setSortType,
   sortCategory,
+}: {
+  handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  setSearch: Dispatch<SetStateAction<string>>;
+  setSortCategory: (event: string) => void;
+  setSortType: (event: string) => void;
+  sortCategory: string;
 }) => {
   const clearForm = () => {
     setSearch('');
-    setSortCategory([]);
+    setSortCategory('');
     setSortType('all');
   };
 

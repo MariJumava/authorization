@@ -45,9 +45,11 @@ const Button = styled(ButtonPrimary)`
 export const UserSettings = () => {
   const { user } = useAppSelector((state) => state.user);
   const [isEditView, setIsEditView] = useState<boolean>(false);
-  const [editableName, setEditableName] = useState<any>(user.username);
-  const [editableEmail, setEditableEmail] = useState<any>(user.email);
-  const [editablePassword, setEditablePassword] = useState<any>(user.password);
+  const [editableName, setEditableName] = useState<string>(user.username);
+  const [editableEmail, setEditableEmail] = useState<string>(user.email);
+  const [editablePassword, setEditablePassword] = useState<string>(
+    user.password
+  );
 
   const dispatch = useAppDispatch();
 

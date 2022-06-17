@@ -4,14 +4,14 @@ import styled from 'styled-components';
 import { useAppSelector, useAppDispatch } from '../../../hooks/redux';
 import { logout, loginFailure } from '../../../redux/user/UserReducer';
 import { ButtonLogout, ButtonSecondary } from '../../../styles/buttons';
-import { UserSettings, Title } from './UserSettings';
+import { UserSettings } from './UserSettings';
 import { OpenCard } from './OpenCard';
 import { device } from '../../../styles/device';
 import { baseTheme } from '../../../styles/baseTheme';
 import { UserPlants } from './UserPlants';
 import { IPlant } from 'components/Plants';
 import profile from '../../../pictures/profile/profile.jpg';
-import { FooterUserPlants } from '../shopPage/foliage/FooterUserPlants';
+import { FooterUserPlants } from './FooterUserPlants';
 
 const Wrap = styled.div`
   height: fit-content;
@@ -99,7 +99,7 @@ export const UserPage = () => {
     setShowFooter(false);
   };
 
-  const openSelectedPlant = (id: any): void => {
+  const openSelectedPlant = (id: string): void => {
     setShowOpenCard(true);
     setSelectedPlant(() => userPlants?.find((el) => el.id === id));
   };

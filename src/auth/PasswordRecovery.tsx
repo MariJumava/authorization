@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { PATH } from '../utils/ROUTES';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
@@ -26,12 +26,12 @@ export const PasswordRecovery = () => {
   const error = useAppSelector((state) => state.user.error);
   const [showChangePassword, setShowChangePassword] = useState<boolean>(false);
 
-  const sendMail = (event: any) => {
+  const sendMail = (event: SyntheticEvent): void => {
     event.preventDefault();
     setShowChangePassword(true);
     dispatch(compareEmail(email));
   };
-  const handlerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handlerChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setEmail(event.target.value);
   };
 

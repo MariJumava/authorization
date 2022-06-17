@@ -28,11 +28,11 @@ export const FoliageCard = ({
   isShowButton,
 }: {
   plant: IPlant;
-  isShowButton: any;
+  isShowButton: boolean;
 }) => {
   const dispatch = useAppDispatch();
 
-  const clonePlant = () => {
+  const clonePlant = (): void => {
     dispatch(addPlant(plant));
   };
 
