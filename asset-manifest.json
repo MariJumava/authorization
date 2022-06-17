@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/authorization/static/css/main.bc860d64.css",
+    "main.js": "/authorization/static/js/main.462f6201.js",
+    "static/media/leaves.jpg": "/authorization/static/media/leaves.856762d6907276b0b256.jpg",
+    "static/media/flower_page.jpg": "/authorization/static/media/flower_page.f0d715e2297c7e6e7dd1.jpg",
+    "static/media/vegitable.jpg": "/authorization/static/media/vegitable.1317c6d091488d935a25.jpg",
+    "static/media/berries.jpg": "/authorization/static/media/berries.7eb2b5421b5db7b0f244.jpg",
+    "static/media/service.png": "/authorization/static/media/service.40fd3bc635630e6bd90d.png",
+    "static/media/location.png": "/authorization/static/media/location.e896ba8fd82438b0fb66.png",
+    "static/media/vegitables.jpg": "/authorization/static/media/vegitables.c9b0fcb95c00ab65463a.jpg",
+    "static/media/shop.png": "/authorization/static/media/shop.521d922ab568ffcece96.png",
+    "static/media/profile.jpg": "/authorization/static/media/profile.44098e33ab676e8cdec1.jpg",
+    "static/media/fruit.jpg": "/authorization/static/media/fruit.c558362e9ed51514b6cc.jpg",
+    "static/media/card_service.png": "/authorization/static/media/card_service.5ba1a1f22c4e39e64a0b.png",
+    "static/media/strawberry.png": "/authorization/static/media/strawberry.6296b09251983cd0dda9.png",
+    "static/media/roses.png": "/authorization/static/media/roses.09925a2be6616f61153a.png",
+    "static/media/foliage.png": "/authorization/static/media/foliage.9cb77cb327e1cead3448.png",
+    "static/media/succulent.png": "/authorization/static/media/succulent.e0f850a893db690df405.png",
+    "static/media/user_photo.png": "/authorization/static/media/user_photo.bf0264f24b7e066fb67f.png",
+    "static/media/ellipse.png": "/authorization/static/media/ellipse.34715e180891eabe08d6.png",
+    "static/media/error.png": "/authorization/static/media/error.62cc7528e69a8c9991ed.png",
+    "static/media/logo.svg": "/authorization/static/media/logo.fb0dc725a7e9f4542f11a5ee61078355.svg",
+    "index.html": "/authorization/index.html",
+    "static/media/lock.svg": "/authorization/static/media/lock.aee0844ddeb42f84df33397b39b0397e.svg",
+    "static/media/user.svg": "/authorization/static/media/user.3c6a45dfdcffd175c0ebd89e8fca1685.svg",
+    "static/media/mail.svg": "/authorization/static/media/mail.4febaa55a8dc849a8b56d3a3139a56d7.svg",
+    "main.bc860d64.css.map": "/authorization/static/css/main.bc860d64.css.map",
+    "main.462f6201.js.map": "/authorization/static/js/main.462f6201.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bc860d64.css",
+    "static/js/main.462f6201.js"
+  ]
+}
