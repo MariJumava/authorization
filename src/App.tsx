@@ -20,6 +20,7 @@ export const App = () => {
     <>
       {isAuthorized && isAuthorizedStore && <Navbar />}
       <Routes>
+        <Route path="/authorization" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/profile" element={<UserPage />} />
