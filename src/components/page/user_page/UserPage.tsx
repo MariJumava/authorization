@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { useAppSelector, useAppDispatch } from '../../../hooks/redux';
+import { useAppSelector, useAppDispatch } from '../../../redux/redux';
 import { logout, loginFailure } from '../../../redux/user/UserReducer';
 import { ButtonLogout, ButtonSecondary } from '../../../styles/buttons';
 import { UserSettings } from './UserSettings';

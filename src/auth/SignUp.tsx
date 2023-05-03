@@ -1,10 +1,11 @@
 import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { Loader } from './Loader';
-import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../redux/redux';
 import { loginFailure } from '../redux/user/UserReducer';
 import { registeredUser } from '../redux/thunk';
 import {
@@ -29,6 +30,18 @@ import rectangle from '../pictures/login/rectangle.png';
 import mail from '../pictures/login/mail.svg';
 import lock from '../pictures/login/lock.svg';
 import user from '../pictures/login/user.svg';
+
+const WrapWelcomBack = styled(WrapHi)`
+  animation: slideBack 1.5s;
+  @keyframes slideBack {
+    from {
+      transform: translateX(140%);
+    }
+    to {
+      transform: translateX(0%);
+    }
+  }
+`;
 
 export const SignUp = () => {
   const { error, isRegistrated, loading } = useAppSelector(
@@ -108,13 +121,13 @@ export const SignUp = () => {
       <ImgRectangle src={rectangle} />
       <ImgEllipse src={ellipse} />
       <Wrap>
-        <WrapHi>
+        <WrapWelcomBack>
           <Title>Welcome Back!</Title>
           <Text>
             To keep connected with us plase login with your personal info
           </Text>
           <Button onClick={transitionSignIn}>Sign in</Button>
-        </WrapHi>
+        </WrapWelcomBack>
         <WrapForm>
           <div>{loading && <Loader />}</div>
           <Form onSubmit={handleSubmit}>

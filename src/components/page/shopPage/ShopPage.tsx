@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { PATH } from '../../../utils/ROUTES';
 import { ListItem } from '../../DropDown';
 import { Wrapper, ImgType } from '../HomePage';
-import { useAppSelector } from 'hooks/redux';
+import { useAppSelector } from 'redux/redux';
 import { baseTheme } from '../../../styles/baseTheme';
 import {
   Name,
@@ -51,7 +51,7 @@ const HiddenLink = styled.div`
     border-radius: 15px;
     box-sizing: border-box;
   }
-  @media (min-width: 769px) and ${device.desktop} {
+  @media (min-width: 769px) {
     display: none;
   }
 `;

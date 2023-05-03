@@ -9,7 +9,7 @@ import { ServicePage } from './components/page/ServicePage';
 import { Navbar } from './components/Navbar';
 import { PasswordRecovery } from './auth/PasswordRecovery';
 import { UserPage } from './components/page/user_page/UserPage';
-import { useAppSelector } from './hooks/redux';
+import { useAppSelector } from './redux/redux';
 import { FoliagePage } from './components/page/shopPage/foliage/FoliagePage';
 import { FlowerPage } from 'components/page/shopPage/flower/FlowerPage';
 

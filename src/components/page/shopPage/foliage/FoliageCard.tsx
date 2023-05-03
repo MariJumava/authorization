@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useAppDispatch } from 'hooks/redux';
+import { useAppDispatch } from 'redux/redux';
 import { baseTheme } from '../../../../styles/baseTheme';
 import { addPlant } from 'redux/user/UserReducer';
 import { IPlant } from 'components/Plants';

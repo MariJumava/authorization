@@ -1,6 +1,6 @@
 import { MouseEventHandler, useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useAppDispatch } from 'hooks/redux';
+import { useAppDispatch } from 'redux/redux';
 import { deletePlant, editPlant } from 'redux/user/UserReducer';
 import { baseTheme } from '../../../styles/baseTheme';
 import { device } from '../../../styles/device';

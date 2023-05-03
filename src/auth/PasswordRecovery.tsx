@@ -1,7 +1,7 @@
 import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { PATH } from '../utils/ROUTES';
-import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../redux/redux';
 import { compareEmail } from '../redux/thunk';
 import {
   Container,

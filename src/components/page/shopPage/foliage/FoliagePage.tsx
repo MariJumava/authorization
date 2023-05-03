@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Container, Title, Text } from '../../ServicePage';
 import { FoliageCard } from './FoliageCard';
 import { SearchPlant } from './SearchPlant';
-import { useAppSelector } from 'hooks/redux';
+import { useAppSelector } from 'redux/redux';
 import { device } from '../../../../styles/device';
 import { baseTheme } from '../../../../styles/baseTheme';
 import wave_white from '../../../../pictures/shop_page/wave_white.png';

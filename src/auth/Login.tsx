@@ -1,7 +1,7 @@
 import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import { NavLink, Navigate, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../redux/redux';
 import { PATH } from '../utils/ROUTES';
 import { Loader } from './Loader';
 import { loginFailure } from '../redux/user/UserReducer';
@@ -27,6 +27,7 @@ export const Wrap = styled.div`
   top: 70px;
   background: ${baseTheme.colors.white};
   border-radius: 10px;
+  transition: all 1s ease-in-out;
   @media ${device.tablet} {
     display: flex;
     flex-direction: column;
@@ -85,12 +86,13 @@ export const WrapHi = styled.div`
   background: ${baseTheme.colors.jungleGreen};
   border-radius: 10px;
   animation: slideIn 1.5s;
+  z-index: 10;
   @keyframes slideIn {
     from {
-      transform: translateX(50%);
+      transform: translateX(-140%);
     }
     to {
-      transform: translateX(-150%);
+      transform: translateX(0%);
     }
   }
   @media ${device.tablet} {

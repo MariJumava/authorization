@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { PATH } from '../../utils/ROUTES';
 import { Logo } from '../Navbar';
 import { device } from '../../styles/device';
-import { useAppSelector } from '../../hooks/redux';
+import { useAppSelector } from '../../redux/redux';
 import { baseTheme } from '../../styles/baseTheme';
 import { Button, ButtonSecondary } from '../../styles/buttons';
 import {

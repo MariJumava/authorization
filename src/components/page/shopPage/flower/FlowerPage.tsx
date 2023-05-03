@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useState, useMemo, ChangeEvent, MouseEvent } from 'react';
-import { useAppSelector } from 'hooks/redux';
+import { useAppSelector } from 'redux/redux';
 import { FilterFlower } from './FilterFlower';
 import { FlowerCard } from './FlowerCard';
 import { IPlant } from 'components/Plants';
