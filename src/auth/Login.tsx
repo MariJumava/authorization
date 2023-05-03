@@ -104,6 +104,15 @@ export const Form = styled.form`
   flex-direction: column;
   align-items: center;
   margin-top: 30px;
+  animation: show 2s;
+  @keyframes show {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `;
 export const Social = styled.div`
   display: flex;
